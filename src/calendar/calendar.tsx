@@ -52,11 +52,11 @@ const Calendar: React.FC<ICalendar> = ({ range = false }) => {
   const changeDate = (selectedDate: Dayjs) => {
     setState((prevState) => {
       const { startDate, endDate } = prevState;
-
+  
       if (!range) {
         return { ...prevState, startDate: selectedDate, endDate: selectedDate };
       }
-
+  
       if (!startDate || (startDate && endDate)) {
         return {
           ...prevState,
@@ -65,12 +65,22 @@ const Calendar: React.FC<ICalendar> = ({ range = false }) => {
           date: selectedDate,
         };
       }
-
+  
+      // Если выбрана дата до начальной даты, то она становится новой начальной датой,
+      // а текущая начальная дата становится новой конечной датой.
       if (selectedDate.isBefore(startDate, "day")) {
-        return { ...prevState, startDate: selectedDate };
+        return {
+          ...prevState,
+          startDate: selectedDate,
+          endDate: startDate,
+        };
       }
-
-      return { ...prevState, endDate: selectedDate };
+  
+      // Если выбрана дата после начальной даты, то она становится новой конечной датой.
+      return {
+        ...prevState,
+        endDate: selectedDate,
+      };
     });
   };
 

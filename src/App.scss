@@ -1,4 +1,4 @@
-$primary: #e08282;
+$primary: rgba(183, 0, 55, 0.80);
 $radius: 12px;
 
 body {
@@ -35,7 +35,7 @@ body {
       width: 30px;
       text-align: center;
       display: inline-block;
-      color: transparentize(#fff, 0.6);
+      color: #fff;
       user-select: none;
       
 
@@ -71,14 +71,14 @@ body {
 
   &--days {
     font-size: 0;
-    
+
     span {
       width: 14.28571%;
       display: inline-block;
       text-align: center;
       user-select: none;
       cursor: pointer;
-      margin: 2px 0;
+      margin: 0;
       line-height: 34px;
       position: relative;
       font-size: 16px;
@@ -94,19 +94,19 @@ body {
 
       &.active {
         font-weight: 700;
-        background-color: transparentize(#ffadad, 0.45);
+        background-color: #a50505;
       }
 
       &.muted {
-        color: rgba(0, 0, 0, 0.3);
+        color:  rgba(0, 0, 0, 0.3);
       }
 
       &.between {
         border-radius: 0;
       }
 
-      &.start, &.between, &.end {
-        background-color: #e08282;
+      &.start, &.end {
+        background-color: #a50505;
         color: #fff;
       }
 
@@ -140,7 +140,7 @@ body {
 }
 
 .between-hover {
-  background-color: rgba(0,0,0,0.1); /* Или другой цвет */
+  background-color: rgba(0,0,0,0.1); /* Или другой цвет */  
 }
 
 .today {
@@ -157,7 +157,7 @@ body {
 }
 
 .between {
-  background-color: #def;
+  background-color: rgb(255, 221, 221);
 }
 
 .hover-end {
@@ -165,9 +165,9 @@ body {
 }
 
 .between-hover {
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgb(255, 221, 221);
 }
 
 .muted {
-  color: #ccc;
+  color: #ac0404;
 }
