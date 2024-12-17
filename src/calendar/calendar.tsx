@@ -102,6 +102,11 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
     });
   };
 
+  const selectToday = () => {
+    resetDate()
+    changeDate(dayjs())
+  }
+
   const { date, startDate, endDate } = state;
 
   return (
@@ -129,12 +134,12 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
         />
       )}
             {showTodayButton && (
-        <button className="classic-button" onClick={() => changeDate(dayjs())}>
+        <button className="classic-button" onClick={selectToday}>
           Сегодня
         </button>
       )}
     </div>
-  );
+  );  
 };
 
 export default Calendar;
