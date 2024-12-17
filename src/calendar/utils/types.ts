@@ -3,6 +3,7 @@ import { Dayjs } from "dayjs";
 export interface ICalendar {
   range?: boolean;
   showTodayButton?: boolean;
+  initialDate?: Dayjs;
 }
 
 export interface IDays {

@@ -13,13 +13,13 @@ dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false }) => {
+const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false, initialDate }) => {
   const [state, setState] = React.useState<{
     date: Dayjs;
     startDate: Dayjs | null;
     endDate: Dayjs | null;
   }>({
-    date: dayjs(),
+    date: initialDate || dayjs(),
     startDate: null,
     endDate: null,
   });
