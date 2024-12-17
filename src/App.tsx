@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <Calendar range />
-      <Calendar />
+      <Calendar showTodayButton />
     </>
   );
 }

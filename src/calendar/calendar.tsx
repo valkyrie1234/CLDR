@@ -13,7 +13,7 @@ dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-const Calendar: React.FC<ICalendar> = ({ range = false }) => {
+const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false }) => {
   const [state, setState] = React.useState<{
     date: Dayjs;
     startDate: Dayjs | null;
@@ -126,6 +126,11 @@ const Calendar: React.FC<ICalendar> = ({ range = false }) => {
           endDate={endDate}
           range={range}
         />
+      )}
+            {showTodayButton && (
+        <button className="today-button" onClick={() => changeDate(dayjs())}>
+          Сегодня
+        </button>
       )}
     </div>
   );

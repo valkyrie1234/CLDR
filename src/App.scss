@@ -173,3 +173,17 @@ body {
 .muted {
   color: #ac0404;
 }
+
+.today-button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #ac0404;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ac0404;
+  }
+}
