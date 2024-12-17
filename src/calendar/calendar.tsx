@@ -27,10 +27,11 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false 
   const [mode, setMode] = React.useState<"day" | "month" | "year">("day");
 
   const resetDate = () => {
-    setState((prevState) => ({
-      ...prevState,
+    setState({
       date: dayjs(),
-    }));
+      startDate: null,
+      endDate: null,
+    });
   };
 
   const changeMonth = (month: number) => {
@@ -128,7 +129,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false 
         />
       )}
             {showTodayButton && (
-        <button className="today-button" onClick={() => changeDate(dayjs())}>
+        <button className="classic-button" onClick={() => changeDate(dayjs())}>
           Сегодня
         </button>
       )}

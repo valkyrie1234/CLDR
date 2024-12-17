@@ -66,7 +66,7 @@ const Heading: React.FC<IHeading> = ({
 
   return (
     <HeaderWrapper>
-      <button onClick={resetDate}>Reset</button>
+      <button className="classic-button" onClick={resetDate}>Сброс</button>
       {range && (
         <div>
           <select onChange={(e) => handleSelectionChange(e.target.value)}>
