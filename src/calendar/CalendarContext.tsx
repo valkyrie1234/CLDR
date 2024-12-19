@@ -9,6 +9,9 @@ interface CalendarContextProps {
   setStartDate: (date: Dayjs | null) => void;
   setEndDate: (date: Dayjs | null) => void;
   resetDates: () => void;
+  changeMonth: (month: number) => void;
+  changeYear: (year: number) => void;
+  selectRange: (rangeType: "week" | "month" | "quarter" | "year") => void;
 }
 
 const CalendarContext = createContext<CalendarContextProps | undefined>(undefined);
@@ -21,16 +24,64 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const resetDates = () => {
     setStartDate(null);
     setEndDate(null);
+    setDate(dayjs()); // Сбрасываем на текущую дату
+  };
+
+  const changeMonth = (month: number) => {
+    setDate((prevDate) => prevDate.month(month));
+  };
+
+  const changeYear = (year: number) => {
+    setDate((prevDate) => prevDate.year(year));
+  };
+
+  const selectRange = (rangeType: "week" | "month" | "quarter" | "year") => {
+    const today = dayjs();
+    let start, end;
+
+    switch (rangeType) {
+      case "week":
+        start = today.startOf("week");
+        end = today.endOf("week");
+        break;
+      case "month":
+        start = today.startOf("month");
+        end = today.endOf("month");
+        break;
+      case "quarter":
+        start = today.startOf("quarter");
+        end = today.endOf("quarter");
+        break;
+      case "year":
+        start = today.startOf("year");
+        end = today.endOf("year");
+        break;
+      default:
+        return;
+    }
+
+    setStartDate(start);
+    setEndDate(end);
   };
 
   return (
-    <CalendarContext.Provider value={{ date, startDate, endDate, setDate, setStartDate, setEndDate, resetDates }}>
+    <CalendarContext.Provider value={{
+      date,
+      startDate,
+      endDate,
+      setDate,
+      setStartDate,
+      setEndDate,
+      resetDates,
+      changeMonth,
+      changeYear,
+      selectRange,
+    }}>
       {children}
     </CalendarContext.Provider>
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useCalendar = () => {
   const context = useContext(CalendarContext);
   if (!context) {

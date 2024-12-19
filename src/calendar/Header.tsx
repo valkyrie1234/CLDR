@@ -27,14 +27,14 @@ const Heading: React.FC<IHeading> = ({
   const endDateInput = React.useRef<HTMLInputElement | null>(null);
 
   React.useEffect(() => {
-    if (startDate && startDateInput.current) {
-      startDateInput.current.value = startDate.format("DD-MM-YYYY");
+    if (startDateInput.current) {
+      startDateInput.current.value = startDate ? startDate.format("DD-MM-YYYY") : "";
     }
   }, [startDate]);
 
   React.useEffect(() => {
-    if (endDate && endDateInput.current) {
-      endDateInput.current.value = endDate.format("DD-MM-YYYY");
+    if (endDateInput.current) {
+      endDateInput.current.value = endDate ? endDate.format("DD-MM-YYYY") : "";
     }
   }, [endDate]);
 

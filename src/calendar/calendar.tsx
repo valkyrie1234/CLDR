@@ -28,10 +28,11 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
 
   const resetDate = () => {
     setState({
-      date: dayjs(),
+      date: initialDate || dayjs(),
       startDate: null,
       endDate: null,
     });
+    setInputDateValue("");
   };
 
   const changeMonth = (month: number) => {
@@ -103,7 +104,11 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
   };
 
   const selectToday = () => {
-    resetDate();
+    setState({
+      date: dayjs(),
+      startDate: null,
+      endDate: null,
+    });
     changeDate(dayjs());
   };
 
@@ -125,10 +130,12 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
 
   const { date, startDate, endDate } = state;
 
-  // Синхронизация инпута с календарем
+    // Синхронизация инпута с календарем
   React.useEffect(() => {
     if (startDate) {
       setInputDateValue(startDate.format("DD-MM-YYYY"));
+    } else {
+      setInputDateValue(""); // Очищаем инпут, если startDate равно null
     }
   }, [startDate]);
 
@@ -154,7 +161,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
               placeholder="DD-MM-YYYY"
               value={inputDateValue}
               onChange={(e) => handleDateInputChange(e.target.value)}
-              onBlur={handleDateInputBlur} // Синхронизация при потере фокуса
+              onBlur={handleDateInputBlur}
             />
           </div>
         )}
