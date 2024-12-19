@@ -1,6 +1,6 @@
 
 import dayjs from "dayjs";
-import Calendar from "./calendar/calendar";
+import Calendar from "./calendar/Сalendar";
 
 function App() {
   return (
