@@ -1,9 +1,12 @@
 import React from "react";
 import dayjs from "dayjs";
+import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { monthNames } from "./utils/consts";
 import { IHeading } from "./utils/types";
 import "dayjs/locale/ru";
-import { HeaderWrapper } from "./style/styles";
+import { HeaderWrapper, PeriodInputStyled, HeaderControls } from "./style/styles";
+
+dayjs.extend(quarterOfYear);
 
 dayjs.locale("ru");
 
@@ -16,8 +19,8 @@ const Heading: React.FC<IHeading> = ({
   startDate,
   onStartDateChange,
   onEndDateChange,
-  mode,
-  setMode,
+  // mode,
+  // setMode,
   changeYear,
 }) => {
   const startDateInput = React.useRef<HTMLInputElement | null>(null);
@@ -60,15 +63,31 @@ const Heading: React.FC<IHeading> = ({
         return;
     }
 
-    onStartDateChange(start.format("DD-MM-YYYY"));
-    onEndDateChange(end.format("DD-MM-YYYY"));
+    onStartDateChange(start.format("MM-DD-YYYY"));
+    onEndDateChange(end.format("MM-DD-YYYY"));
   };
 
   return (
     <HeaderWrapper>
-      <button className="classic-button" onClick={resetDate}>Сброс</button>
-      {range && (
-        <div>
+      <button className="classic-button" onClick={resetDate}>Сбросить</button>
+      <div className="header-top">
+        {range && (
+          <div className="input-container">
+            <PeriodInputStyled
+              ref={startDateInput}
+              type="text"
+              placeholder="DD-MM-YYYY"
+              onChange={(e) => onStartDateChange(e.target.value)}
+            />
+            <PeriodInputStyled
+              ref={endDateInput}
+              type="text"
+              placeholder="DD-MM-YYYY"
+              onChange={(e) => onEndDateChange(e.target.value)}
+            />
+          </div>
+        )}
+        {range && (
           <select onChange={(e) => handleSelectionChange(e.target.value)}>
             <option value="">Выберите диапазон</option>
             <option value="current-week">Текущая неделя</option>
@@ -76,25 +95,17 @@ const Heading: React.FC<IHeading> = ({
             <option value="current-quarter">Текущий квартал</option>
             <option value="current-year">Текущий год</option>
           </select>
-          <input
-            ref={startDateInput}
-            type="text"
-            placeholder="DD-MM-YYYY"
-            onChange={(e) => onStartDateChange(e.target.value)}
-          />
-          <input
-            ref={endDateInput}
-            type="text"
-            placeholder="DD-MM-YYYY"
-            onChange={(e) => onEndDateChange(e.target.value)}
-          />
-        </div>
-      )}
-      <h1>
-        {monthNames[date.month()]} <small>{date.year()}</small>
-      </h1>
-      <button onClick={() => changeMonth(date.month() - 1)}>&#8249;</button>
-      <button onClick={() => changeMonth(date.month() + 1)}>&#8250;</button>
+        )}
+      </div>
+      <HeaderControls>
+        <button onClick={() => changeYear(date.year() - 1)}>&#8656;</button>
+        <button onClick={() => changeMonth(date.month() - 1)}>&#8249;</button>
+        <h1 className="month-year-title">
+          {monthNames[date.month()]} <small>{date.year()}</small>
+        </h1>
+        <button onClick={() => changeMonth(date.month() + 1)}>&#8250;</button>
+        <button onClick={() => changeYear(date.year() + 1)}>&#8658;</button>
+      </HeaderControls>
     </HeaderWrapper>
   );
 };

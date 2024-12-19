@@ -1,4 +1,3 @@
-// Calendar.tsx
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
 import Heading from "./Header";
@@ -25,6 +24,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
   });
 
   const [mode, setMode] = React.useState<"day" | "month" | "year">("day");
+  const [inputDateValue, setInputDateValue] = React.useState<string>("");
 
   const resetDate = () => {
     setState({
@@ -47,7 +47,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
       ...prevState,
       date: prevState.date.year(year),
     }));
-    setMode("month");
+    setMode("day");
   };
 
   const changeDate = (selectedDate: Dayjs) => {
@@ -103,11 +103,34 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
   };
 
   const selectToday = () => {
-    resetDate()
-    changeDate(dayjs())
-  }
+    resetDate();
+    changeDate(dayjs());
+  };
+
+  const handleDateInputChange = (value: string) => {
+    setInputDateValue(value);
+  };
+
+  const handleDateInputBlur = () => {
+    const parsedDate = parseDateFromInput(inputDateValue);
+    if (parsedDate) {
+      setState((prevState) => ({
+        ...prevState,
+        date: parsedDate,
+        startDate: parsedDate,
+        endDate: range ? parsedDate : null,
+      }));
+    }
+  };
 
   const { date, startDate, endDate } = state;
+
+  // Синхронизация инпута с календарем
+  React.useEffect(() => {
+    if (startDate) {
+      setInputDateValue(startDate.format("DD-MM-YYYY"));
+    }
+  }, [startDate]);
 
   return (
     <div className="calendar">
@@ -124,6 +147,17 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
         mode={mode}
         setMode={setMode}
       />
+        {!range && (
+          <div className="date-input-container">
+            <input
+              type="text"
+              placeholder="DD-MM-YYYY"
+              value={inputDateValue}
+              onChange={(e) => handleDateInputChange(e.target.value)}
+              onBlur={handleDateInputBlur} // Синхронизация при потере фокуса
+            />
+          </div>
+        )}
       {mode === "day" && (
         <Days
           onClick={changeDate}
@@ -133,13 +167,13 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
           range={range}
         />
       )}
-            {showTodayButton && (
+      {showTodayButton && (
         <button className="classic-button" onClick={selectToday}>
           Сегодня
         </button>
       )}
     </div>
-  );  
+  );
 };
 
 export default Calendar;
