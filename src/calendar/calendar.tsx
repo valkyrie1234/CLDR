@@ -26,6 +26,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
   const [mode, setMode] = React.useState<"day" | "month" | "year">("day");
   const [inputDateValue, setInputDateValue] = React.useState<string>("");
 
+  // Сброс даты к начальному значению или текущей дате
   const resetDate = () => {
     setState({
       date: initialDate || dayjs(),
@@ -35,6 +36,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
     setInputDateValue("");
   };
 
+  // Изменение месяца
   const changeMonth = (month: number) => {
     setState((prevState) => ({
       ...prevState,
@@ -43,6 +45,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
     setMode("day");
   };
 
+  // Изменение года
   const changeYear = (year: number) => {
     setState((prevState) => ({
       ...prevState,
@@ -51,6 +54,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
     setMode("day");
   };
 
+  // Изменение выбранной даты
   const changeDate = (selectedDate: Dayjs) => {
     setState((prevState) => {
       const { startDate, endDate } = prevState;
@@ -86,12 +90,14 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
     });
   };
 
+  // Парсинг даты из строки
   const parseDateFromInput = (value: string): Dayjs | null => {
     const format = "DD-MM-YYYY";
     const parsedDate = dayjs(value, format, true);
     return parsedDate.isValid() ? parsedDate : null;
   };
 
+  // Обработка изменения даты через инпут
   const handleDateChange = (value: string, type: "startDate" | "endDate") => {
     setState((prevState) => {
       const parsedDate = parseDateFromInput(value);
@@ -103,6 +109,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
     });
   };
 
+  // Выбор текущей даты
   const selectToday = () => {
     setState({
       date: dayjs(),
@@ -112,10 +119,12 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
     changeDate(dayjs());
   };
 
+  // Обработка изменения значения инпута
   const handleDateInputChange = (value: string) => {
     setInputDateValue(value);
   };
 
+  // Обработка потери фокуса инпутом
   const handleDateInputBlur = () => {
     const parsedDate = parseDateFromInput(inputDateValue);
     if (parsedDate) {
@@ -130,12 +139,12 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
 
   const { date, startDate, endDate } = state;
 
-    // Синхронизация инпута с календарем
+  // Синхронизация инпута с календарем
   React.useEffect(() => {
     if (startDate) {
       setInputDateValue(startDate.format("DD-MM-YYYY"));
     } else {
-      setInputDateValue(""); // Очищаем инпут, если startDate равно null
+      setInputDateValue("");
     }
   }, [startDate]);
 

@@ -15,14 +15,17 @@ const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null }> = ({
 }) => {
   const className: string[] = [];
 
+  // Добавление класса для текущей даты
   if (dayjs().isSame(date, "day")) {
     className.push("today");
   }
 
+  // Добавление класса для активной даты
   if (startDate && date.isSame(startDate, "day")) {
     className.push("active");
   }
 
+  // Обработка диапазона дат
   if (range) {
     if (startDate && endDate) {
       if (date.isSame(startDate, "day")) className.push("start");
@@ -35,6 +38,7 @@ const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null }> = ({
     }
   }
 
+  // Добавление класса для дней другого месяца
   if (!date.isSame(currentDate, "month")) {
     className.push("muted");
   }

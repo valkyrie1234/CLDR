@@ -21,20 +21,24 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [startDate, setStartDate] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
 
+  // Сброс дат к текущей дате
   const resetDates = () => {
     setStartDate(null);
     setEndDate(null);
-    setDate(dayjs()); // Сбрасываем на текущую дату
+    setDate(dayjs());
   };
 
+  // Изменение месяца
   const changeMonth = (month: number) => {
     setDate((prevDate) => prevDate.month(month));
   };
 
+  // Изменение года
   const changeYear = (year: number) => {
     setDate((prevDate) => prevDate.year(year));
   };
 
+  // Выбор диапазона дат
   const selectRange = (rangeType: "week" | "month" | "quarter" | "year") => {
     const today = dayjs();
     let start, end;

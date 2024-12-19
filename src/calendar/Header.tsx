@@ -19,13 +19,12 @@ const Heading: React.FC<IHeading> = ({
   startDate,
   onStartDateChange,
   onEndDateChange,
-  // mode,
-  // setMode,
   changeYear,
 }) => {
   const startDateInput = React.useRef<HTMLInputElement | null>(null);
   const endDateInput = React.useRef<HTMLInputElement | null>(null);
 
+  // Синхронизация инпутов с выбранными датами
   React.useEffect(() => {
     if (startDateInput.current) {
       startDateInput.current.value = startDate ? startDate.format("DD-MM-YYYY") : "";
@@ -38,6 +37,7 @@ const Heading: React.FC<IHeading> = ({
     }
   }, [endDate]);
 
+  // Обработка выбора диапазона дат
   const handleSelectionChange = (value: string) => {
     const today = dayjs();
     let start, end;
