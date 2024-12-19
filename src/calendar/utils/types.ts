@@ -33,3 +33,14 @@ export interface IHeading {
   setMode: React.Dispatch<React.SetStateAction<"day" | "month" | "year">>;
   changeYear: (year: number) => void;
 }
+
+export interface IDayProps {
+  isToday?: boolean;
+  isActive?: boolean;
+  isStart?: boolean;
+  isEnd?: boolean;
+  isBetween?: boolean;
+  isBetweenHover?: boolean;
+  isMuted?: boolean;
+  isHoverEnd?: boolean;
+}

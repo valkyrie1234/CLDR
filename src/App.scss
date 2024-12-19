@@ -136,13 +136,8 @@ body {
   }
 }
 
-
 .hover-end {
-  background-color: lightgray; /* Или другой цвет */
-}
-
-.between-hover {
-  background-color: rgba(0,0,0,0.1); /* Или другой цвет */  
+  background-color: lightgray;
 }
 
 .today {
@@ -166,24 +161,7 @@ body {
   background-color: lightgray;
 }
 
-.between-hover {
-  background-color: rgb(255, 221, 221);
-}
-
 .muted {
   color: #ac0404;
 }
 
-.classic-button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  background-color: #ac0404;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #ac0404;
-  }
-}

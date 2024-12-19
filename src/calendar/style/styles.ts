@@ -61,10 +61,6 @@ export const HeaderWrapper = styled.div`
     }
   }
 
-  .classic-button {
-    align-self: flex-start;
-  }
-
   select {
     width: 100%;
     padding: 8px;
@@ -112,6 +108,20 @@ export const InputWrapper = styled.div`
     font-size: 14px;
   }
 `;
+
+export const ClassicButton = styled.button `
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #ac0404;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ac0404;
+  }
+`
 
 export const HeaderControls = styled.div`
   display: flex;

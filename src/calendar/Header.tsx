@@ -4,7 +4,7 @@ import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { monthNames } from "./utils/consts";
 import { IHeading } from "./utils/types";
 import "dayjs/locale/ru";
-import { HeaderWrapper, PeriodInputStyled, HeaderControls } from "./style/styles";
+import { HeaderWrapper, PeriodInputStyled, HeaderControls, ClassicButton } from "./style/styles";
 
 dayjs.extend(quarterOfYear);
 
@@ -69,7 +69,7 @@ const Heading: React.FC<IHeading> = ({
 
   return (
     <HeaderWrapper>
-      <button className="classic-button" onClick={resetDate}>Сбросить</button>
+      <ClassicButton onClick={resetDate}>Сбросить</ClassicButton>
       <div className="header-top">
         {range && (
           <div className="input-container">

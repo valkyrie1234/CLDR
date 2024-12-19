@@ -8,6 +8,7 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 
 import { ICalendar } from "./utils/types";
 import "./../App.scss";
+import { ClassicButton, PeriodInputStyled } from "./style/styles";
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -164,15 +165,13 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
         setMode={setMode}
       />
         {!range && (
-          <div className="date-input-container">
-            <input
+            <PeriodInputStyled
               type="text"
               placeholder="DD-MM-YYYY"
               value={inputDateValue}
               onChange={(e) => handleDateInputChange(e.target.value)}
               onBlur={handleDateInputBlur}
             />
-          </div>
         )}
       {mode === "day" && (
         <Days
@@ -184,9 +183,10 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
         />
       )}
       {showTodayButton && (
-        <button className="classic-button" onClick={selectToday}>
+        <ClassicButton
+         onClick={selectToday}>
           Сегодня
-        </button>
+        </ClassicButton>
       )}
     </div>
   );
