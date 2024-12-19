@@ -20,6 +20,8 @@ const Heading: React.FC<IHeading> = ({
   onStartDateChange,
   onEndDateChange,
   changeYear,
+  showToggle,
+  toggleRangeMode,
 }) => {
   const startDateInput = React.useRef<HTMLInputElement | null>(null);
   const endDateInput = React.useRef<HTMLInputElement | null>(null);
@@ -69,6 +71,15 @@ const Heading: React.FC<IHeading> = ({
 
   return (
     <HeaderWrapper>
+      {showToggle && (
+        <div className="toggle-container">
+          <label className="toggle">
+            <input type="checkbox" checked={range} onChange={toggleRangeMode} />
+            <span className="slider"></span>
+          </label>
+          <span className="toggle-label">{range ? "Диапазон" : "Одна дата"}</span>
+        </div>
+      )}
       <ClassicButton onClick={resetDate}>Сбросить</ClassicButton>
       <div className="header-top">
         {range && (

@@ -13,15 +13,17 @@ dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false, initialDate }) => {
+const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false, initialDate, showToggle = false }) => {
   const [state, setState] = React.useState<{
     date: Dayjs;
     startDate: Dayjs | null;
     endDate: Dayjs | null;
+    isRangeMode: boolean;
   }>({
     date: initialDate || dayjs(),
     startDate: null,
     endDate: null,
+    isRangeMode: range,
   });
 
   const [mode, setMode] = React.useState<"day" | "month" | "year">("day");
@@ -33,6 +35,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
       date: initialDate || dayjs(),
       startDate: null,
       endDate: null,
+      isRangeMode: range,
     });
     setInputDateValue("");
   };
@@ -58,9 +61,9 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
   // Изменение выбранной даты
   const changeDate = (selectedDate: Dayjs) => {
     setState((prevState) => {
-      const { startDate, endDate } = prevState;
+      const { startDate, endDate, isRangeMode } = prevState;
   
-      if (!range) {
+      if (!isRangeMode) {
         return { ...prevState, startDate: selectedDate, endDate: selectedDate };
       }
   
@@ -116,6 +119,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
       date: dayjs(),
       startDate: null,
       endDate: null,
+      isRangeMode: state.isRangeMode,
     });
     changeDate(dayjs());
   };
@@ -133,12 +137,12 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
         ...prevState,
         date: parsedDate,
         startDate: parsedDate,
-        endDate: range ? parsedDate : null,
+        endDate: state.isRangeMode ? parsedDate : null,
       }));
     }
   };
 
-  const { date, startDate, endDate } = state;
+  const { date, startDate, endDate, isRangeMode } = state;
 
   // Синхронизация инпута с календарем
   React.useEffect(() => {
@@ -156,15 +160,17 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
         changeMonth={changeMonth}
         changeYear={changeYear}
         resetDate={resetDate}
-        range={range}
+        range={isRangeMode}
         endDate={endDate}
         startDate={startDate}
         onStartDateChange={(value) => handleDateChange(value, "startDate")}
         onEndDateChange={(value) => handleDateChange(value, "endDate")}
         mode={mode}
         setMode={setMode}
+        showToggle={showToggle}
+        toggleRangeMode={() => setState((prev) => ({ ...prev, isRangeMode: !prev.isRangeMode }))}
       />
-        {!range && (
+        {!isRangeMode && (
             <PeriodInputStyled
               type="text"
               placeholder="DD-MM-YYYY"
@@ -179,7 +185,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
           date={date}
           startDate={startDate}
           endDate={endDate}
-          range={range}
+          range={isRangeMode}
         />
       )}
       {showTodayButton && (

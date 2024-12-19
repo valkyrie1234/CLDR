@@ -4,6 +4,7 @@ export interface ICalendar {
   range?: boolean;
   showTodayButton?: boolean;
   initialDate?: Dayjs;
+  showToggle?: boolean;
 }
 
 export interface IDays {
@@ -32,6 +33,8 @@ export interface IHeading {
   mode: "day" | "month" | "year";
   setMode: React.Dispatch<React.SetStateAction<"day" | "month" | "year">>;
   changeYear: (year: number) => void;
+  showToggle?: boolean;
+  toggleRangeMode: () => void;
 }
 
 export interface IDayProps {

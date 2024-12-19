@@ -22,7 +22,7 @@ const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null }> = ({
 
   // Добавление класса для активной даты
   if (startDate && date.isSame(startDate, "day")) {
-    className.push("active");
+    className.push("start");
   }
 
   // Обработка диапазона дат
@@ -33,8 +33,12 @@ const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null }> = ({
       if (date.isBetween(startDate, endDate, null, "[]")) className.push("between");
     } else if (startDate && hoveredDate) {
       if (date.isSame(startDate, "day")) className.push("start");
-      if (date.isSame(hoveredDate, "day")) className.push("hover-end");
       if (date.isBetween(startDate, hoveredDate, null, "[]")) className.push("between-hover");
+    }
+  } else {
+    // Обработка выделения для одиночной даты
+    if (hoveredDate && date.isSame(hoveredDate, "day") && !startDate?.isSame(date, "day")) {
+      className.push("hover-end");
     }
   }
 
