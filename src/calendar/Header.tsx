@@ -79,12 +79,6 @@ const Heading: FC<IHeading> = ({
     changeYear(date.year() + yearOffset);
   };
 
-  // Обработка пролистывания месяцев
-  const handleMonthScroll = (direction: "prev" | "next") => {
-    const yearOffset = direction === "prev" ? -1 : 1;
-    changeYear(date.year() + yearOffset);
-  };
-
   return (
     <HeaderWrapper>
       <ToggleAndButton>
@@ -150,12 +144,10 @@ const Heading: FC<IHeading> = ({
           </>
         ) : mode === "month" ? (
           <>
-            <button onClick={() => handleMonthScroll("prev")}>&#8656;</button>
             <h1 className="month-year-title">
               <span>{monthNames[date.month()]}</span>{" "}
               <small>{date.year()}</small>
             </h1>
-            <button onClick={() => handleMonthScroll("next")}>&#8658;</button>
           </>
         ) : (
           // mode === "year"
