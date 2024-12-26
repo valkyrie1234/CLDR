@@ -50,3 +50,13 @@ export interface IDayProps {
   isMuted?: boolean;
   isHoverEnd?: boolean;
 }
+
+export interface MonthPickerProps {
+  currentMonth: number;
+  onMonthSelect: (month: number) => void;
+}
+
+export interface YearPickerProps {
+  currentYear: number;
+  onYearSelect: (year: number) => void;
+}

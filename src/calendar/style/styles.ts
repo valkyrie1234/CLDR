@@ -156,6 +156,7 @@ export const HeaderControls = styled.div`
     margin: 0;
     flex: 1;
     text-align: center;
+    cursor: pointer;
   }
 
   button {
@@ -163,5 +164,53 @@ export const HeaderControls = styled.div`
     border: none;
     cursor: pointer;
     font-size: 16px;
+  }
+`;
+
+export const MonthGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+`;
+
+export const MonthItem = styled.div`
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: ${colors.gray[40]};
+  }
+
+  &.selected {
+    background-color: ${colors.brandRed.red};
+    color: white;
+  }
+`;
+
+export const YearGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
+`;
+
+export const YearItem = styled.div`
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: ${colors.gray[40]};
+  }
+
+  &.selected {
+    background-color: ${colors.brandRed.red};
+    color: white;
   }
 `;

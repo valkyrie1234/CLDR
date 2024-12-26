@@ -24,6 +24,8 @@ const Heading: React.FC<IHeading> = ({
   inputDateValue,
   onDateInputChange,
   onDateInputBlur,
+  // mode,
+  setMode,
 }) => {
   const startDateInput = React.useRef<HTMLInputElement | null>(null);
   const endDateInput = React.useRef<HTMLInputElement | null>(null);
@@ -74,16 +76,16 @@ const Heading: React.FC<IHeading> = ({
   return (
     <HeaderWrapper>
       <ToggleAndButton>
-      {showToggle && (
-        <div className="toggle-container">
-          <label className="toggle">
-            <input type="checkbox" checked={range} onChange={toggleRangeMode} />
-            <span className="slider"></span>
-          </label>
-          <span className="toggle-label">{range ? "Диапазон" : "Одна дата"}</span>
-        </div>
-      )}
-      <ResetButton onClick={resetDate}>Сбросить</ResetButton>
+        {showToggle && (
+          <div className="toggle-container">
+            <label className="toggle">
+              <input type="checkbox" checked={range} onChange={toggleRangeMode} />
+              <span className="slider"></span>
+            </label>
+            <span className="toggle-label">{range ? "Диапазон" : "Одна дата"}</span>
+          </div>
+        )}
+        <ResetButton onClick={resetDate}>Сбросить</ResetButton>
       </ToggleAndButton>
       <div className="header-top">
         {range ? (
@@ -126,7 +128,8 @@ const Heading: React.FC<IHeading> = ({
         <button onClick={() => changeYear(date.year() - 1)}>&#8656;</button>
         <button onClick={() => changeMonth(date.month() - 1)}>&#8249;</button>
         <h1 className="month-year-title">
-          {monthNames[date.month()]} <small>{date.year()}</small>
+          <span onClick={() => setMode("month")}>{monthNames[date.month()]}</span>{" "}
+          <small onClick={() => setMode("year")}>{date.year()}</small>
         </h1>
         <button onClick={() => changeMonth(date.month() + 1)}>&#8250;</button>
         <button onClick={() => changeYear(date.year() + 1)}>&#8658;</button>
