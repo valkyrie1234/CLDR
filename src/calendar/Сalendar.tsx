@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState, FC } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import Heading from "./Header";
 import Days from "./Days";
@@ -7,17 +7,17 @@ import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 
 import YearPicker from "./components/YearPicker";
-import MonthPicker from "./components/MounthPicker"; // Импортируем компонент выбора месяца
+import MonthPicker from "./components/MounthPicker";
 import { ICalendar } from "./utils/types";
-import "./../App.scss";
 import { TodayButton } from "./style/styles";
+import "./../App.scss";
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false, initialDate, showToggle = false }) => {
-  const [state, setState] = React.useState<{
+const Calendar: FC<ICalendar> = ({ range = false, showTodayButton = false, initialDate, showToggle = false }) => {
+  const [state, setState] = useState<{
     date: Dayjs;
     startDate: Dayjs | null;
     endDate: Dayjs | null;
@@ -31,8 +31,8 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
     initialDate: initialDate || dayjs(),
   });
 
-  const [mode, setMode] = React.useState<"day" | "month" | "year">("day");
-  const [inputDateValue, setInputDateValue] = React.useState<string>("");
+  const [mode, setMode] = useState<"day" | "month" | "year">("day");
+  const [inputDateValue, setInputDateValue] = useState<string>("");
 
   // Обработка выбора года
   const handleYearSelect = (year: number) => {
@@ -40,25 +40,29 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
       ...prevState,
       date: prevState.date.year(year),
     }));
-    setMode("month"); // Переходим к выбору месяца после выбора года
+    setMode("month");
   };
 
-    // Изменение месяца
-    const changeMonth = (month: number) => {
-      setState((prevState) => ({
-        ...prevState,
-        date: prevState.date.month(month),
-      }));
-      setMode("day");
-    };
+  // Изменение месяца
+  const changeMonth = (month: number) => {
+    setState((prevState) => ({
+      ...prevState,
+      date: prevState.date.month(month),
+    }));
+    setMode("day");
+  };
 
-      // Изменение года
+  // Изменение года
   const changeYear = (year: number) => {
     setState((prevState) => ({
       ...prevState,
       date: prevState.date.year(year),
     }));
-    setMode("day");
+    if (mode === "year") {
+      setMode("year");
+    } else {
+      setMode("day");
+    }
   };
 
   // Обработка выбора месяца
@@ -67,7 +71,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
       ...prevState,
       date: prevState.date.month(month),
     }));
-    setMode("day"); // Возвращаемся к выбору дня после выбора месяца
+    setMode("day");
   };
 
   // Сброс даты к начальному значению или текущей дате
@@ -168,7 +172,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
   const { date, startDate, endDate, isRangeMode } = state;
 
   // Синхронизация инпута с календарем
-  React.useEffect(() => {
+  useEffect(() => {
     if (startDate) {
       setInputDateValue(startDate.format("DD-MM-YYYY"));
     } else {

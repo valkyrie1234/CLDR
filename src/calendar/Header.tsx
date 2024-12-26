@@ -1,4 +1,4 @@
-import React from "react";
+import { FC, useRef, useEffect } from "react";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { monthNames } from "./utils/consts";
@@ -9,7 +9,7 @@ import { HeaderWrapper, PeriodInputStyled, HeaderControls, ResetButton, ToggleAn
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
 
-const Heading: React.FC<IHeading> = ({
+const Heading: FC<IHeading> = ({
   date,
   changeMonth,
   resetDate,
@@ -24,20 +24,20 @@ const Heading: React.FC<IHeading> = ({
   inputDateValue,
   onDateInputChange,
   onDateInputBlur,
-  // mode,
+  mode,
   setMode,
 }) => {
-  const startDateInput = React.useRef<HTMLInputElement | null>(null);
-  const endDateInput = React.useRef<HTMLInputElement | null>(null);
+  const startDateInput = useRef<HTMLInputElement | null>(null);
+  const endDateInput = useRef<HTMLInputElement | null>(null);
 
   // Синхронизация инпутов с выбранными датами
-  React.useEffect(() => {
+  useEffect(() => {
     if (startDateInput.current) {
       startDateInput.current.value = startDate ? startDate.format("DD-MM-YYYY") : "";
     }
   }, [startDate]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (endDateInput.current) {
       endDateInput.current.value = endDate ? endDate.format("DD-MM-YYYY") : "";
     }
@@ -71,6 +71,18 @@ const Heading: React.FC<IHeading> = ({
 
     onStartDateChange(start.format("MM-DD-YYYY"));
     onEndDateChange(end.format("MM-DD-YYYY"));
+  };
+
+  // Обработка пролистывания годов
+  const handleYearScroll = (direction: "prev" | "next") => {
+    const yearOffset = direction === "prev" ? -10 : 10;
+    changeYear(date.year() + yearOffset);
+  };
+
+  // Обработка пролистывания месяцев
+  const handleMonthScroll = (direction: "prev" | "next") => {
+    const yearOffset = direction === "prev" ? -1 : 1;
+    changeYear(date.year() + yearOffset);
   };
 
   return (
@@ -125,14 +137,36 @@ const Heading: React.FC<IHeading> = ({
         )}
       </div>
       <HeaderControls>
-        <button onClick={() => changeYear(date.year() - 1)}>&#8656;</button>
-        <button onClick={() => changeMonth(date.month() - 1)}>&#8249;</button>
-        <h1 className="month-year-title">
-          <span onClick={() => setMode("month")}>{monthNames[date.month()]}</span>{" "}
-          <small onClick={() => setMode("year")}>{date.year()}</small>
-        </h1>
-        <button onClick={() => changeMonth(date.month() + 1)}>&#8250;</button>
-        <button onClick={() => changeYear(date.year() + 1)}>&#8658;</button>
+        {mode === "day" ? (
+          <>
+            <button onClick={() => changeYear(date.year() - 1)}>&#8656;</button>
+            <button onClick={() => changeMonth(date.month() - 1)}>&#8249;</button>
+            <h1 className="month-year-title">
+              <span onClick={() => setMode("month")}>{monthNames[date.month()]}</span>{" "}
+              <small onClick={() => setMode("year")}>{date.year()}</small>
+            </h1>
+            <button onClick={() => changeMonth(date.month() + 1)}>&#8250;</button>
+            <button onClick={() => changeYear(date.year() + 1)}>&#8658;</button>
+          </>
+        ) : mode === "month" ? (
+          <>
+            <button onClick={() => handleMonthScroll("prev")}>&#8656;</button>
+            <h1 className="month-year-title">
+              <span>{monthNames[date.month()]}</span>{" "}
+              <small>{date.year()}</small>
+            </h1>
+            <button onClick={() => handleMonthScroll("next")}>&#8658;</button>
+          </>
+        ) : (
+          // mode === "year"
+          <>
+            <button onClick={() => handleYearScroll("prev")}>&#8656;</button>
+            <h1 className="month-year-title">
+              <span>{date.year()}</span>
+            </h1>
+            <button onClick={() => handleYearScroll("next")}>&#8658;</button>
+          </>
+        )}
       </HeaderControls>
     </HeaderWrapper>
   );
