@@ -8,7 +8,7 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 
 import { ICalendar } from "./utils/types";
 import "./../App.scss";
-import { ClassicButton, PeriodInputStyled } from "./style/styles";
+import { TodayButton } from "./style/styles";
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -39,7 +39,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
     });
     setInputDateValue("");
   };
-
+  
   // Изменение месяца
   const changeMonth = (month: number) => {
     setState((prevState) => ({
@@ -143,7 +143,7 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
   };
 
   const { date, startDate, endDate, isRangeMode } = state;
-
+  
   // Синхронизация инпута с календарем
   React.useEffect(() => {
     if (startDate) {
@@ -169,16 +169,10 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
         setMode={setMode}
         showToggle={showToggle}
         toggleRangeMode={() => setState((prev) => ({ ...prev, isRangeMode: !prev.isRangeMode }))}
+        inputDateValue={inputDateValue}
+        onDateInputChange={handleDateInputChange}
+        onDateInputBlur={handleDateInputBlur}
       />
-        {!isRangeMode && (
-            <PeriodInputStyled
-              type="text"
-              placeholder="DD-MM-YYYY"
-              value={inputDateValue}
-              onChange={(e) => handleDateInputChange(e.target.value)}
-              onBlur={handleDateInputBlur}
-            />
-        )}
       {mode === "day" && (
         <Days
           onClick={changeDate}
@@ -189,10 +183,9 @@ const Calendar: React.FC<ICalendar> = ({ range = false, showTodayButton = false,
         />
       )}
       {showTodayButton && (
-        <ClassicButton
-         onClick={selectToday}>
+        <TodayButton onClick={selectToday}>
           Сегодня
-        </ClassicButton>
+        </TodayButton>
       )}
     </div>
   );

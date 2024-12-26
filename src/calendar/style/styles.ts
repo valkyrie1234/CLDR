@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { colors } from "./colors";
 
+export const ToggleAndButton = styled.div`
+  display: flex;
+  width: 100%; 
+  align-items: center;
+`;
+
 export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -109,19 +115,36 @@ export const InputWrapper = styled.div`
   }
 `;
 
-export const ClassicButton = styled.button `
+export const TodayButton = styled.button`
   margin-top: 10px;
+  background-color: #ac0404;
+  width: 100%;
+  padding: 8px 120px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    background-color: #ac0404;
+  }
+`;
+
+export const ResetButton = styled.button`
+  margin-bottom: 10px;
   padding: 8px 12px;
   background-color: #ac0404;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-left: auto;
 
   &:hover {
     background-color: #ac0404;
   }
-`
+`;
 
 export const HeaderControls = styled.div`
   display: flex;

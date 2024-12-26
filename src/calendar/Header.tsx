@@ -4,10 +4,9 @@ import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { monthNames } from "./utils/consts";
 import { IHeading } from "./utils/types";
 import "dayjs/locale/ru";
-import { HeaderWrapper, PeriodInputStyled, HeaderControls, ClassicButton } from "./style/styles";
+import { HeaderWrapper, PeriodInputStyled, HeaderControls, ResetButton, ToggleAndButton } from "./style/styles";
 
 dayjs.extend(quarterOfYear);
-
 dayjs.locale("ru");
 
 const Heading: React.FC<IHeading> = ({
@@ -22,6 +21,9 @@ const Heading: React.FC<IHeading> = ({
   changeYear,
   showToggle,
   toggleRangeMode,
+  inputDateValue,
+  onDateInputChange,
+  onDateInputBlur,
 }) => {
   const startDateInput = React.useRef<HTMLInputElement | null>(null);
   const endDateInput = React.useRef<HTMLInputElement | null>(null);
@@ -71,6 +73,7 @@ const Heading: React.FC<IHeading> = ({
 
   return (
     <HeaderWrapper>
+      <ToggleAndButton>
       {showToggle && (
         <div className="toggle-container">
           <label className="toggle">
@@ -80,9 +83,10 @@ const Heading: React.FC<IHeading> = ({
           <span className="toggle-label">{range ? "Диапазон" : "Одна дата"}</span>
         </div>
       )}
-      <ClassicButton onClick={resetDate}>Сбросить</ClassicButton>
+      <ResetButton onClick={resetDate}>Сбросить</ResetButton>
+      </ToggleAndButton>
       <div className="header-top">
-        {range && (
+        {range ? (
           <div className="input-container">
             <PeriodInputStyled
               ref={startDateInput}
@@ -95,6 +99,16 @@ const Heading: React.FC<IHeading> = ({
               type="text"
               placeholder="DD-MM-YYYY"
               onChange={(e) => onEndDateChange(e.target.value)}
+            />
+          </div>
+        ) : (
+          <div className="input-container">
+            <PeriodInputStyled
+              type="text"
+              placeholder="DD-MM-YYYY"
+              value={inputDateValue}
+              onChange={(e) => onDateInputChange(e.target.value)}
+              onBlur={onDateInputBlur}
             />
           </div>
         )}
