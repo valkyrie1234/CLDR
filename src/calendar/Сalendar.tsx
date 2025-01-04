@@ -1,4 +1,3 @@
-// Сalendar.tsx
 import { useEffect, useState, FC } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import Heading from "./components/Header/Header";

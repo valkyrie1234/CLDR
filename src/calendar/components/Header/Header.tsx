@@ -14,7 +14,7 @@ import {
   ToggleAndButton,
   ToggleContainer,
   ToggleLabel,
-  ClickableDateMode 
+  ClickableDateMode
 } from "./styles";
 
 dayjs.extend(quarterOfYear);
@@ -147,14 +147,10 @@ const Heading: FC<IHeading> = ({
             <button onClick={() => changeYear(date.year() - 1)}>&#8656;</button>
             <button onClick={() => changeMonth(date.month() - 1)}>&#8249;</button>
             <h1>
-              <ClickableDateMode
-                onClick={() => setMode("month")}
-              >
+              <ClickableDateMode onClick={() => setMode("month")}>
                 {monthNames[date.month()]}
               </ClickableDateMode>{" "}
-              <ClickableDateMode
-                onClick={() => setMode("year")}
-              >
+              <ClickableDateMode onClick={() => setMode("year")}>
                 {date.year()}
               </ClickableDateMode>
             </h1>
@@ -163,15 +159,9 @@ const Heading: FC<IHeading> = ({
           </>
         ) : mode === "month" ? (
           <>
-            <h1>
-              <ClickableDateMode
-                onClick={() => setMode("month")}
-              >
-                {monthNames[date.month()]}
-              </ClickableDateMode>{" "}
-              <ClickableDateMode
-                onClick={() => setMode("year")}
-              >
+            <h1 className="year-mode-title">
+              <span>{monthNames[date.month()]}</span>{" "}
+              <ClickableDateMode onClick={() => setMode("year")}>
                 {date.year()}
               </ClickableDateMode>
             </h1>
@@ -180,12 +170,7 @@ const Heading: FC<IHeading> = ({
           <>
             <button onClick={() => handleYearScroll("prev")}>&#8656;</button>
             <h1>
-              <ClickableDateMode
-                onClick={() => setMode("year")}
-                className="header-clickable"
-              >
-                {date.year()}
-              </ClickableDateMode>
+              <span>{date.year()}</span>
             </h1>
             <button onClick={() => handleYearScroll("next")}>&#8658;</button>
           </>

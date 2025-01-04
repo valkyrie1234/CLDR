@@ -101,6 +101,11 @@ export const HeaderControls = styled.div`
     border: none;
     cursor: pointer;
     font-size: 16px;
+
+    &:hover {
+    background-color: ${colors.gray[60]};
+    border-radius: 15%;
+    }
   }
 `;
 
@@ -191,5 +196,10 @@ export const ClickableDateMode = styled.span`
   &:hover {
     background-color: ${colors.gray[60]};
     border-radius: 5%;
+  }
+
+  &.non-clickable {
+    cursor: default;
+    color: #333;
   }
 `
