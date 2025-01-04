@@ -1,6 +1,6 @@
 import React from "react";
-import { YearItem, YearGrid } from '../style/styles';
-import { YearPickerProps } from '../utils/types';
+import { YearItem, YearGrid } from './styles';
+import { YearPickerProps } from './types';
 
 const YearPicker: React.FC<YearPickerProps> = ({ currentYear, onYearSelect }) => {
   const startYear = currentYear - 8;

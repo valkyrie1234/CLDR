@@ -1,10 +1,10 @@
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
-import Day from "./Day";
-import { daysOfWeek } from "./utils/consts";
-import { IDays } from "./utils/types";
 import isBetween from "dayjs/plugin/isBetween";
-import { CalendarDays } from "./style/styles";
+import Day from "../Day/Day";
+import { daysOfWeek } from "../../utils/consts";
+import { IDays } from "./types";
+import { CalendarDays } from "./styles";
 
 dayjs.extend(isBetween);
 

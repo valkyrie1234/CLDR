@@ -1,15 +1,15 @@
 import { useEffect, useState, FC } from "react";
 import dayjs, { Dayjs } from "dayjs";
-import Heading from "./Header";
-import Days from "./Days";
+import Heading from "./components/Header/Header";
+import Days from "./components/Days/Days";
 import isBetween from "dayjs/plugin/isBetween";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-import YearPicker from "./components/YearPicker";
-import MonthPicker from "./components/MounthPicker";
+import YearPicker from "./components/YearPicker/YearPicker";
+import MonthPicker from "./components/MounthPicker/MounthPicker";
 import { ICalendar } from "./utils/types";
 import { TodayButton, CalendarWrapper } from "./style/styles";
-import "./../App.scss"; // Этот импорт можно будет убрать после полного перехода на styled-components
+import "./../App.scss";
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);

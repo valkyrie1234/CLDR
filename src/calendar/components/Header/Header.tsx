@@ -1,20 +1,10 @@
 import { FC, useRef, useEffect } from "react";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
-import { monthNames } from "./utils/consts";
-import { IHeading } from "./utils/types";
 import "dayjs/locale/ru";
-import {
-  HeaderWrapper,
-  PeriodInputStyled,
-  HeaderControls,
-  ResetButton,
-  ToggleAndButton,
-  ToggleLabel,
-  Slider,
-  Toggle,
-  ToggleContainer,
-} from "./style/styles";
+import { monthNames } from "../../utils/consts";
+import { IHeading } from "./types";
+import { HeaderWrapper, PeriodInputStyled, HeaderControls, ResetButton, Slider, Toggle, ToggleAndButton, ToggleContainer, ToggleLabel } from "./styles";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
@@ -96,7 +86,7 @@ const Heading: FC<IHeading> = ({
           <ToggleContainer>
             <Toggle>
               <input type="checkbox" checked={range} onChange={toggleRangeMode} />
-              <Slider /> {/* Используем компонент Slider */}
+              <Slider />
             </Toggle>
             <ToggleLabel>{range ? "Диапазон" : "Одна дата"}</ToggleLabel>
           </ToggleContainer>
