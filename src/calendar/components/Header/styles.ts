@@ -184,3 +184,7 @@ export const Toggle = styled.label`
     }
   }
 `;
+
+export const ClickableDateMode = styled.span`
+  cursor: pointer;
+`

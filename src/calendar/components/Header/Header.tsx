@@ -4,7 +4,18 @@ import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import "dayjs/locale/ru";
 import { monthNames } from "../../utils/consts";
 import { IHeading } from "./types";
-import { HeaderWrapper, PeriodInputStyled, HeaderControls, ResetButton, Slider, Toggle, ToggleAndButton, ToggleContainer, ToggleLabel } from "./styles";
+import {
+  HeaderWrapper,
+  PeriodInputStyled,
+  HeaderControls,
+  ResetButton,
+  Slider,
+  Toggle,
+  ToggleAndButton,
+  ToggleContainer,
+  ToggleLabel,
+  ClickableDateMode 
+} from "./styles";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
@@ -136,8 +147,16 @@ const Heading: FC<IHeading> = ({
             <button onClick={() => changeYear(date.year() - 1)}>&#8656;</button>
             <button onClick={() => changeMonth(date.month() - 1)}>&#8249;</button>
             <h1>
-              <span onClick={() => setMode("month")}>{monthNames[date.month()]}</span>{" "}
-              <small onClick={() => setMode("year")}>{date.year()}</small>
+              <ClickableDateMode
+                onClick={() => setMode("month")}
+              >
+                {monthNames[date.month()]}
+              </ClickableDateMode>{" "}
+              <ClickableDateMode
+                onClick={() => setMode("year")}
+              >
+                {date.year()}
+              </ClickableDateMode>
             </h1>
             <button onClick={() => changeMonth(date.month() + 1)}>&#8250;</button>
             <button onClick={() => changeYear(date.year() + 1)}>&#8658;</button>
@@ -145,15 +164,28 @@ const Heading: FC<IHeading> = ({
         ) : mode === "month" ? (
           <>
             <h1>
-              <span>{monthNames[date.month()]}</span>{" "}
-              <small>{date.year()}</small>
+              <ClickableDateMode
+                onClick={() => setMode("month")}
+              >
+                {monthNames[date.month()]}
+              </ClickableDateMode>{" "}
+              <ClickableDateMode
+                onClick={() => setMode("year")}
+              >
+                {date.year()}
+              </ClickableDateMode>
             </h1>
           </>
         ) : (
           <>
             <button onClick={() => handleYearScroll("prev")}>&#8656;</button>
             <h1>
-              <span>{date.year()}</span>
+              <ClickableDateMode
+                onClick={() => setMode("year")}
+                className="header-clickable"
+              >
+                {date.year()}
+              </ClickableDateMode>
             </h1>
             <button onClick={() => handleYearScroll("next")}>&#8658;</button>
           </>
