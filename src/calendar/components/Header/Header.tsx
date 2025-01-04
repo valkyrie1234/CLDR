@@ -1,21 +1,20 @@
-import { FC, useRef, useEffect } from "react";
+import { FC } from "react";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import "dayjs/locale/ru";
-import { monthNames } from "../../utils/consts";
+
 import { IHeading } from "./types";
 import {
   HeaderWrapper,
-  PeriodInputStyled,
-  HeaderControls,
   ResetButton,
   Slider,
   Toggle,
   ToggleAndButton,
   ToggleContainer,
   ToggleLabel,
-  ClickableDateMode
 } from "./styles";
+import DateInputs from "./components/DateInputs";
+import HeaderControls from "./components/HeaderControls";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
@@ -38,21 +37,6 @@ const Heading: FC<IHeading> = ({
   mode,
   setMode,
 }) => {
-  const startDateInput = useRef<HTMLInputElement | null>(null);
-  const endDateInput = useRef<HTMLInputElement | null>(null);
-
-  // Синхронизация инпутов с выбранными датами
-  useEffect(() => {
-    if (startDateInput.current) {
-      startDateInput.current.value = startDate ? startDate.format("DD-MM-YYYY") : "";
-    }
-  }, [startDate]);
-
-  useEffect(() => {
-    if (endDateInput.current) {
-      endDateInput.current.value = endDate ? endDate.format("DD-MM-YYYY") : "";
-    }
-  }, [endDate]);
 
   // Обработка выбора диапазона дат
   const handleSelectionChange = (value: string) => {
@@ -79,7 +63,6 @@ const Heading: FC<IHeading> = ({
       default:
         return;
     }
-
     onStartDateChange(start.format("MM-DD-YYYY"));
     onEndDateChange(end.format("MM-DD-YYYY"));
   };
@@ -105,32 +88,16 @@ const Heading: FC<IHeading> = ({
         <ResetButton onClick={resetDate}>Сбросить</ResetButton>
       </ToggleAndButton>
       <div className="header-top">
-        {range ? (
-          <div className="input-container">
-            <PeriodInputStyled
-              ref={startDateInput}
-              type="text"
-              placeholder="DD-MM-YYYY"
-              onChange={(e) => onStartDateChange(e.target.value)}
-            />
-            <PeriodInputStyled
-              ref={endDateInput}
-              type="text"
-              placeholder="DD-MM-YYYY"
-              onChange={(e) => onEndDateChange(e.target.value)}
-            />
-          </div>
-        ) : (
-          <div className="input-container">
-            <PeriodInputStyled
-              type="text"
-              placeholder="DD-MM-YYYY"
-              value={inputDateValue}
-              onChange={(e) => onDateInputChange(e.target.value)}
-              onBlur={onDateInputBlur}
-            />
-          </div>
-        )}
+        <DateInputs
+          range={range}
+          startDate={startDate}
+          endDate={endDate}
+          onStartDateChange={onStartDateChange}
+          onEndDateChange={onEndDateChange}
+          inputDateValue={inputDateValue}
+          onDateInputChange={onDateInputChange}
+          onDateInputBlur={onDateInputBlur}
+        />
         {range && (
           <select onChange={(e) => handleSelectionChange(e.target.value)}>
             <option value="">Выберите диапазон</option>
@@ -141,41 +108,14 @@ const Heading: FC<IHeading> = ({
           </select>
         )}
       </div>
-      <HeaderControls>
-        {mode === "day" ? (
-          <>
-            <button onClick={() => changeYear(date.year() - 1)}>&#8656;</button>
-            <button onClick={() => changeMonth(date.month() - 1)}>&#8249;</button>
-            <h1>
-              <ClickableDateMode onClick={() => setMode("month")}>
-                {monthNames[date.month()]}
-              </ClickableDateMode>{" "}
-              <ClickableDateMode onClick={() => setMode("year")}>
-                {date.year()}
-              </ClickableDateMode>
-            </h1>
-            <button onClick={() => changeMonth(date.month() + 1)}>&#8250;</button>
-            <button onClick={() => changeYear(date.year() + 1)}>&#8658;</button>
-          </>
-        ) : mode === "month" ? (
-          <>
-            <h1 className="year-mode-title">
-              <span>{monthNames[date.month()]}</span>{" "}
-              <ClickableDateMode onClick={() => setMode("year")}>
-                {date.year()}
-              </ClickableDateMode>
-            </h1>
-          </>
-        ) : (
-          <>
-            <button onClick={() => handleYearScroll("prev")}>&#8656;</button>
-            <h1>
-              <span>{date.year()}</span>
-            </h1>
-            <button onClick={() => handleYearScroll("next")}>&#8658;</button>
-          </>
-        )}
-      </HeaderControls>
+      <HeaderControls
+        mode={mode}
+        date={date}
+        changeYear={changeYear}
+        changeMonth={changeMonth}
+        setMode={setMode}
+        handleYearScroll={handleYearScroll}
+      />
     </HeaderWrapper>
   );
 };
