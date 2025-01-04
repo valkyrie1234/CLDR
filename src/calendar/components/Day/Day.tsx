@@ -1,8 +1,8 @@
 import React from "react";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { IDay } from "./types";
 
-const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null }> = ({
+const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null; minDate?: Dayjs; maxDate?: Dayjs }> = ({
   currentDate,
   date,
   startDate,
@@ -12,8 +12,13 @@ const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null }> = ({
   hoveredDate,
   onMouseEnter,
   onMouseLeave,
+  minDate,
+  maxDate,
 }) => {
   const className: string[] = [];
+
+  // Проверка, находится ли дата в допустимом диапазоне
+  const isDisabled = (minDate && date.isBefore(minDate, "day")) || (maxDate && date.isAfter(maxDate, "day"));
 
   // Добавление класса для текущей даты
   if (dayjs().isSame(date, "day")) {
@@ -47,12 +52,18 @@ const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null }> = ({
     className.push("muted");
   }
 
+  // Добавление класса для невалидных дат
+  if (isDisabled) {
+    className.push("disabled");
+  }
+
   return (
     <span
-      onClick={() => onClick(date)}
+      onClick={() => !isDisabled && onClick(date)} // Отключаем клик для невалидных дат
       className={className.join(" ")}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      style={{ cursor: isDisabled ? "not-allowed" : "pointer" }} // Меняем курсор для невалидных дат
     >
       {date.date()}
     </span>

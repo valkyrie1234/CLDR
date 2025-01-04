@@ -8,15 +8,17 @@ import { CalendarDays } from "./styles";
 
 dayjs.extend(isBetween);
 
-const Days: React.FC<IDays> = ({
+const Days: React.FC<IDays & { minDate?: Dayjs; maxDate?: Dayjs }> = ({
   date,
   startDate,
   endDate,
   onClick,
   range,
+  minDate,
+  maxDate,
 }) => {
   const [hoveredDate, setHoveredDate] = React.useState<Dayjs | null>(null);
-  
+
   const firstDayOfMonth = date.startOf("month").day() === 0 ? 6 : date.startOf("month").day() - 1;
   const daysInMonth = date.daysInMonth();
   const previousMonth = date.subtract(1, "month");
@@ -49,6 +51,8 @@ const Days: React.FC<IDays> = ({
         hoveredDate={hoveredDate}
         onMouseEnter={() => setHoveredDate(prevDate)}
         onMouseLeave={() => setHoveredDate(null)}
+        minDate={minDate}
+        maxDate={maxDate}
       />
     );
   }
@@ -68,6 +72,8 @@ const Days: React.FC<IDays> = ({
         hoveredDate={hoveredDate}
         onMouseEnter={() => setHoveredDate(currentDate)}
         onMouseLeave={() => setHoveredDate(null)}
+        minDate={minDate}
+        maxDate={maxDate}
       />
     );
   }
@@ -88,13 +94,13 @@ const Days: React.FC<IDays> = ({
         hoveredDate={hoveredDate}
         onMouseEnter={() => setHoveredDate(nextDate)}
         onMouseLeave={() => setHoveredDate(null)}
+        minDate={minDate}
+        maxDate={maxDate}
       />
     );
   }
 
-  return  <CalendarDays>
-            {[...labels, ...days]}
-          </CalendarDays>;
+  return <CalendarDays>{[...labels, ...days]}</CalendarDays>;
 };
 
 export default Days;

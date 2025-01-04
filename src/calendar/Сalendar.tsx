@@ -1,3 +1,4 @@
+// Сalendar.tsx
 import { useEffect, useState, FC } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import Heading from "./components/Header/Header";
@@ -15,7 +16,14 @@ dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-const Calendar: FC<ICalendar> = ({ range = false, showTodayButton = false, initialDate, showToggle = false }) => {
+const Calendar: FC<ICalendar> = ({
+  range = false,
+  showTodayButton = false,
+  initialDate,
+  showToggle = false,
+  minDate,
+  maxDate,
+}) => {
   const [state, setState] = useState<{
     date: Dayjs;
     startDate: Dayjs | null;
@@ -206,6 +214,8 @@ const Calendar: FC<ICalendar> = ({ range = false, showTodayButton = false, initi
           startDate={startDate}
           endDate={endDate}
           range={isRangeMode}
+          minDate={minDate}
+          maxDate={maxDate}
         />
       )}
       {mode === "year" && (
