@@ -4,6 +4,7 @@ import Day from "./Day";
 import { daysOfWeek } from "./utils/consts";
 import { IDays } from "./utils/types";
 import isBetween from "dayjs/plugin/isBetween";
+import { CalendarDays } from "./style/styles";
 
 dayjs.extend(isBetween);
 
@@ -91,7 +92,9 @@ const Days: React.FC<IDays> = ({
     );
   }
 
-  return <nav className="calendar--days">{[...labels, ...days]}</nav>;
+  return  <CalendarDays>
+            {[...labels, ...days]}
+          </CalendarDays>;
 };
 
 export default Days;

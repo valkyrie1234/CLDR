@@ -4,7 +4,17 @@ import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { monthNames } from "./utils/consts";
 import { IHeading } from "./utils/types";
 import "dayjs/locale/ru";
-import { HeaderWrapper, PeriodInputStyled, HeaderControls, ResetButton, ToggleAndButton } from "./style/styles";
+import {
+  HeaderWrapper,
+  PeriodInputStyled,
+  HeaderControls,
+  ResetButton,
+  ToggleAndButton,
+  ToggleLabel,
+  Slider,
+  Toggle,
+  ToggleContainer,
+} from "./style/styles";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
@@ -83,13 +93,13 @@ const Heading: FC<IHeading> = ({
     <HeaderWrapper>
       <ToggleAndButton>
         {showToggle && (
-          <div className="toggle-container">
-            <label className="toggle">
+          <ToggleContainer>
+            <Toggle>
               <input type="checkbox" checked={range} onChange={toggleRangeMode} />
-              <span className="slider"></span>
-            </label>
-            <span className="toggle-label">{range ? "Диапазон" : "Одна дата"}</span>
-          </div>
+              <Slider /> {/* Используем компонент Slider */}
+            </Toggle>
+            <ToggleLabel>{range ? "Диапазон" : "Одна дата"}</ToggleLabel>
+          </ToggleContainer>
         )}
         <ResetButton onClick={resetDate}>Сбросить</ResetButton>
       </ToggleAndButton>
@@ -135,7 +145,7 @@ const Heading: FC<IHeading> = ({
           <>
             <button onClick={() => changeYear(date.year() - 1)}>&#8656;</button>
             <button onClick={() => changeMonth(date.month() - 1)}>&#8249;</button>
-            <h1 className="month-year-title">
+            <h1>
               <span onClick={() => setMode("month")}>{monthNames[date.month()]}</span>{" "}
               <small onClick={() => setMode("year")}>{date.year()}</small>
             </h1>
@@ -144,16 +154,15 @@ const Heading: FC<IHeading> = ({
           </>
         ) : mode === "month" ? (
           <>
-            <h1 className="month-year-title">
+            <h1>
               <span>{monthNames[date.month()]}</span>{" "}
               <small>{date.year()}</small>
             </h1>
           </>
         ) : (
-          // mode === "year"
           <>
             <button onClick={() => handleYearScroll("prev")}>&#8656;</button>
-            <h1 className="month-year-title">
+            <h1>
               <span>{date.year()}</span>
             </h1>
             <button onClick={() => handleYearScroll("next")}>&#8658;</button>

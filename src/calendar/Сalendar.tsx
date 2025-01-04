@@ -5,12 +5,11 @@ import Days from "./Days";
 import isBetween from "dayjs/plugin/isBetween";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-
 import YearPicker from "./components/YearPicker";
 import MonthPicker from "./components/MounthPicker";
 import { ICalendar } from "./utils/types";
-import { TodayButton } from "./style/styles";
-import "./../App.scss";
+import { TodayButton, CalendarWrapper } from "./style/styles";
+import "./../App.scss"; // Этот импорт можно будет убрать после полного перехода на styled-components
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
@@ -181,7 +180,7 @@ const Calendar: FC<ICalendar> = ({ range = false, showTodayButton = false, initi
   }, [startDate]);
 
   return (
-    <div className="calendar">
+    <CalendarWrapper>
       <Heading
         date={date}
         changeMonth={changeMonth}
@@ -220,7 +219,7 @@ const Calendar: FC<ICalendar> = ({ range = false, showTodayButton = false, initi
           Сегодня
         </TodayButton>
       )}
-    </div>
+    </CalendarWrapper>
   );
 };
 
