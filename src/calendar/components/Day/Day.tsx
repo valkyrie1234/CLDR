@@ -57,13 +57,17 @@ const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null; minDate?: Dayjs; m
     className.push("disabled");
   }
 
+  if (hoveredDate && date.isSame(hoveredDate, "day")) {
+    className.push("hover-end");
+  }
+
   return (
     <span
-      onClick={() => !isDisabled && onClick(date)} // Отключаем клик для невалидных дат
+      onClick={() => !isDisabled && onClick(date)}
       className={className.join(" ")}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      style={{ cursor: isDisabled ? "not-allowed" : "pointer" }} // Меняем курсор для невалидных дат
+      style={{ cursor: isDisabled ? "not-allowed" : "pointer" }}
     >
       {date.date()}
     </span>

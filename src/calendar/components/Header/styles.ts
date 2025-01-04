@@ -187,4 +187,9 @@ export const Toggle = styled.label`
 
 export const ClickableDateMode = styled.span`
   cursor: pointer;
+
+  &:hover {
+    background-color: ${colors.gray[60]};
+    border-radius: 5%;
+  }
 `
