@@ -7,6 +7,7 @@ export interface ICalendar {
   showToggle?: boolean;
   minDate?: Dayjs;
   maxDate?: Dayjs;
+  timePicker?: boolean;
 }
 
 export interface IDayProps {

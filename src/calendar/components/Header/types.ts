@@ -17,4 +17,7 @@ export interface IHeading {
     inputDateValue: string;
     onDateInputChange: (value: string) => void;
     onDateInputBlur: () => void;
+    timePicker?: boolean;
+    onTimeChange: (value: string) => void;
+    timeValue: string;
   }

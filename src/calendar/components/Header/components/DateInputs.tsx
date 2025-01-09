@@ -11,6 +11,9 @@ interface DateInputsProps {
   inputDateValue: string;
   onDateInputChange: (value: string) => void;
   onDateInputBlur: () => void;
+  timePicker?: boolean;
+  onTimeChange?: (value: string) => void;
+  timeValue?: string;
 }
 
 const DateInputs: FC<DateInputsProps> = ({
@@ -22,6 +25,9 @@ const DateInputs: FC<DateInputsProps> = ({
   inputDateValue,
   onDateInputChange,
   onDateInputBlur,
+  timePicker,
+  onTimeChange,
+  timeValue,
 }) => {
   const startDateInput = useRef<HTMLInputElement | null>(null);
   const endDateInput = useRef<HTMLInputElement | null>(null);
@@ -57,13 +63,22 @@ const DateInputs: FC<DateInputsProps> = ({
           />
         </>
       ) : (
-        <PeriodInputStyled
-          type="text"
-          placeholder="DD-MM-YYYY"
-          value={inputDateValue}
-          onChange={(e) => onDateInputChange(e.target.value)}
-          onBlur={onDateInputBlur}
-        />
+        <>
+          <PeriodInputStyled
+            type="text"
+            placeholder="DD-MM-YYYY"
+            value={inputDateValue}
+            onChange={(e) => onDateInputChange(e.target.value)}
+            onBlur={onDateInputBlur}
+          />
+          {timePicker && (
+            <PeriodInputStyled
+              type="time"
+              value={timeValue}
+              onChange={(e) => onTimeChange?.(e.target.value)}
+            />
+          )}
+        </>
       )}
     </div>
   );

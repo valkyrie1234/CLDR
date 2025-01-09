@@ -5,6 +5,7 @@ import Days from "./components/Days/Days";
 import isBetween from "dayjs/plugin/isBetween";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+
 import YearPicker from "./components/YearPicker/YearPicker";
 import MonthPicker from "./components/MounthPicker/MounthPicker";
 import { ICalendar } from "./utils/types";
@@ -16,10 +17,11 @@ dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
 const Calendar: FC<ICalendar> = ({
-  range = false,
   showTodayButton = false,
-  initialDate,
   showToggle = false,
+  timePicker = false,
+  range = false,
+  initialDate,
   minDate,
   maxDate,
 }) => {
@@ -39,6 +41,7 @@ const Calendar: FC<ICalendar> = ({
 
   const [mode, setMode] = useState<"day" | "month" | "year">("day");
   const [inputDateValue, setInputDateValue] = useState<string>("");
+  const [timeValue, setTimeValue] = useState<string>("00:00");
 
   // Обработка выбора года
   const handleYearSelect = (year: number) => {
@@ -89,6 +92,7 @@ const Calendar: FC<ICalendar> = ({
       endDate: null,
     }));
     setInputDateValue("");
+    setTimeValue("00:00");
   };
 
   // Изменение выбранной даты
@@ -175,6 +179,10 @@ const Calendar: FC<ICalendar> = ({
     }
   };
 
+  const handleTimeChange = (value: string) => {
+    setTimeValue(value);
+  };
+
   const { date, startDate, endDate, isRangeMode } = state;
 
   // Синхронизация инпута с календарем
@@ -205,6 +213,9 @@ const Calendar: FC<ICalendar> = ({
         inputDateValue={inputDateValue}
         onDateInputChange={handleDateInputChange}
         onDateInputBlur={handleDateInputBlur}
+        timePicker={timePicker}
+        onTimeChange={handleTimeChange}
+        timeValue={timeValue}
       />
       {mode === "day" && (
         <Days

@@ -36,6 +36,9 @@ const Heading: FC<IHeading> = ({
   onDateInputBlur,
   mode,
   setMode,
+  timePicker,
+  onTimeChange,
+  timeValue,
 }) => {
 
   // Обработка выбора диапазона дат
@@ -97,6 +100,9 @@ const Heading: FC<IHeading> = ({
           inputDateValue={inputDateValue}
           onDateInputChange={onDateInputChange}
           onDateInputBlur={onDateInputBlur}
+          timePicker={timePicker}
+          onTimeChange={onTimeChange}
+          timeValue={timeValue}
         />
         {range && (
           <select onChange={(e) => handleSelectionChange(e.target.value)}>
