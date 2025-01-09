@@ -25,16 +25,11 @@ const Calendar: FC<ICalendar> = ({
   minDate,
   maxDate,
 }) => {
-  const [state, setState] = useState<{
-    date: Dayjs;
-    startDate: Dayjs | null;
-    endDate: Dayjs | null;
-    isRangeMode: boolean;
-    initialDate: Dayjs;
-  }>({
+
+  const [calendarState, setCalendarState] = useState({
     date: initialDate || dayjs(),
-    startDate: null,
-    endDate: null,
+    startDate: null as Dayjs | null,
+    endDate: null as Dayjs | null,
     isRangeMode: range,
     initialDate: initialDate || dayjs(),
   });
@@ -45,7 +40,7 @@ const Calendar: FC<ICalendar> = ({
 
   // Обработка выбора года
   const handleYearSelect = (year: number) => {
-    setState((prevState) => ({
+    setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.year(year),
     }));
@@ -54,7 +49,7 @@ const Calendar: FC<ICalendar> = ({
 
   // Изменение месяца
   const changeMonth = (month: number) => {
-    setState((prevState) => ({
+    setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.month(month),
     }));
@@ -63,7 +58,7 @@ const Calendar: FC<ICalendar> = ({
 
   // Изменение года
   const changeYear = (year: number) => {
-    setState((prevState) => ({
+    setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.year(year),
     }));
@@ -76,7 +71,7 @@ const Calendar: FC<ICalendar> = ({
 
   // Обработка выбора месяца
   const handleMonthSelect = (month: number) => {
-    setState((prevState) => ({
+    setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.month(month),
     }));
@@ -85,7 +80,7 @@ const Calendar: FC<ICalendar> = ({
 
   // Сброс даты к начальному значению или текущей дате
   const resetDate = () => {
-    setState((prevState) => ({
+    setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.initialDate,
       startDate: null,
@@ -97,7 +92,7 @@ const Calendar: FC<ICalendar> = ({
 
   // Изменение выбранной даты
   const changeDate = (selectedDate: Dayjs) => {
-    setState((prevState) => {
+    setCalendarState((prevState) => {
       const { startDate, endDate, isRangeMode } = prevState;
 
       if (!isRangeMode) {
@@ -140,7 +135,7 @@ const Calendar: FC<ICalendar> = ({
 
   // Обработка изменения даты через инпут
   const handleDateChange = (value: string, type: "startDate" | "endDate") => {
-    setState((prevState) => {
+    setCalendarState((prevState) => {
       const parsedDate = parseDateFromInput(value);
 
       return {
@@ -150,9 +145,16 @@ const Calendar: FC<ICalendar> = ({
     });
   };
 
+  // Упрощаем передачу колбеков для onStartDateChange и onEndDateChange
+  const handleStartDateChange = (value: string) => handleDateChange(value, "startDate");
+  const handleEndDateChange = (value: string) => handleDateChange(value, "endDate");
+
+  // Обработка изменения значения инпута
+  const handleDateInputChange = (value: string) => setInputDateValue(value);
+
   // Выбор текущей даты
   const selectToday = () => {
-    setState((prevState) => ({
+    setCalendarState((prevState) => ({
       ...prevState,
       date: dayjs(),
       startDate: null,
@@ -161,37 +163,37 @@ const Calendar: FC<ICalendar> = ({
     changeDate(dayjs());
   };
 
-  // Обработка изменения значения инпута
-  const handleDateInputChange = (value: string) => {
-    setInputDateValue(value);
-  };
-
   // Обработка потери фокуса инпутом
   const handleDateInputBlur = () => {
     const parsedDate = parseDateFromInput(inputDateValue);
     if (parsedDate) {
-      setState((prevState) => ({
+      setCalendarState((prevState) => ({
         ...prevState,
         date: parsedDate,
         startDate: parsedDate,
-        endDate: state.isRangeMode ? parsedDate : null,
+        endDate: calendarState.isRangeMode ? parsedDate : null,
       }));
     }
   };
 
+  // Обработка изменения времени
   const handleTimeChange = (value: string) => {
     setTimeValue(value);
   };
 
-  const { date, startDate, endDate, isRangeMode } = state;
+  // Логика переключения режима диапазона
+  const toggleRangeMode = () => {
+    setCalendarState((prevState) => ({
+      ...prevState,
+      isRangeMode: !prevState.isRangeMode,
+    }));
+  };
+
+  const { date, startDate, endDate, isRangeMode } = calendarState;
 
   // Синхронизация инпута с календарем
   useEffect(() => {
-    if (startDate) {
-      setInputDateValue(startDate.format("DD-MM-YYYY"));
-    } else {
-      setInputDateValue("");
-    }
+    setInputDateValue(startDate ? startDate.format("DD-MM-YYYY") : "");
   }, [startDate]);
 
   return (
@@ -204,12 +206,12 @@ const Calendar: FC<ICalendar> = ({
         range={isRangeMode}
         endDate={endDate}
         startDate={startDate}
-        onStartDateChange={(value) => handleDateChange(value, "startDate")}
-        onEndDateChange={(value) => handleDateChange(value, "endDate")}
+        onStartDateChange={handleStartDateChange}
+        onEndDateChange={handleEndDateChange}
         mode={mode}
         setMode={setMode}
         showToggle={showToggle}
-        toggleRangeMode={() => setState((prev) => ({ ...prev, isRangeMode: !prev.isRangeMode }))}
+        toggleRangeMode={toggleRangeMode}
         inputDateValue={inputDateValue}
         onDateInputChange={handleDateInputChange}
         onDateInputBlur={handleDateInputBlur}
