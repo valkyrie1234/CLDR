@@ -70,7 +70,7 @@ export const HeaderWrapper = styled.div`
   }
 `;
 
-export const PeriodInputStyled = styled.input`
+export const InputStyled = styled.input`
   flex: 1;
   min-width: 0;
   padding: 8px;

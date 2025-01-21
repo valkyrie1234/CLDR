@@ -1,5 +1,5 @@
 import { FC, useRef, useEffect } from "react";
-import { PeriodInputStyled } from "../styles";
+import { InputStyled } from "../styles";
 import { DateInputsProps } from "../types";
 
 const DateInputs: FC<DateInputsProps> = ({
@@ -35,13 +35,13 @@ const DateInputs: FC<DateInputsProps> = ({
     <div className="input-container">
       {range ? (
         <>
-          <PeriodInputStyled
+          <InputStyled
             ref={startDateInput}
             type="text"
             placeholder="DD-MM-YYYY"
             onChange={(e) => onStartDateChange(e.target.value)}
           />
-          <PeriodInputStyled
+          <InputStyled
             ref={endDateInput}
             type="text"
             placeholder="DD-MM-YYYY"
@@ -50,7 +50,7 @@ const DateInputs: FC<DateInputsProps> = ({
         </>
       ) : (
         <>
-          <PeriodInputStyled
+          <InputStyled
             type="text"
             placeholder="DD-MM-YYYY"
             value={inputDateValue}
@@ -58,7 +58,7 @@ const DateInputs: FC<DateInputsProps> = ({
             onBlur={onDateInputBlur}
           />
           {timePicker && (
-            <PeriodInputStyled
+            <InputStyled
               type="time"
               value={timeValue}
               onChange={(e) => onTimeChange?.(e.target.value)}
