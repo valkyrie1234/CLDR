@@ -9,33 +9,3 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-.hover-end {
-  background-color: rgba(211, 211, 211, 0.404);
-}
-
-.today {
-  font-weight: bold;
-  color: red;
-}
-
-.start {
-  background-color: #afd;
-}
-
-.end {
-  background-color: #daf;
-}
-
-.between {
-  background-color: rgb(255, 221, 221);
-}
-
-.muted {
-  color: #ac0404;
-}
-
-.disabled {
-  color: #ccc;
-  pointer-events: none;
-}
