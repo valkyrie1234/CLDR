@@ -4,6 +4,7 @@ import isBetween from "dayjs/plugin/isBetween";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 
+import { fixDateFormat, parseDateFromInput } from "./utils/helpers";
 import MonthPicker from "./components/MounthPicker/MounthPicker";
 import { TodayButton, CalendarWrapper } from "./style/styles";
 import YearPicker from "./components/YearPicker/YearPicker";
@@ -11,7 +12,6 @@ import Header from "./components/Header/Header";
 import Days from "./components/Days/Days";
 import { ICalendar } from "./types";
 import "./../App.scss";
-import { fixDateFormat, parseDateFromInput } from "./utils/helpers";
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
