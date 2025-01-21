@@ -47,6 +47,9 @@ const Header: FC<IHeader> = ({
     let start, end;
 
     switch (value) {
+      case "current-reset":
+        resetDate()
+        break;
       case "current-week":
         start = today.startOf("week");
         end = today.endOf("week");
@@ -66,8 +69,10 @@ const Header: FC<IHeader> = ({
       default:
         return;
     }
-    onStartDateChange(start.format("MM-DD-YYYY"));
-    onEndDateChange(end.format("MM-DD-YYYY"));
+    if(start && end){
+      onStartDateChange(start.format("MM-DD-YYYY"));
+      onEndDateChange(end.format("MM-DD-YYYY"));
+    }
   };
 
   // Обработка пролистывания годов
@@ -106,7 +111,7 @@ const Header: FC<IHeader> = ({
         />
         {range && (
           <select onChange={(e) => handleSelectionChange(e.target.value)}>
-            <option value="">Выберите диапазон</option>
+            <option value="current-reset">Выберите диапазон</option>
             <option value="current-week">Текущая неделя</option>
             <option value="current-month">Текущий месяц</option>
             <option value="current-quarter">Текущий квартал</option>
