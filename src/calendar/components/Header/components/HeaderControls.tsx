@@ -1,16 +1,7 @@
 import { FC } from "react";
 import { HeaderControls as StyledHeaderControls, ClickableDateMode } from "../styles";
 import { monthNames } from "../../../utils/consts";
-import { Dayjs } from "dayjs";
-
-interface HeaderControlsProps {
-  mode: "day" | "month" | "year";
-  date: Dayjs;
-  changeYear: (year: number) => void;
-  changeMonth: (month: number) => void;
-  setMode: (mode: "day" | "month" | "year") => void;
-  handleYearScroll: (direction: "prev" | "next") => void;
-}
+import { HeaderControlsProps } from "../types";
 
 const HeaderControls: FC<HeaderControlsProps> = ({
   mode,

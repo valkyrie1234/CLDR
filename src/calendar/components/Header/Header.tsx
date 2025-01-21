@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import "dayjs/locale/ru";
 
-import { IHeading } from "./types";
+import { IHeader } from "./types";
 import {
   HeaderWrapper,
   ResetButton,
@@ -19,7 +19,7 @@ import HeaderControls from "./components/HeaderControls";
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
 
-const Heading: FC<IHeading> = ({
+const Header: FC<IHeader> = ({
   date,
   changeMonth,
   resetDate,
@@ -126,4 +126,4 @@ const Heading: FC<IHeading> = ({
   );
 };
 
-export default Heading;
+export default Header;

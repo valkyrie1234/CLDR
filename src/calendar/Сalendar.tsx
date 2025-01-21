@@ -1,6 +1,6 @@
 import { useEffect, useState, FC } from "react";
 import dayjs, { Dayjs } from "dayjs";
-import Heading from "./components/Header/Header";
+import Header from "./components/Header/Header";
 import Days from "./components/Days/Days";
 import isBetween from "dayjs/plugin/isBetween";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
@@ -25,26 +25,24 @@ const Calendar: FC<ICalendar> = ({
   minDate,
   maxDate,
 }) => {
-
   const [calendarState, setCalendarState] = useState({
     date: initialDate || dayjs(),
     startDate: null as Dayjs | null,
     endDate: null as Dayjs | null,
     isRangeMode: range,
     initialDate: initialDate || dayjs(),
+    mode: "day" as "day" | "month" | "year",
+    inputDateValue: "",
+    timeValue: "00:00",
   });
-
-  const [mode, setMode] = useState<"day" | "month" | "year">("day");
-  const [inputDateValue, setInputDateValue] = useState<string>("");
-  const [timeValue, setTimeValue] = useState<string>("00:00");
 
   // Обработка выбора года
   const handleYearSelect = (year: number) => {
     setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.year(year),
+      mode: "month",
     }));
-    setMode("month");
   };
 
   // Изменение месяца
@@ -52,18 +50,18 @@ const Calendar: FC<ICalendar> = ({
     setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.month(month),
+      mode: "day",
     }));
-    setMode("day");
   };
 
   // Форматирование даты
   const fixDateFormat = (value: string): string => {
     const numbers = value.replace(/\D/g, '');
-  
+
     const part1 = numbers.slice(0, 2);
     const part2 = numbers.slice(2, 4);
     const year = numbers.slice(4, 8);
-  
+
     return `${part2}-${part1}-${year}`;
   };
 
@@ -73,10 +71,10 @@ const Calendar: FC<ICalendar> = ({
       ...prevState,
       date: prevState.date.year(year),
     }));
-    if (mode === "year") {
-      setMode("year");
+    if (calendarState.mode === "year") {
+      setCalendarState((prevState) => ({ ...prevState, mode: "year" }));
     } else {
-      setMode("day");
+      setCalendarState((prevState) => ({ ...prevState, mode: "day" }));
     }
   };
 
@@ -85,8 +83,8 @@ const Calendar: FC<ICalendar> = ({
     setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.month(month),
+      mode: "day",
     }));
-    setMode("day");
   };
 
   // Сброс даты к начальному значению или текущей дате
@@ -96,9 +94,9 @@ const Calendar: FC<ICalendar> = ({
       date: prevState.initialDate,
       startDate: null,
       endDate: null,
+      inputDateValue: "",
+      timeValue: "00:00",
     }));
-    setInputDateValue("");
-    setTimeValue("00:00");
   };
 
   // Изменение выбранной даты
@@ -161,7 +159,12 @@ const Calendar: FC<ICalendar> = ({
   const handleEndDateChange = (value: string) => handleDateChange(value, "endDate");
 
   // Обработка изменения значения инпута
-  const handleDateInputChange = (value: string) => setInputDateValue(value);
+  const handleDateInputChange = (value: string) => {
+    setCalendarState((prevState) => ({
+      ...prevState,
+      inputDateValue: value,
+    }));
+  };
 
   // Выбор текущей даты
   const selectToday = () => {
@@ -176,25 +179,31 @@ const Calendar: FC<ICalendar> = ({
 
   // Обработка потери фокуса инпутом
   const handleDateInputBlur = () => {
-    const fixedDate = fixDateFormat(inputDateValue);
+    const fixedDate = fixDateFormat(calendarState.inputDateValue);
     const parsedDate = parseDateFromInput(fixedDate);
-  
+
     if (parsedDate && parsedDate.isValid()) {
       setCalendarState((prevState) => ({
         ...prevState,
         date: parsedDate,
         startDate: parsedDate,
-        endDate: calendarState.isRangeMode ? parsedDate : null,
+        endDate: prevState.isRangeMode ? parsedDate : null,
+        inputDateValue: parsedDate.format("DD-MM-YYYY"),
       }));
-      setInputDateValue(parsedDate.format("DD-MM-YYYY"));
     } else {
-      setInputDateValue("");
+      setCalendarState((prevState) => ({
+        ...prevState,
+        inputDateValue: "",
+      }));
     }
   };
 
   // Обработка изменения времени
   const handleTimeChange = (value: string) => {
-    setTimeValue(value);
+    setCalendarState((prevState) => ({
+      ...prevState,
+      timeValue: value,
+    }));
   };
 
   // Логика переключения режима диапазона
@@ -205,16 +214,21 @@ const Calendar: FC<ICalendar> = ({
     }));
   };
 
-  const { date, startDate, endDate, isRangeMode } = calendarState;
+  const setMode = (newMode: "day" | "month" | "year") => setCalendarState((prevState) => ({ ...prevState, mode: newMode }))
+
+  const { date, startDate, endDate, isRangeMode, mode, inputDateValue, timeValue } = calendarState;
 
   // Синхронизация инпута с календарем
   useEffect(() => {
-    setInputDateValue(startDate ? startDate.format("DD-MM-YYYY") : "");
+    setCalendarState((prevState) => ({
+      ...prevState,
+      inputDateValue: startDate ? startDate.format("DD-MM-YYYY") : "",
+    }));
   }, [startDate]);
 
   return (
     <CalendarWrapper>
-      <Heading
+      <Header
         date={date}
         changeMonth={changeMonth}
         changeYear={changeYear}

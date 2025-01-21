@@ -1,20 +1,6 @@
 import { FC, useRef, useEffect } from "react";
 import { PeriodInputStyled } from "../styles";
-import { Dayjs } from "dayjs";
-
-interface DateInputsProps {
-  range: boolean;
-  startDate: Dayjs | null;
-  endDate: Dayjs | null;
-  onStartDateChange: (value: string) => void;
-  onEndDateChange: (value: string) => void;
-  inputDateValue: string;
-  onDateInputChange: (value: string) => void;
-  onDateInputBlur: () => void;
-  timePicker?: boolean;
-  onTimeChange?: (value: string) => void;
-  timeValue?: string;
-}
+import { DateInputsProps } from "../types";
 
 const DateInputs: FC<DateInputsProps> = ({
   range,
