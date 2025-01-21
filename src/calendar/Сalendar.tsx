@@ -11,7 +11,6 @@ import YearPicker from "./components/YearPicker/YearPicker";
 import Header from "./components/Header/Header";
 import Days from "./components/Days/Days";
 import { ICalendar } from "./types";
-import "./../App.scss";
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
