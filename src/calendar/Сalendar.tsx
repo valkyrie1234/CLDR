@@ -9,8 +9,9 @@ import { TodayButton, CalendarWrapper } from "./style/styles";
 import YearPicker from "./components/YearPicker/YearPicker";
 import Header from "./components/Header/Header";
 import Days from "./components/Days/Days";
-import { ICalendar } from "./utils/types";
+import { ICalendar } from "./types";
 import "./../App.scss";
+import { fixDateFormat, parseDateFromInput } from "./utils/helpers";
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
@@ -52,17 +53,6 @@ const Calendar: FC<ICalendar> = ({
       date: prevState.date.month(month),
       mode: "day",
     }));
-  };
-
-  // Форматирование даты
-  const fixDateFormat = (value: string): string => {
-    const numbers = value.replace(/\D/g, '');
-
-    const part1 = numbers.slice(0, 2);
-    const part2 = numbers.slice(2, 4);
-    const year = numbers.slice(4, 8);
-
-    return `${part2}-${part1}-${year}`;
   };
 
   // Изменение года
@@ -133,13 +123,6 @@ const Calendar: FC<ICalendar> = ({
         endDate: selectedDate,
       };
     });
-  };
-
-  // Парсинг даты из строки
-  const parseDateFromInput = (value: string): Dayjs | null => {
-    const format = "DD-MM-YYYY";
-    const parsedDate = dayjs(value, format, true);
-    return parsedDate.isValid() ? parsedDate : null;
   };
 
   // Обработка изменения даты через инпут
