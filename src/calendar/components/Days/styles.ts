@@ -33,6 +33,8 @@ export const DayWrapper = styled.span<{
   isMuted?: boolean;
   isDisabled?: boolean;
   shouldHover?: boolean;
+  hasStartDate?: boolean;
+  hasEndDate?: boolean;
 }>`
   display: inline-block;
   width: 14.28571%;
@@ -50,19 +52,6 @@ export const DayWrapper = styled.span<{
       color: red;
     `}
 
-    ${(props) =>
-    props.isBetween &&
-    css`
-      background-color: rgb(255, 221, 221);
-    `}
-
-  ${({isStart, isEnd}) =>
-    (isStart || isEnd) &&
-    css`
-      background-color: #a50505;
-      color: white;
-    `}
-
   ${(props) =>
     props.isMuted &&
     css`
@@ -78,9 +67,30 @@ export const DayWrapper = styled.span<{
 
   ${(props) =>
     props.shouldHover &&
+    !(props.hasStartDate && !props.hasEndDate) && // Условие: не применять, если есть startDate, но нет endDate
     css`
       &:hover {
         background-color: rgba(211, 211, 211, 0.404);
       }
+    `}
+    
+  ${(props) =>
+    props.isBetween &&
+    css`
+      background-color: rgb(255, 221, 221);
+    `}
+
+  ${(props) =>
+    props.isBetweenHover &&
+    !props.isEnd &&
+    css`
+      background-color: rgb(255, 221, 221);
+    `}
+
+  ${(props) =>
+    (props.isStart || props.isEnd) &&
+    css`
+      background-color: #a50505;
+      color: white;
     `}
 `;

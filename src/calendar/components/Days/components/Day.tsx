@@ -27,11 +27,8 @@ const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null; minDate?: Dayjs; m
   const isBetweenHover = (range && startDate && hoveredDate && date.isBetween(startDate, hoveredDate, null, "[]")) || undefined;
   const isMuted = (!date.isSame(currentDate, "month")) || undefined;
 
-  // Проверка, является ли дата частью выделенного диапазона
-  const isPartOfRange = range && startDate && endDate && date.isBetween(startDate, endDate, null, "[]");
-
-  // Проверка, является ли дата граничной (начало или конец диапазона)
-  const isBoundary = isStart || isEnd;
+  // Проверка, является ли диапазон завершенным (выбраны и startDate, и endDate)
+  const isRangeComplete = range && startDate && endDate;
 
   return (
     <DayWrapper
@@ -39,10 +36,12 @@ const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null; minDate?: Dayjs; m
       isStart={isStart}
       isEnd={isEnd}
       isBetween={isBetween}
-      isBetweenHover={isBetweenHover}
+      isBetweenHover={isBetweenHover && !isRangeComplete}
       isMuted={isMuted}
       isDisabled={isDisabled}
-      shouldHover={!isPartOfRange && !isBoundary}
+      shouldHover={!isStart && !isEnd && !isBetween}
+      hasStartDate={!!startDate}
+      hasEndDate={!!endDate}
       onClick={() => !isDisabled && onClick(date)}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
