@@ -6,4 +6,10 @@ export interface IDays {
     endDate: Dayjs | null;
     onClick: (selectedDate: Dayjs) => void;
     range: boolean;
-  }
+  };
+  
+export interface IDay extends IDays {
+    currentDate: Dayjs;
+    onMouseEnter: () => void,
+    onMouseLeave: () => void
+  };

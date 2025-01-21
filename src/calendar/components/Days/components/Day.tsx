@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
-import { IDay } from "./types";
+import { IDay } from "../types";
 
 const Day: React.FC<IDay & { hoveredDate: dayjs.Dayjs | null; minDate?: Dayjs; maxDate?: Dayjs }> = ({
   currentDate,

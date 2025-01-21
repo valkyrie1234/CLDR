@@ -1,7 +1,7 @@
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
-import Day from "../Day/Day";
+import Day from "./components/Day";
 import { daysOfWeek } from "../../utils/consts";
 import { IDays } from "./types";
 import { CalendarDays } from "./styles";
