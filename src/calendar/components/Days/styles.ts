@@ -25,16 +25,16 @@ export const CalendarDays = styled.nav`
 `;
 
 export const DayWrapper = styled.span<{
-  isToday?: boolean;
-  isStart?: boolean;
-  isEnd?: boolean;
-  isBetween?: boolean;
-  isBetweenHover?: boolean;
-  isMuted?: boolean;
-  isDisabled?: boolean;
-  shouldHover?: boolean;
-  hasStartDate?: boolean;
-  hasEndDate?: boolean;
+  $isToday?: boolean;
+  $isStart?: boolean;
+  $isEnd?: boolean;
+  $isBetween?: boolean;
+  $isBetweenHover?: boolean;
+  $isMuted?: boolean;
+  $isDisabled?: boolean;
+  $shouldHover?: boolean;
+  $hasStartDate?: boolean;
+  $hasEndDate?: boolean;
 }>`
   display: inline-block;
   width: 14.28571%;
@@ -46,28 +46,28 @@ export const DayWrapper = styled.span<{
   position: relative;
 
   ${(props) =>
-    props.isToday &&
+    props.$isToday &&
     css`
       font-weight: bold;
       color: red;
     `}
 
   ${(props) =>
-    props.isMuted &&
+    props.$isMuted &&
     css`
       color: rgba(0, 0, 0, 0.3);
     `}
 
   ${(props) =>
-    props.isDisabled &&
+    props.$isDisabled &&
     css`
       color: #ccc;
       pointer-events: none;
     `}
 
   ${(props) =>
-    props.shouldHover &&
-    !(props.hasStartDate && !props.hasEndDate) && // Условие: не применять, если есть startDate, но нет endDate
+    props.$shouldHover &&
+    !(props.$hasStartDate && !props.$hasEndDate) &&
     css`
       &:hover {
         background-color: rgba(211, 211, 211, 0.404);
@@ -75,20 +75,20 @@ export const DayWrapper = styled.span<{
     `}
     
   ${(props) =>
-    props.isBetween &&
+    props.$isBetween &&
     css`
       background-color: rgb(255, 221, 221);
     `}
 
   ${(props) =>
-    props.isBetweenHover &&
-    !props.isEnd &&
+    props.$isBetweenHover &&
+    !props.$isEnd &&
     css`
       background-color: rgb(255, 221, 221);
     `}
 
   ${(props) =>
-    (props.isStart || props.isEnd) &&
+    (props.$isStart || props.$isEnd) &&
     css`
       background-color: #a50505;
       color: white;
