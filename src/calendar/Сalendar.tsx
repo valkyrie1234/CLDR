@@ -3,8 +3,8 @@ import dayjs, { Dayjs } from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
-import { fixDateFormat, parseDateFromInput } from "./utils/helpers";
 import MonthPicker from "./components/MounthPicker/MounthPicker";
 import { TodayButton, CalendarWrapper } from "./style/styles";
 import YearPicker from "./components/YearPicker/YearPicker";
@@ -12,6 +12,10 @@ import Header from "./components/Header/Header";
 import Days from "./components/Days/Days";
 import { ICalendar } from "./types";
 
+
+
+
+dayjs.extend(customParseFormat)
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -35,6 +39,14 @@ const Calendar: FC<ICalendar> = ({
     inputDateValue: "",
     timeValue: "00:00",
   });
+
+  // Парсинг даты из строки
+  const parseDateFromInput = (value: string): Dayjs | null => {
+      const format = "DD-MM-YYYY";
+      const parsedDate = dayjs(value, format, true);
+      return parsedDate.isValid() ? parsedDate : null;
+    };
+  
 
   // Обработка выбора года
   const handleYearSelect = (year: number) => {
@@ -161,8 +173,7 @@ const Calendar: FC<ICalendar> = ({
 
   // Обработка потери фокуса инпутом
   const handleDateInputBlur = () => {
-    const fixedDate = fixDateFormat(calendarState.inputDateValue);
-    const parsedDate = parseDateFromInput(fixedDate);
+    const parsedDate = parseDateFromInput(calendarState.inputDateValue);
 
     if (parsedDate && parsedDate.isValid()) {
       setCalendarState((prevState) => ({

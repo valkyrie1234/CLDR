@@ -39,13 +39,13 @@ const DateInputs: FC<DateInputsProps> = ({
             ref={startDateInput}
             type="text"
             placeholder="DD-MM-YYYY"
-            onChange={(e) => onStartDateChange(e.target.value)}
+            onBlur={(e) => onStartDateChange(e.target.value)}
           />
           <InputStyled
             ref={endDateInput}
             type="text"
             placeholder="DD-MM-YYYY"
-            onChange={(e) => onEndDateChange(e.target.value)}
+            onBlur={(e) => onEndDateChange(e.target.value)}
           />
         </>
       ) : (
