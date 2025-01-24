@@ -44,6 +44,7 @@ const Header: FC<IHeader> = ({
   // Обработка выбора диапазона дат
   const handleSelectionChange = (value: string) => {
     const today = dayjs();
+    const format = "DD-MM-YYYY";
     let start, end;
 
     switch (value) {
@@ -70,8 +71,8 @@ const Header: FC<IHeader> = ({
         return;
     }
     if(start && end){
-      onStartDateChange(start.format("DD-MM-YYYY"));
-      onEndDateChange(end.format("DD-MM-YYYY"));
+      onStartDateChange(start.format(format));
+      onEndDateChange(end.format(format));
     }
   };
 
