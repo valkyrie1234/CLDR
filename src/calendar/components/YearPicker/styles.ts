@@ -4,7 +4,7 @@ import { colors } from "../../style/colors";
 export const YearGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 21px;
   padding: 10px;
 `;
 

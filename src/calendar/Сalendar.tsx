@@ -13,10 +13,7 @@ import Days from "./components/Days/Days";
 import { ICalendar } from "./types";
 import { format } from "./utils/consts";
 
-
-
-
-dayjs.extend(customParseFormat)
+dayjs.extend(customParseFormat);
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -43,10 +40,9 @@ const Calendar: FC<ICalendar> = ({
 
   // Парсинг даты из строки
   const parseDateFromInput = (value: string): Dayjs | null => {
-      const parsedDate = dayjs(value, format, true);
-      return parsedDate.isValid() ? parsedDate : null;
-    };
-  
+    const parsedDate = dayjs(value, format, true);
+    return parsedDate.isValid() ? parsedDate : null;
+  };
 
   // Обработка выбора года
   const handleYearSelect = (year: number) => {
@@ -207,7 +203,8 @@ const Calendar: FC<ICalendar> = ({
     }));
   };
 
-  const setMode = (newMode: "day" | "month" | "year") => setCalendarState((prevState) => ({ ...prevState, mode: newMode }))
+  const setMode = (newMode: "day" | "month" | "year") =>
+    setCalendarState((prevState) => ({ ...prevState, mode: newMode }));
 
   const { date, startDate, endDate, isRangeMode, mode, inputDateValue, timeValue } = calendarState;
 
