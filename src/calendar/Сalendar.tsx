@@ -11,6 +11,7 @@ import YearPicker from "./components/YearPicker/YearPicker";
 import Header from "./components/Header/Header";
 import Days from "./components/Days/Days";
 import { ICalendar } from "./types";
+import { format } from "./utils/consts";
 
 
 
@@ -42,7 +43,6 @@ const Calendar: FC<ICalendar> = ({
 
   // Парсинг даты из строки
   const parseDateFromInput = (value: string): Dayjs | null => {
-      const format = "DD-MM-YYYY";
       const parsedDate = dayjs(value, format, true);
       return parsedDate.isValid() ? parsedDate : null;
     };
@@ -181,7 +181,7 @@ const Calendar: FC<ICalendar> = ({
         date: parsedDate,
         startDate: parsedDate,
         endDate: prevState.isRangeMode ? parsedDate : null,
-        inputDateValue: parsedDate.format("DD-MM-YYYY"),
+        inputDateValue: parsedDate.format(format),
       }));
     } else {
       setCalendarState((prevState) => ({
@@ -215,7 +215,7 @@ const Calendar: FC<ICalendar> = ({
   useEffect(() => {
     setCalendarState((prevState) => ({
       ...prevState,
-      inputDateValue: startDate ? startDate.format("DD-MM-YYYY") : "",
+      inputDateValue: startDate ? startDate.format(format) : "",
     }));
   }, [startDate]);
 

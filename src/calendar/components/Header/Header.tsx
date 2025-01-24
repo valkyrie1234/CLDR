@@ -15,6 +15,7 @@ import {
 } from "./styles";
 import DateInputs from "./components/DateInputs";
 import HeaderControls from "./components/HeaderControls";
+import { format } from "../../utils/consts";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
@@ -44,7 +45,6 @@ const Header: FC<IHeader> = ({
   // Обработка выбора диапазона дат
   const handleSelectionChange = (value: string) => {
     const today = dayjs();
-    const format = "DD-MM-YYYY";
     let start, end;
 
     switch (value) {

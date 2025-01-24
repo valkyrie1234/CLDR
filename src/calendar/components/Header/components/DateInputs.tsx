@@ -1,6 +1,7 @@
 import { FC, useRef, useEffect } from "react";
 import { InputStyled } from "../styles";
 import { DateInputsProps } from "../types";
+import { format } from "../../../utils/consts";
 
 const DateInputs: FC<DateInputsProps> = ({
   range,
@@ -21,13 +22,13 @@ const DateInputs: FC<DateInputsProps> = ({
   // Синхронизация инпутов с выбранными датами
   useEffect(() => {
     if (startDateInput.current) {
-      startDateInput.current.value = startDate ? startDate.format("DD-MM-YYYY") : "";
+      startDateInput.current.value = startDate ? startDate.format(format) : "";
     }
   }, [startDate]);
 
   useEffect(() => {
     if (endDateInput.current) {
-      endDateInput.current.value = endDate ? endDate.format("DD-MM-YYYY") : "";
+      endDateInput.current.value = endDate ? endDate.format(format) : "";
     }
   }, [endDate]);
 
@@ -38,13 +39,13 @@ const DateInputs: FC<DateInputsProps> = ({
           <InputStyled
             ref={startDateInput}
             type="text"
-            placeholder="DD-MM-YYYY"
+            placeholder={format}
             onBlur={(e) => onStartDateChange(e.target.value)}
           />
           <InputStyled
             ref={endDateInput}
             type="text"
-            placeholder="DD-MM-YYYY"
+            placeholder={format}
             onBlur={(e) => onEndDateChange(e.target.value)}
           />
         </>
@@ -52,7 +53,7 @@ const DateInputs: FC<DateInputsProps> = ({
         <>
           <InputStyled
             type="text"
-            placeholder="DD-MM-YYYY"
+            placeholder={format}
             value={inputDateValue}
             onChange={(e) => onDateInputChange(e.target.value)}
             onBlur={onDateInputBlur}
