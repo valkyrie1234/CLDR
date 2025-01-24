@@ -83,10 +83,10 @@ export const InputStyled = styled.input`
   }
 `;
 
-export const HeaderControls = styled.div`
+export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${(props) => (props.mode === "month" ? "center" : "space-between")};
   width: 100%;
 
   .month-year-title {
@@ -103,8 +103,8 @@ export const HeaderControls = styled.div`
     font-size: 16px;
 
     &:hover {
-    background-color: ${colors.gray[60]};
-    border-radius: 15%;
+      background-color: ${colors.gray[60]};
+      border-radius: 15%;
     }
   }
 `;

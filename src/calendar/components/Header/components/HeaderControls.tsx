@@ -12,7 +12,7 @@ const HeaderControls: FC<HeaderControlsProps> = ({
   handleYearScroll,
 }) => {
   return (
-    <StyledHeaderControls>
+    <StyledHeaderControls mode={mode}>
       {mode === "day" ? (
         <>
           <button onClick={() => changeYear(date.year() - 1)}>&#8656;</button>

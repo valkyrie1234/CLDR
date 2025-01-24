@@ -10,8 +10,8 @@ import { TodayButton, CalendarWrapper } from "./style/styles";
 import YearPicker from "./components/YearPicker/YearPicker";
 import Header from "./components/Header/Header";
 import Days from "./components/Days/Days";
-import { ICalendar } from "./types";
 import { format } from "./utils/consts";
+import { ICalendar } from "./types";
 
 dayjs.extend(customParseFormat);
 dayjs.extend(isBetween);
