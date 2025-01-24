@@ -70,8 +70,8 @@ const Header: FC<IHeader> = ({
         return;
     }
     if(start && end){
-      onStartDateChange(start.format("MM-DD-YYYY"));
-      onEndDateChange(end.format("MM-DD-YYYY"));
+      onStartDateChange(start.format("DD-MM-YYYY"));
+      onEndDateChange(end.format("DD-MM-YYYY"));
     }
   };
 
