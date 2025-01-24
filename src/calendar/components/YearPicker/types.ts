@@ -1,4 +1,7 @@
 export interface YearPickerProps {
-    currentYear: number;
-    onYearSelect: (year: number) => void;
-  }
+  /** Текущий выбранный год */
+  currentYear: number;
+
+  /** Колбэк, вызываемый при выборе года */
+  onYearSelect: (year: number) => void;
+};

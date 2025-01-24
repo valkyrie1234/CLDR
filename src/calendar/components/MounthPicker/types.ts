@@ -1,4 +1,7 @@
 export interface MonthPickerProps {
-    currentMonth: number;
-    onMonthSelect: (month: number) => void;
-  }
+  /** Текущий выбранный месяц */
+  currentMonth: number;
+
+  /** Колбэк, вызываемый при выборе месяца */
+  onMonthSelect: (month: number) => void;
+};
