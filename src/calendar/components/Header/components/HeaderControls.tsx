@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { HeaderControls as StyledHeaderControls, ClickableDateMode } from "../styles";
-import { monthNames } from "../../../utils/consts";
+import { monthNames } from "../../../consts";
 import { HeaderControlsProps } from "../types";
 
 const HeaderControls: FC<HeaderControlsProps> = ({

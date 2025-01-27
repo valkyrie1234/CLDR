@@ -1,14 +1,14 @@
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
-import Day from "./components/Day";
-import { daysOfWeek, format } from "../../utils/consts";
+import Day from "./Day";
+import { daysOfWeek, format } from "../../consts";
 import { IDays } from "./types";
 import { CalendarDays } from "./styles";
 
 dayjs.extend(isBetween);
 
-const Days: React.FC<IDays & { minDate?: Dayjs; maxDate?: Dayjs }> = ({
+const Days: React.FC<IDays & { minDate?: Dayjs; maxDate?: Dayjs }> = React.memo(({
   date,
   startDate,
   endDate,
@@ -101,6 +101,6 @@ const Days: React.FC<IDays & { minDate?: Dayjs; maxDate?: Dayjs }> = ({
   }
 
   return <CalendarDays>{[...labels, ...days]}</CalendarDays>;
-};
+});
 
 export default Days;

@@ -1,9 +1,9 @@
 import React from "react";
-import { monthNames } from "../../utils/consts";
+import { monthNames } from "../../../consts";
 import { MonthItem, MonthGrid } from './styles'
 import { MonthPickerProps } from './types'
 
-const MonthPicker: React.FC<MonthPickerProps> = ({ currentMonth, onMonthSelect }) => {
+const MonthPicker: React.FC<MonthPickerProps> = React.memo(({ currentMonth, onMonthSelect }) => {
   return (
     <MonthGrid>
       {monthNames.map((month, index) => (
@@ -17,6 +17,6 @@ const MonthPicker: React.FC<MonthPickerProps> = ({ currentMonth, onMonthSelect }
       ))}
     </MonthGrid>
   );
-};
+});
 
 export default MonthPicker;

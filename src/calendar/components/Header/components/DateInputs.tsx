@@ -1,7 +1,7 @@
 import { FC, useRef, useEffect } from "react";
 import { InputStyled } from "../styles";
 import { DateInputsProps } from "../types";
-import { format } from "../../../utils/consts";
+import { format } from "../../../consts";
 
 const DateInputs: FC<DateInputsProps> = ({
   range,

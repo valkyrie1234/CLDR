@@ -1,11 +1,11 @@
 import React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import { IDay } from '../types';
-import { DayWrapper } from '../styles';
+import { IDay } from './types';
+import { DayWrapper } from './styles';
 
 const Day: React.FC<
-  IDay & { hoveredDate: dayjs.Dayjs | null; minDate?: Dayjs; maxDate?: Dayjs }
-> = ({
+IDay & { hoveredDate: dayjs.Dayjs | null; minDate?: Dayjs; maxDate?: Dayjs }
+> = React.memo(({
   currentDate,
   date,
   startDate,
@@ -63,6 +63,6 @@ const Day: React.FC<
       {date.date()}
     </DayWrapper>
   );
-};
+});
 
 export default Day;

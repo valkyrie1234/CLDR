@@ -15,7 +15,7 @@ import {
 } from "./styles";
 import DateInputs from "./components/DateInputs";
 import HeaderControls from "./components/HeaderControls";
-import { format } from "../../utils/consts";
+import { format } from "../../consts";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");

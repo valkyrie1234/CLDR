@@ -1,4 +1,4 @@
-import { useEffect, useState, FC } from "react";
+import { FC, useEffect, useState, useCallback } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
@@ -9,8 +9,8 @@ import MonthPicker from "./components/YearAndMounthPickers/MounthPicker/MounthPi
 import YearPicker from "./components/YearAndMounthPickers/YearPicker/YearPicker";
 import { TodayButton, CalendarWrapper } from "./style/styles";
 import Header from "./components/Header/Header";
-import Days from "./components/Days/Days";
-import { format } from "./utils/consts";
+import Days from "./components/DayPicker/Days";
+import { format } from "./consts";
 import { ICalendar } from "./types";
 
 dayjs.extend(customParseFormat);
@@ -39,31 +39,31 @@ const Calendar: FC<ICalendar> = ({
   });
 
   // Парсинг даты из строки
-  const parseDateFromInput = (value: string): Dayjs | null => {
+  const parseDateFromInput = useCallback((value: string): Dayjs | null => {
     const parsedDate = dayjs(value, format, true);
     return parsedDate.isValid() ? parsedDate : null;
-  };
+  }, []);
 
   // Обработка выбора года
-  const handleYearSelect = (year: number) => {
+  const handleYearSelect = useCallback((year: number) => {
     setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.year(year),
       mode: "month",
     }));
-  };
+  }, []);
 
   // Изменение месяца
-  const changeMonth = (month: number) => {
+  const changeMonth = useCallback((month: number) => {
     setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.month(month),
       mode: "day",
     }));
-  };
+  }, []);
 
   // Изменение года
-  const changeYear = (year: number) => {
+  const changeYear = useCallback((year: number) => {
     setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.year(year),
@@ -73,19 +73,19 @@ const Calendar: FC<ICalendar> = ({
     } else {
       setCalendarState((prevState) => ({ ...prevState, mode: "day" }));
     }
-  };
+  }, [calendarState.mode]);
 
   // Обработка выбора месяца
-  const handleMonthSelect = (month: number) => {
+  const handleMonthSelect = useCallback((month: number) => {
     setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.date.month(month),
       mode: "day",
     }));
-  };
+  }, []);
 
   // Сброс даты к начальному значению или текущей дате
-  const resetDate = () => {
+  const resetDate = useCallback(() => {
     setCalendarState((prevState) => ({
       ...prevState,
       date: prevState.initialDate,
@@ -94,10 +94,10 @@ const Calendar: FC<ICalendar> = ({
       inputDateValue: "",
       timeValue: "00:00",
     }));
-  };
+  }, []);
 
   // Изменение выбранной даты
-  const changeDate = (selectedDate: Dayjs) => {
+  const changeDate = useCallback((selectedDate: Dayjs) => {
     setCalendarState((prevState) => {
       const { startDate, endDate, isRangeMode } = prevState;
 
@@ -130,10 +130,10 @@ const Calendar: FC<ICalendar> = ({
         endDate: selectedDate,
       };
     });
-  };
+  }, []);
 
   // Обработка изменения даты через инпут
-  const handleDateChange = (value: string, type: "startDate" | "endDate") => {
+  const handleDateChange = useCallback((value: string, type: "startDate" | "endDate") => {
     setCalendarState((prevState) => {
       const parsedDate = parseDateFromInput(value);
 
@@ -142,22 +142,22 @@ const Calendar: FC<ICalendar> = ({
         [type]: parsedDate,
       };
     });
-  };
+  }, [parseDateFromInput]);
 
   // Упрощаем передачу колбеков для onStartDateChange и onEndDateChange
-  const handleStartDateChange = (value: string) => handleDateChange(value, "startDate");
-  const handleEndDateChange = (value: string) => handleDateChange(value, "endDate");
+  const handleStartDateChange = useCallback((value: string) => handleDateChange(value, "startDate"), [handleDateChange]);
+  const handleEndDateChange = useCallback((value: string) => handleDateChange(value, "endDate"), [handleDateChange]);
 
   // Обработка изменения значения инпута
-  const handleDateInputChange = (value: string) => {
+  const handleDateInputChange = useCallback((value: string) => {
     setCalendarState((prevState) => ({
       ...prevState,
       inputDateValue: value,
     }));
-  };
+  }, []);
 
   // Выбор текущей даты
-  const selectToday = () => {
+  const selectToday = useCallback(() => {
     setCalendarState((prevState) => ({
       ...prevState,
       date: dayjs(),
@@ -165,10 +165,10 @@ const Calendar: FC<ICalendar> = ({
       endDate: null,
     }));
     changeDate(dayjs());
-  };
+  }, [changeDate]);
 
   // Обработка потери фокуса инпутом
-  const handleDateInputBlur = () => {
+  const handleDateInputBlur = useCallback(() => {
     const parsedDate = parseDateFromInput(calendarState.inputDateValue);
 
     if (parsedDate && parsedDate.isValid()) {
@@ -185,26 +185,27 @@ const Calendar: FC<ICalendar> = ({
         inputDateValue: "",
       }));
     }
-  };
+  }, [calendarState.inputDateValue, parseDateFromInput]);
 
   // Обработка изменения времени
-  const handleTimeChange = (value: string) => {
+  const handleTimeChange = useCallback((value: string) => {
     setCalendarState((prevState) => ({
       ...prevState,
       timeValue: value,
     }));
-  };
+  }, []);
 
   // Логика переключения режима диапазона
-  const toggleRangeMode = () => {
+  const toggleRangeMode = useCallback(() => {
     setCalendarState((prevState) => ({
       ...prevState,
       isRangeMode: !prevState.isRangeMode,
     }));
-  };
+  }, []);
 
-  const setMode = (newMode: "day" | "month" | "year") =>
+  const setMode = useCallback((newMode: "day" | "month" | "year") => {
     setCalendarState((prevState) => ({ ...prevState, mode: newMode }));
+  }, []);
 
   const { date, startDate, endDate, isRangeMode, mode, inputDateValue, timeValue } = calendarState;
 
