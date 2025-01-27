@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../style/colors";
+import { colors } from '@rgs-ui/design-tokens';
 
 export const YearGrid = styled.div`
   display: grid;
@@ -21,6 +21,6 @@ export const YearItem = styled.div`
 
   &.selected {
     background-color: ${colors.brandRed.red};
-    color: white;
+    color: ${colors.gray[0]};
   }
 `;

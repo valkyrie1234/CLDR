@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { colors } from '@rgs-ui/design-tokens';
 
 export const CalendarDays = styled.nav`
   font-size: 0;
@@ -49,19 +50,19 @@ export const DayWrapper = styled.span<{
     props.$isToday &&
     css`
       font-weight: bold;
-      color: red;
+      color: ${colors.brandRed.red};
     `}
 
   ${(props) =>
     props.$isMuted &&
     css`
-      color: rgba(0, 0, 0, 0.3);
+      color: ${colors.gray[50]};
     `}
 
   ${(props) =>
     props.$isDisabled &&
     css`
-      color: #ccc;
+      color: ${colors.gray[60]};
       pointer-events: none;
     `}
 
@@ -70,27 +71,27 @@ export const DayWrapper = styled.span<{
     !(props.$hasStartDate && !props.$hasEndDate) &&
     css`
       &:hover {
-        background-color: rgba(211, 211, 211, 0.404);
+        background-color: ${colors.gray[40]};
       }
     `}
     
   ${(props) =>
     props.$isBetween &&
     css`
-      background-color: rgb(255, 221, 221);
+      background-color: ${colors.additionalRed[20]};
     `}
 
   ${(props) =>
     props.$isBetweenHover &&
     !props.$isEnd &&
     css`
-      background-color: rgb(255, 221, 221);
+      background-color: ${colors.additionalRed[20]};
     `}
 
   ${(props) =>
     (props.$isStart || props.$isEnd) &&
     css`
-      background-color: #a50505;
-      color: white;
+      background-color: ${colors.brandRed.red};
+      color: ${colors.gray[0]};
     `}
 `;

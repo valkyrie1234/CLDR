@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../style/colors";
+import { colors } from '@rgs-ui/design-tokens';
 
 export const HeaderWrapper = styled.div`
   display: flex;
@@ -16,14 +16,14 @@ export const HeaderWrapper = styled.div`
     flex-direction: column;
     gap: 10px;
     width: 100%;
-  }
+  };
 
   .input-container {
     display: flex;
     gap: 10px;
     width: 100%;
     position: relative;
-  }
+  };
 
   .dropdown-arrow {
     position: absolute;
@@ -35,8 +35,8 @@ export const HeaderWrapper = styled.div`
 
     &.open {
       transform: translateY(-50%) rotate(270deg);
-    }
-  }
+    };
+  };
 
   .dropdown-menu {
     position: absolute;
@@ -45,12 +45,12 @@ export const HeaderWrapper = styled.div`
     background: white;
     border: 1px solid ${colors.gray[60]};
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px ${colors.gray[50]};
     z-index: 10;
     width: 100%;
     max-width: 200px;
     margin-top: 5px;
-  }
+  };
 
   .dropdown-item {
     padding: 8px 12px;
@@ -58,8 +58,8 @@ export const HeaderWrapper = styled.div`
 
     &:hover {
       background: ${colors.gray[40]};
-    }
-  }
+    };
+  };
 
   select {
     width: 100%;
@@ -67,7 +67,7 @@ export const HeaderWrapper = styled.div`
     border: 1px solid ${colors.gray[60]};
     border-radius: 4px;
     font-size: 14px;
-  }
+  };
 `;
 
 export const InputStyled = styled.input`
@@ -112,17 +112,18 @@ export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
 export const ResetButton = styled.button`
   margin-bottom: 10px;
   padding: 8px 12px;
-  background-color: #ac0404;
-  color: white;
+  background-color: ${colors.brandRed.red};
+  color: ${colors.gray[0]};
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-left: auto;
 
   &:hover {
-    background-color: #ac0404;
+    background-color: ${colors.brandRed.darkRed};
   }
 `;
+
 export const ToggleAndButton = styled.div`
   display: flex;
   width: 100%; 
@@ -138,7 +139,7 @@ export const ToggleContainer = styled.div`
 export const ToggleLabel = styled.div`
   margin-left: 10px;
   font-size: 14px;
-  color: #333;
+  color: ${colors.gray[180]};
 `;
 
 export const Slider = styled.span`
@@ -148,7 +149,7 @@ export const Slider = styled.span`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: ${colors.gray[60]};
   transition: 0.4s;
   border-radius: 34px;
 
@@ -159,7 +160,7 @@ export const Slider = styled.span`
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: ${colors.gray[0]};
     transition: 0.4s;
     border-radius: 50%;
   }
@@ -200,6 +201,6 @@ export const ClickableDateMode = styled.span`
 
   &.non-clickable {
     cursor: default;
-    color: #333;
+    color: ${colors.gray[200]};
   }
-`
+`;
