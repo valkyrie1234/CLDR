@@ -16,7 +16,7 @@ export const YearItem = styled.div`
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: ${colors.gray[40]};
+    background-color: ${colors.gray[60]};
   }
 
   &.selected {
