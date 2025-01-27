@@ -71,7 +71,8 @@ export const DayWrapper = styled.span<{
     !(props.$hasStartDate && !props.$hasEndDate) &&
     css`
       &:hover {
-        background-color: ${colors.gray[40]};
+        background-color: ${colors.gray[60]};
+        border-radius: 7px;
       }
     `}
     
@@ -93,5 +94,6 @@ export const DayWrapper = styled.span<{
     css`
       background-color: ${colors.brandRed.red};
       color: ${colors.gray[0]};
+      border-radius: 7px;
     `}
 `;

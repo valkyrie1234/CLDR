@@ -12,7 +12,7 @@ export const MonthItem = styled.div`
   text-align: center;
   padding: 10px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 7px;
   transition: background-color 0.2s;
 
   &:hover {

@@ -104,7 +104,7 @@ export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
 
     &:hover {
       background-color: ${colors.gray[60]};
-      border-radius: 15%;
+      border-radius: 20%;
     }
   }
 `;
@@ -139,7 +139,7 @@ export const ToggleContainer = styled.div`
 export const ToggleLabel = styled.div`
   margin-left: 10px;
   font-size: 14px;
-  color: ${colors.gray[180]};
+  color: ${colors.gray[120]};
 `;
 
 export const Slider = styled.span`
@@ -196,7 +196,7 @@ export const ClickableDateMode = styled.span`
 
   &:hover {
     background-color: ${colors.gray[60]};
-    border-radius: 5%;
+    border-radius: 7px;
   }
 
   &.non-clickable {
