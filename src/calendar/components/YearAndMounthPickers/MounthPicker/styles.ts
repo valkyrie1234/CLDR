@@ -17,10 +17,10 @@ export const MonthItem = styled.div`
 
   &:hover {
     background-color: ${colors.gray[60]};
-  }
+  };
 
   &.selected {
     background-color: ${colors.brandRed.red};
     color: ${colors.gray[0]};
-  }
+  };
 `;

@@ -5,9 +5,9 @@ import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
-import MonthPicker from "./components/MounthPicker/MounthPicker";
+import MonthPicker from "./components/YearAndMounthPickers/MounthPicker/MounthPicker";
+import YearPicker from "./components/YearAndMounthPickers/YearPicker/YearPicker";
 import { TodayButton, CalendarWrapper } from "./style/styles";
-import YearPicker from "./components/YearPicker/YearPicker";
 import Header from "./components/Header/Header";
 import Days from "./components/Days/Days";
 import { format } from "./utils/consts";

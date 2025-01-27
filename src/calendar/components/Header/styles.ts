@@ -80,7 +80,7 @@ export const InputStyled = styled.input`
 
   & ::placeholder {
     color: ${colors.gray[80]} !important;
-  }
+  };
 `;
 
 export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
@@ -94,7 +94,7 @@ export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
     flex: 1;
     text-align: center;
     cursor: pointer;
-  }
+  };
 
   button {
     background: none;
@@ -163,7 +163,7 @@ export const Slider = styled.span`
     background-color: ${colors.gray[0]};
     transition: 0.4s;
     border-radius: 50%;
-  }
+  };
 `;
 
 export const Toggle = styled.label`
@@ -179,16 +179,16 @@ export const Toggle = styled.label`
 
     &:checked + ${Slider} {
       background-color: ${colors.brandRed.red};
-    }
+    };
 
     &:focus + ${Slider} {
       box-shadow: 0 0 1px ${colors.brandRed.red};
-    }
+    };
 
     &:checked + ${Slider}:before {
       transform: translateX(26px);
-    }
-  }
+    };
+  };
 `;
 
 export const ClickableDateMode = styled.span`
@@ -197,10 +197,10 @@ export const ClickableDateMode = styled.span`
   &:hover {
     background-color: ${colors.gray[60]};
     border-radius: 7px;
-  }
+  };
 
   &.non-clickable {
     cursor: default;
     color: ${colors.gray[200]};
-  }
+  };
 `;

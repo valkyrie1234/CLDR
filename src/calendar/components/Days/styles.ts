@@ -21,8 +21,8 @@ export const CalendarDays = styled.nav`
       color: black;
       font-size: 14px;
       cursor: initial;
-    }
-  }
+    };
+  };
 `;
 
 export const DayWrapper = styled.span<{
@@ -51,20 +51,20 @@ export const DayWrapper = styled.span<{
     css`
       font-weight: bold;
       color: ${colors.brandRed.red};
-    `}
+    `};
 
   ${(props) =>
     props.$isMuted &&
     css`
       color: ${colors.gray[50]};
-    `}
+    `};
 
   ${(props) =>
     props.$isDisabled &&
     css`
       color: ${colors.gray[60]};
       pointer-events: none;
-    `}
+    `};
 
   ${(props) =>
     props.$shouldHover &&
@@ -73,21 +73,21 @@ export const DayWrapper = styled.span<{
       &:hover {
         background-color: ${colors.gray[60]};
         border-radius: 7px;
-      }
-    `}
+      };
+    `};
     
   ${(props) =>
     props.$isBetween &&
     css`
       background-color: ${colors.additionalRed[20]};
-    `}
+    `};
 
   ${(props) =>
     props.$isBetweenHover &&
     !props.$isEnd &&
     css`
       background-color: ${colors.additionalRed[20]};
-    `}
+    `};
 
   ${(props) =>
     (props.$isStart || props.$isEnd) &&
@@ -95,5 +95,5 @@ export const DayWrapper = styled.span<{
       background-color: ${colors.brandRed.red};
       color: ${colors.gray[0]};
       border-radius: 7px;
-    `}
+    `};
 `;
