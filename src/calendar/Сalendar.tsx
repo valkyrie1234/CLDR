@@ -93,6 +93,7 @@ const Calendar: FC<ICalendar> = ({
       endDate: null,
       inputDateValue: "",
       timeValue: "00:00",
+      mode: "day"
     }));
   }, []);
 
@@ -132,6 +133,7 @@ const Calendar: FC<ICalendar> = ({
     });
   }, []);
 
+  // Функции дизейбла стрелочек переключения месяцев и лет
   const canGoToPreviousMonth = useCallback(() => {
     const previousMonth = calendarState.date.subtract(1, 'month');
     return !minDate || previousMonth.isSameOrAfter(minDate, 'month');
@@ -217,11 +219,12 @@ const Calendar: FC<ICalendar> = ({
 
   // Логика переключения режима диапазона
   const toggleRangeMode = useCallback(() => {
+    resetDate();
     setCalendarState((prevState) => ({
       ...prevState,
       isRangeMode: !prevState.isRangeMode,
     }));
-  }, []);
+  }, [resetDate]);
 
   const setMode = useCallback((newMode: "day" | "month" | "year") => {
     setCalendarState((prevState) => ({ ...prevState, mode: newMode }));
