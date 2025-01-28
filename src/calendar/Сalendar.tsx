@@ -132,6 +132,26 @@ const Calendar: FC<ICalendar> = ({
     });
   }, []);
 
+  const canGoToPreviousMonth = useCallback(() => {
+    const previousMonth = calendarState.date.subtract(1, 'month');
+    return !minDate || previousMonth.isSameOrAfter(minDate, 'month');
+  }, [calendarState.date, minDate]);
+  
+  const canGoToNextMonth = useCallback(() => {
+    const nextMonth = calendarState.date.add(1, 'month');
+    return !maxDate || nextMonth.isSameOrBefore(maxDate, 'month');
+  }, [calendarState.date, maxDate]);
+  
+  const canGoToPreviousYear = useCallback(() => {
+    const previousYear = calendarState.date.subtract(1, 'year');
+    return !minDate || previousYear.isSameOrAfter(minDate, 'year');
+  }, [calendarState.date, minDate]);
+  
+  const canGoToNextYear = useCallback(() => {
+    const nextYear = calendarState.date.add(1, 'year');
+    return !maxDate || nextYear.isSameOrBefore(maxDate, 'year');
+  }, [calendarState.date, maxDate]);
+
   // Обработка изменения даты через инпут
   const handleDateChange = useCallback((value: string, type: "startDate" | "endDate") => {
     setCalendarState((prevState) => {
@@ -239,6 +259,10 @@ const Calendar: FC<ICalendar> = ({
         timePicker={timePicker}
         onTimeChange={handleTimeChange}
         timeValue={timeValue}
+        canGoToPreviousMonth={canGoToPreviousMonth}
+        canGoToNextMonth={canGoToNextMonth}
+        canGoToPreviousYear={canGoToPreviousYear}
+        canGoToNextYear={canGoToNextYear}
       />
       {mode === "day" && (
         <Days
@@ -251,12 +275,23 @@ const Calendar: FC<ICalendar> = ({
           maxDate={maxDate}
         />
       )}
-      {mode === "year" && (
-        <YearPicker currentYear={date.year()} onYearSelect={handleYearSelect} />
-      )}
-      {mode === "month" && (
-        <MonthPicker currentMonth={date.month()} onMonthSelect={handleMonthSelect} />
-      )}
+{mode === "year" && (
+  <YearPicker
+    currentYear={date.year()}
+    onYearSelect={handleYearSelect}
+    minDate={minDate}
+    maxDate={maxDate}
+  />
+)}
+{mode === "month" && (
+  <MonthPicker
+    currentMonth={date.month()}
+    onMonthSelect={handleMonthSelect}
+    minDate={minDate}
+    maxDate={maxDate}
+    currentYear={date.year()}
+  />
+)}
       {showTodayButton && (
         <TodayButton onClick={selectToday}>
           Сегодня

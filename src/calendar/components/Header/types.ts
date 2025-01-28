@@ -57,6 +57,18 @@ export interface IHeader {
 
   /** Значение времени */
   timeValue: string;
+  
+  /**  Флаг указывающий на дизейбл стрелочки*/
+  canGoToPreviousMonth: () => boolean;
+
+  /**  Флаг указывающий на дизейбл стрелочки*/
+  canGoToNextMonth: () => boolean;
+
+  /**  Флаг указывающий на дизейбл стрелочки*/
+  canGoToPreviousYear: () => boolean;
+
+  /**  Флаг указывающий на дизейбл стрелочки*/
+  canGoToNextYear: () => boolean;
 };
 
 export interface DateInputsProps {
@@ -112,4 +124,16 @@ export interface HeaderControlsProps {
 
   /** Функция для прокрутки годов */
   handleYearScroll: (direction: "prev" | "next") => void;
+  
+  /**  Флаг указывающий на дизейбл стрелочки*/
+  canGoToPreviousMonth: () => boolean;
+
+  /**  Флаг указывающий на дизейбл стрелочки*/
+  canGoToNextMonth: () => boolean;
+
+  /**  Флаг указывающий на дизейбл стрелочки*/
+  canGoToPreviousYear: () => boolean;
+
+  /**  Флаг указывающий на дизейбл стрелочки*/
+  canGoToNextYear: () => boolean;
 };

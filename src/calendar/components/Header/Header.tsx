@@ -40,6 +40,10 @@ const Header: FC<IHeader> = ({
   timePicker,
   onTimeChange,
   timeValue,
+  canGoToPreviousMonth,
+  canGoToNextMonth,
+  canGoToPreviousYear,
+  canGoToNextYear
 }) => {
 
   // Обработка выбора диапазона дат
@@ -127,6 +131,10 @@ const Header: FC<IHeader> = ({
         changeMonth={changeMonth}
         setMode={setMode}
         handleYearScroll={handleYearScroll}
+        canGoToPreviousMonth={canGoToPreviousMonth}
+        canGoToNextMonth={canGoToNextMonth}
+        canGoToPreviousYear={canGoToPreviousYear}
+        canGoToNextYear={canGoToNextYear}
       />
     </HeaderWrapper>
   );

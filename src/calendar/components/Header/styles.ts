@@ -89,13 +89,6 @@ export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
   justify-content: ${(props) => (props.mode === "month" ? "center" : "space-between")};
   width: 100%;
 
-  .month-year-title {
-    margin: 0;
-    flex: 1;
-    text-align: center;
-    cursor: pointer;
-  };
-
   button {
     background: none;
     border: none;
@@ -105,6 +98,11 @@ export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
     &:hover {
       background-color: ${colors.gray[60]};
       border-radius: 20%;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
 `;
