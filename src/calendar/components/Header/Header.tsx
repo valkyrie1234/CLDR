@@ -30,15 +30,12 @@ const Header: FC<IHeader> = ({
   timePicker,
   showToggle,
   inputDateValue,
-  canGoToPreviousMonth,
-  canGoToPreviousYear,
+  navigationControls,
   onDateInputChange,
   onStartDateChange,
-  canGoToNextMonth,
   toggleRangeMode,
   onEndDateChange,
   onDateInputBlur,
-  canGoToNextYear,
   onTimeChange,
   changeMonth,
   changeYear,
@@ -88,56 +85,53 @@ const Header: FC<IHeader> = ({
 
   return (
     <HeaderWrapper>
-      <ToggleAndButton>
-        {showToggle && (
-          <ToggleContainer>
-            <Toggle>
-              <input type="checkbox" checked={range} onChange={toggleRangeMode} />
-              <Slider />
-            </Toggle>
-            <ToggleLabel>{range ? "Диапазон" : "Одна дата"}</ToggleLabel>
-          </ToggleContainer>
-        )}
-        <ResetButton onClick={resetDate}>Сбросить</ResetButton>
-      </ToggleAndButton>
-      <div className="header-top">
-        <DateInputs
-          range={range}
-          startDate={startDate}
-          endDate={endDate}
-          onStartDateChange={onStartDateChange}
-          onEndDateChange={onEndDateChange}
-          inputDateValue={inputDateValue}
-          onDateInputChange={onDateInputChange}
-          onDateInputBlur={onDateInputBlur}
-          timePicker={timePicker}
-          onTimeChange={onTimeChange}
-          timeValue={timeValue}
-        />
-        {range && (
-          <select onChange={(e) => handleSelectionChange(e.target.value)}>
-            <option value="current-reset">Выберите диапазон</option>
-            <option value="current-week">Текущая неделя</option>
-            <option value="current-month">Текущий месяц</option>
-            <option value="current-quarter">Текущий квартал</option>
-            <option value="current-year">Текущий год</option>
-          </select>
-        )}
-      </div>
-      <HeaderControls
-        mode={mode}
-        date={date}
-        changeYear={changeYear}
-        changeMonth={changeMonth}
-        setMode={setMode}
-        handleYearScroll={handleYearScroll}
-        canGoToPreviousMonth={canGoToPreviousMonth}
-        canGoToNextMonth={canGoToNextMonth}
-        canGoToPreviousYear={canGoToPreviousYear}
-        canGoToNextYear={canGoToNextYear}
-      />
-    </HeaderWrapper>
-  );
-};
+          <ToggleAndButton>
+            {showToggle && (
+              <ToggleContainer>
+                <Toggle>
+                  <input type="checkbox" checked={range} onChange={toggleRangeMode} />
+                  <Slider />
+                </Toggle>
+                <ToggleLabel>{range ? "Диапазон" : "Одна дата"}</ToggleLabel>
+              </ToggleContainer>
+            )}
+            <ResetButton onClick={resetDate}>Сбросить</ResetButton>
+          </ToggleAndButton>
+          <div className="header-top">
+            <DateInputs
+              range={range}
+              startDate={startDate}
+              endDate={endDate}
+              onStartDateChange={onStartDateChange}
+              onEndDateChange={onEndDateChange}
+              inputDateValue={inputDateValue}
+              onDateInputChange={onDateInputChange}
+              onDateInputBlur={onDateInputBlur}
+              timePicker={timePicker}
+              onTimeChange={onTimeChange}
+              timeValue={timeValue}
+            />
+            {range && (
+              <select onChange={(e) => handleSelectionChange(e.target.value)}>
+                <option value="current-reset">Выберите диапазон</option>
+                <option value="current-week">Текущая неделя</option>
+                <option value="current-month">Текущий месяц</option>
+                <option value="current-quarter">Текущий квартал</option>
+                <option value="current-year">Текущий год</option>
+              </select>
+            )}
+          </div>
+          <HeaderControls
+            mode={mode}
+            date={date}
+            changeYear={changeYear}
+            changeMonth={changeMonth}
+            setMode={setMode}
+            handleYearScroll={handleYearScroll}
+            navigationControls={navigationControls}
+          />
+        </HeaderWrapper>
+      );
+    };
 
-export default Header;
+    export default Header;

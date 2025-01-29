@@ -10,11 +10,14 @@ const HeaderControls: FC<HeaderControlsProps> = ({
   changeMonth,
   setMode,
   handleYearScroll,
-  canGoToPreviousMonth,
-  canGoToNextMonth,
-  canGoToPreviousYear,
-  canGoToNextYear,
+  navigationControls,
 }) => {
+  const {
+    canGoToPreviousMonth,
+    canGoToNextMonth,
+    canGoToPreviousYear,
+    canGoToNextYear,
+  } = navigationControls;
   return (
     <StyledHeaderControls mode={mode}>
       {mode === "day" ? (
@@ -32,7 +35,7 @@ const HeaderControls: FC<HeaderControlsProps> = ({
             &#8249;
           </button>
           <h1>
-            <ClickableDateMode onClick={() => setMode("month")}>
+          <ClickableDateMode onClick={() => setMode("month")}>
               {monthNames[date.month()]}
             </ClickableDateMode>{" "}
             <ClickableDateMode onClick={() => setMode("year")}>

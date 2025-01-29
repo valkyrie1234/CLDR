@@ -154,6 +154,13 @@ const Calendar: FC<ICalendar> = ({
     return !maxDate || nextYear.isSameOrBefore(maxDate, 'year');
   }, [calendarState.date, maxDate]);
 
+  const navigationControls = {
+    canGoToPreviousMonth,
+    canGoToNextMonth,
+    canGoToPreviousYear,
+    canGoToNextYear,
+}
+
   // Обработка изменения даты через инпут
   const handleDateChange = useCallback((value: string, type: "startDate" | "endDate") => {
     setCalendarState((prevState) => {
@@ -262,10 +269,7 @@ const Calendar: FC<ICalendar> = ({
         timePicker={timePicker}
         onTimeChange={handleTimeChange}
         timeValue={timeValue}
-        canGoToPreviousMonth={canGoToPreviousMonth}
-        canGoToNextMonth={canGoToNextMonth}
-        canGoToPreviousYear={canGoToPreviousYear}
-        canGoToNextYear={canGoToNextYear}
+        navigationControls={navigationControls}
       />
       {mode === "day" && (
         <Days
