@@ -73,7 +73,7 @@ const HeaderControls: FC<HeaderControlsProps> = ({
             onClick={() => handleYearScroll("prev")}
             disabled={!canGoToPreviousYear()}
           >
-            &#8656;
+            <MenuOpenedIcon />
           </button>
           <h2>
             <span>{date.year()}</span>
@@ -82,7 +82,7 @@ const HeaderControls: FC<HeaderControlsProps> = ({
             onClick={() => handleYearScroll("next")}
             disabled={!canGoToNextYear()}
           >
-            &#8658;
+            <MenuClosedIcon />
           </button>
         </>
       )}
