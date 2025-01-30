@@ -1,7 +1,8 @@
 import { FC } from "react";
-import { HeaderControls as StyledHeaderControls, ClickableDateMode } from "../styles";
+import { HeaderControls as StyledHeaderControls, ClickableDateMode, CurrentDateWrapper } from "../styles";
 import { monthNames } from "../../../consts";
 import { HeaderControlsProps } from "../types";
+import { ArrowExpandIcon, ArrowHideIcon, MenuClosedIcon, MenuOpenedIcon } from "@rgs-ui/icons";
 
 const HeaderControls: FC<HeaderControlsProps> = ({
   mode,
@@ -26,43 +27,45 @@ const HeaderControls: FC<HeaderControlsProps> = ({
             onClick={() => changeYear(date.year() - 1)}
             disabled={!canGoToPreviousYear()}
           >
-            &#8656;
+            <MenuOpenedIcon />
           </button>
           <button
             onClick={() => changeMonth(date.month() - 1)}
             disabled={!canGoToPreviousMonth()}
           >
-            &#8249;
+           <ArrowHideIcon />
           </button>
-          <h1>
+          <CurrentDateWrapper>
+          <h2>
           <ClickableDateMode onClick={() => setMode("month")}>
               {monthNames[date.month()]}
             </ClickableDateMode>{" "}
             <ClickableDateMode onClick={() => setMode("year")}>
               {date.year()}
             </ClickableDateMode>
-          </h1>
+          </h2>
+          </CurrentDateWrapper>
           <button
             onClick={() => changeMonth(date.month() + 1)}
             disabled={!canGoToNextMonth()}
           >
-            &#8250;
+            <ArrowExpandIcon />
           </button>
           <button
             onClick={() => changeYear(date.year() + 1)}
             disabled={!canGoToNextYear()}
           >
-            &#8658;
+            <MenuClosedIcon />
           </button>
         </>
       ) : mode === "month" ? (
         <>
-          <h1 className="year-mode-title">
+          <h2 className="year-mode-title">
             <span>{monthNames[date.month()]}</span>{" "}
             <ClickableDateMode onClick={() => setMode("year")}>
               {date.year()}
             </ClickableDateMode>
-          </h1>
+          </h2>
         </>
       ) : (
         <>
@@ -72,9 +75,9 @@ const HeaderControls: FC<HeaderControlsProps> = ({
           >
             &#8656;
           </button>
-          <h1>
+          <h2>
             <span>{date.year()}</span>
-          </h1>
+          </h2>
           <button
             onClick={() => handleYearScroll("next")}
             disabled={!canGoToNextYear()}

@@ -56,6 +56,7 @@ export const DayWrapper = styled.span<{
   ${(props) =>
     props.$isMuted &&
     css`
+      pointer-events: none;
       color: ${colors.gray[50]};
     `};
 

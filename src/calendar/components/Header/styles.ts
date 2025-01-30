@@ -88,6 +88,7 @@ export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
   align-items: center;
   justify-content: ${(props) => (props.mode === "month" ? "center" : "space-between")};
   width: 100%;
+  height: 40px;
 
   button {
     background: none;
@@ -106,6 +107,12 @@ export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
     }
   }
 `;
+
+export const CurrentDateWrapper = styled.div`
+  width:100%;
+  display: flex;
+  justify-content: center;
+`
 
 export const ResetButton = styled.button`
   margin-bottom: 10px;
