@@ -5,8 +5,8 @@ import {
   TIME_MASK,
   TIME_PLACEHOLDER,
 } from '@rgs-ui/date-utils';
-import { PeriodInputStyled, SingleInputStyled } from '../styles';
-import { ISingleInput } from '../types';
+import { PeriodInputStyled, SingleInputStyled } from './styles';
+import { ISingleInput } from '../../types';
 
 const SingleInput: FC<ISingleInput> = ({
   timeValue,

@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { HeaderControls as StyledHeaderControls, ClickableDateMode, CurrentDateWrapper } from "../styles";
-import { monthNames } from "../../../consts";
-import { HeaderControlsProps } from "../types";
 import { ArrowExpandIcon, ArrowHideIcon, MenuClosedIcon, MenuOpenedIcon } from "@rgs-ui/icons";
+import { monthNames } from "../../../../consts";
+import { CurrentDateWrapper, StyledHeaderControls, ClickableDateMode } from "./styles";
+import { HeaderControlsProps } from "../../types";
 
 const HeaderControls: FC<HeaderControlsProps> = ({
   date,

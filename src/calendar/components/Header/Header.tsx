@@ -14,9 +14,9 @@ import {
   ToggleContainer,
   ToggleLabel,
 } from "./styles";
-import HeaderControls from "./components/HeaderControls";
-import PeriodInput from "./components/PeriodInput";
-import SingleInput from "./components/SingleInput";
+import HeaderControls from "./components/controls/HeaderControls";
+import PeriodInput from "./components/inputs/PeriodInput";
+import SingleInput from "./components/inputs/SingleInput";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");

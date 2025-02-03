@@ -1,5 +1,5 @@
-import { List, ListItem } from '../styles';
-import { DropDownProps } from '../types';
+import { List, ListItem } from '../../styles';
+import { DropDownProps } from '../../types';
 
 const DropDown = ({ isMobile, handleSelectionChange }: DropDownProps) => {
 
