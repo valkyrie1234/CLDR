@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import "dayjs/locale/ru";
@@ -14,8 +14,9 @@ import {
   ToggleContainer,
   ToggleLabel,
 } from "./styles";
-import DateInputs from "./components/DateInputs";
 import HeaderControls from "./components/HeaderControls";
+import PeriodInput from "./components/PeriodInput";
+import SingleInput from "./components/SingleInput";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
@@ -44,6 +45,23 @@ const Header: FC<IHeader> = ({
   resetDate,
   setMode,
 }) => {
+  const startDateInput = useRef<HTMLInputElement | null>(null);
+  const endDateInput = useRef<HTMLInputElement | null>(null);
+
+  // Синхронизация инпутов с выбранными датами
+  useEffect(() => {
+    if (startDateInput.current) {
+      startDateInput.current.value = startDate
+        ? startDate.format(DATE_FORMAT)
+        : '';
+    }
+  }, [startDate]);
+
+  useEffect(() => {
+    if (endDateInput.current) {
+      endDateInput.current.value = endDate ? endDate.format(DATE_FORMAT) : '';
+    }
+  }, [endDate]);
 
   // Обработка выбора диапазона дат
   const handleSelectionChange = (value: string) => {
@@ -70,7 +88,7 @@ const Header: FC<IHeader> = ({
       default:
         return;
     }
-    if(start && end){
+    if (start && end) {
       onStartDateChange(start.format(DATE_FORMAT));
       onEndDateChange(end.format(DATE_FORMAT));
     }
@@ -83,51 +101,58 @@ const Header: FC<IHeader> = ({
   };
 
   return (
-    <HeaderWrapper
-              $timePicker={timePicker}
-              $range={range}
-    >
-          <ToggleAndButton>
-            {showToggle && (
-              <ToggleContainer>
-                <Toggle>
-                  <input type="checkbox" checked={range} onChange={toggleRangeMode} />
-                  <Slider />
-                </Toggle>
-                <ToggleLabel>{range ? "Диапазон" : "Одна дата"}</ToggleLabel>
-              </ToggleContainer>
-            )}
-            <ResetButton onClick={resetDate}>Сбросить</ResetButton>
-          </ToggleAndButton>
-          <div className="header-top">
-            <DateInputs
-              handleSelectionChange={handleSelectionChange}
-              endDateInputValue={endDateInputValue}
+    <HeaderWrapper $timePicker={timePicker} $range={range}>
+      <ToggleAndButton>
+        {showToggle && (
+          <ToggleContainer>
+            <Toggle>
+              <input
+                type="checkbox"
+                checked={range}
+                onChange={toggleRangeMode}
+              />
+              <Slider />
+            </Toggle>
+            <ToggleLabel>{range ? "Диапазон" : "Одна дата"}</ToggleLabel>
+          </ToggleContainer>
+        )}
+        <ResetButton onClick={resetDate}>Сбросить</ResetButton>
+      </ToggleAndButton>
+      <div className="header-top">
+        <div className="input-container">
+          {range ? (
+            <PeriodInput
               startDateInputValue={startDateInputValue}
-              range={range}
-              startDate={startDate}
-              endDate={endDate}
+              endDateInputValue={endDateInputValue}
+              onDateInputChange={onDateInputChange}
               onStartDateChange={onStartDateChange}
               onEndDateChange={onEndDateChange}
+              handleSelectionChange={handleSelectionChange}
+            />
+          ) : (
+            <SingleInput
               inputDateValue={inputDateValue}
-              onDateInputChange={onDateInputChange}
               onDateInputBlur={onDateInputBlur}
-              timePicker={timePicker}
+              onDateInputChange={onDateInputChange}
+              onEndDateChange={onEndDateChange}
               onTimeChange={onTimeChange}
+              timePicker={timePicker}
               timeValue={timeValue}
             />
-          </div>
-          <HeaderControls
-            mode={mode}
-            date={date}
-            changeYear={changeYear}
-            changeMonth={changeMonth}
-            setMode={setMode}
-            handleYearScroll={handleYearScroll}
-            navigationControls={navigationControls}
-          />
-        </HeaderWrapper>
-      );
-    };
+          )}
+        </div>
+      </div>
+      <HeaderControls
+        mode={mode}
+        date={date}
+        changeYear={changeYear}
+        changeMonth={changeMonth}
+        setMode={setMode}
+        handleYearScroll={handleYearScroll}
+        navigationControls={navigationControls}
+      />
+    </HeaderWrapper>
+  );
+};
 
-    export default Header;
+export default Header;

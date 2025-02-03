@@ -71,51 +71,7 @@ export interface IHeader {
     canGoToPreviousYear: () => boolean;
     canGoToNextYear: () => boolean;
   };
-}
-
-export interface DateInputsProps {
-  /** Функция обработки выбора диапазона дат*/
-  handleSelectionChange: (value: string) => void;
-
-  /** Значение даты 1 инпуте диапазона*/
-  endDateInputValue: string;
-
-  /** Значение даты 2 инпуте диапазона*/
-  startDateInputValue: string;
-
-  /** Флаг, указывающий, включен ли режим выбора диапазона дат */
-  range: boolean;
-
-  /** Начальная дата диапазона (если выбран диапазон) */
-  startDate: Dayjs | null;
-
-  /** Конечная дата диапазона (если выбран диапазон) */
-  endDate: Dayjs | null;
-
-  /** Колбэк, вызываемый при изменении начальной даты */
-  onStartDateChange: (value: string) => void;
-
-  /** Колбэк, вызываемый при изменении конечной даты */
-  onEndDateChange: (value: string) => void;
-
-  /** Значение даты в инпуте */
-  inputDateValue: string;
-
-  /** Колбэк, вызываемый при изменении значения в инпуте */
-  onDateInputChange: (value: string, key: string) => void;
-
-  /** Колбэк, вызываемый при потере фокуса инпутом */
-  onDateInputBlur: () => void;
-
-  /** Флаг, указывающий, отображается ли выбор времени */
-  timePicker?: boolean;
-
-  /** Колбэк, вызываемый при изменении времени */
-  onTimeChange: (value: string) => void;
-
-  /** Значение времени */
-  timeValue: string;
-}
+};
 
 export interface HeaderControlsProps {
   /** Режим отображения календаря (день, месяц, год) */

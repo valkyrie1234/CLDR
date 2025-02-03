@@ -19,6 +19,8 @@ const SingleInput: FC<ISingleInput> = ({
   return timePicker ? (
     <>
       <PeriodInputStyled
+        invalid={false}
+        errorMessage="Введите корректную дату"
         value={inputDateValue}
         onChange={(e) => onDateInputChange(e.target.value, 'inputDateValue')}
         onBlur={onDateInputBlur}
