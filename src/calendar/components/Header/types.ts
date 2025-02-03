@@ -1,6 +1,12 @@
 import { Dayjs } from "dayjs";
 
 export interface IHeader {
+  /** Значение даты в первом инпуте диапазона*/
+  endDateInputValue: string;
+
+  /** Значение даты во втором инпуте диапазона*/
+  startDateInputValue: string;
+
   /** Текущая дата, отображаемая в календаре */
   date: Dayjs;
 
@@ -44,7 +50,7 @@ export interface IHeader {
   inputDateValue: string;
 
   /** Колбэк, вызываемый при изменении значения в инпуте */
-  onDateInputChange: (value: string) => void;
+  onDateInputChange: (value: string, key: string) => void
 
   /** Колбэк, вызываемый при потере фокуса инпутом */
   onDateInputBlur: () => void;
@@ -68,6 +74,12 @@ export interface IHeader {
 };
 
 export interface DateInputsProps {
+  /** Значение даты 1 инпуте диапазона*/
+  endDateInputValue: string;
+
+  /** Значение даты 2 инпуте диапазона*/
+  startDateInputValue: string;
+
   /** Флаг, указывающий, включен ли режим выбора диапазона дат */
   range: boolean;
 
@@ -87,7 +99,7 @@ export interface DateInputsProps {
   inputDateValue: string;
 
   /** Колбэк, вызываемый при изменении значения в инпуте */
-  onDateInputChange: (value: string) => void;
+  onDateInputChange: (value: string, key: string) => void
 
   /** Колбэк, вызываемый при потере фокуса инпутом */
   onDateInputBlur: () => void;
@@ -96,10 +108,10 @@ export interface DateInputsProps {
   timePicker?: boolean;
 
   /** Колбэк, вызываемый при изменении времени */
-  onTimeChange?: (value: string) => void;
+  onTimeChange: (value: string) => void;
 
   /** Значение времени */
-  timeValue?: string;
+  timeValue: string;
 };
 
 export interface HeaderControlsProps {

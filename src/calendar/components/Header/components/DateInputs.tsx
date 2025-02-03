@@ -1,20 +1,22 @@
-import { FC, useRef, useEffect } from "react";
-import { InputStyled } from "../styles";
+import { FC, useEffect, useRef } from "react";
+import { DATE_FORMAT, DATE_MASK, DATE_PLACEHOLDER, TIME_MASK, TIME_PLACEHOLDER } from "@rgs-ui/date-utils";
+import { PeriodInputStyled, SingleInputStyled } from "../styles";
 import { DateInputsProps } from "../types";
-import { format } from "../../../consts";
 
 const DateInputs: FC<DateInputsProps> = ({
   range,
-  startDate,
   endDate,
-  onStartDateChange,
-  onEndDateChange,
-  inputDateValue,
-  onDateInputChange,
-  onDateInputBlur,
-  timePicker,
-  onTimeChange,
   timeValue,
+  startDate,
+  timePicker,
+  inputDateValue,
+  endDateInputValue,
+  startDateInputValue,
+  onStartDateChange,
+  onDateInputChange,
+  onEndDateChange,
+  onDateInputBlur,
+  onTimeChange,
 }) => {
   const startDateInput = useRef<HTMLInputElement | null>(null);
   const endDateInput = useRef<HTMLInputElement | null>(null);
@@ -22,13 +24,15 @@ const DateInputs: FC<DateInputsProps> = ({
   // Синхронизация инпутов с выбранными датами
   useEffect(() => {
     if (startDateInput.current) {
-      startDateInput.current.value = startDate ? startDate.format(format) : "";
+      startDateInput.current.value = startDate
+        ? startDate.format(DATE_FORMAT)
+        : "";
     }
   }, [startDate]);
 
   useEffect(() => {
     if (endDateInput.current) {
-      endDateInput.current.value = endDate ? endDate.format(format) : "";
+      endDateInput.current.value = endDate ? endDate.format(DATE_FORMAT) : "";
     }
   }, [endDate]);
 
@@ -36,36 +40,53 @@ const DateInputs: FC<DateInputsProps> = ({
     <div className="input-container">
       {range ? (
         <>
-          <InputStyled
-            ref={startDateInput}
-            type="text"
-            placeholder={format}
+          <PeriodInputStyled
+            value={startDateInputValue}
+            onChange={(e) => onDateInputChange(e.target.value, "startDateInputValue")}
             onBlur={(e) => onStartDateChange(e.target.value)}
+            mask={{ mask: DATE_MASK, showMaskOnHover: false, placeholder: DATE_PLACEHOLDER }}
+            label={"Начало"}
+            large={false}
           />
-          <InputStyled
-            ref={endDateInput}
-            type="text"
-            placeholder={format}
+
+          <PeriodInputStyled
+            value={endDateInputValue}
+            onChange={(e) => onDateInputChange(e.target.value, "endDateInputValue")}
             onBlur={(e) => onEndDateChange(e.target.value)}
+            mask={{ mask: DATE_MASK, showMaskOnHover: false, placeholder: DATE_PLACEHOLDER }}
+            label={"Конец"}
+            large={false}
+          />
+        </>
+      ) : timePicker ? (
+        <>
+          <PeriodInputStyled
+            value={inputDateValue}
+            onChange={(e) => onDateInputChange(e.target.value, "inputDateValue")}
+            onBlur={onDateInputBlur}
+            mask={{ mask: DATE_MASK, showMaskOnHover: false, placeholder: DATE_PLACEHOLDER }}
+            label={"Дата"}
+            large={false}
+          />
+
+          <PeriodInputStyled
+            value={timeValue === "00:00" ? undefined : timeValue}
+            onChange={(e) => onTimeChange(e.target.value)}
+            mask={{ alias: TIME_MASK, showMaskOnHover: false, placeholder: TIME_PLACEHOLDER }}
+            label={"Время"}
+            large={false}
           />
         </>
       ) : (
-        <>
-          <InputStyled
-            type="text"
-            placeholder={format}
-            value={inputDateValue}
-            onChange={(e) => onDateInputChange(e.target.value)}
-            onBlur={onDateInputBlur}
-          />
-          {timePicker && (
-            <InputStyled
-              type="time"
-              value={timeValue}
-              onChange={(e) => onTimeChange?.(e.target.value)}
-            />
-          )}
-        </>
+        <SingleInputStyled
+          mask={{ mask: DATE_MASK, showMaskOnHover: false, placeholder: DATE_PLACEHOLDER }}
+          value={inputDateValue}
+          onChange={(e) => onDateInputChange(e.target.value, "inputDateValue")}
+          onBlur={onDateInputBlur}
+          placeholder={DATE_PLACEHOLDER}
+          label={"Введите дату"}
+          large={false}
+        />
       )}
     </div>
   );

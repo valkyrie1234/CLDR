@@ -1,8 +1,9 @@
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
+import { DATE_FORMAT } from "@rgs-ui/date-utils";
 import Day from "./Day";
-import { daysOfWeek, format } from "../../consts";
+import { daysOfWeek } from "../../consts";
 import { IDays } from "./types";
 import { CalendarDays } from "./styles";
 
@@ -41,7 +42,7 @@ const Days: React.FC<IDays & { minDate?: Dayjs; maxDate?: Dayjs }> = React.memo(
     const prevDate = previousMonth.date(previousMonthDays - firstDayOfMonth + i + 1);
     days.push(
       <Day
-        key={`prev-${prevDate.format(format)}`}
+        key={`prev-${prevDate.format(DATE_FORMAT)}`}
         onClick={onClick}
         currentDate={date}
         date={prevDate}
@@ -62,7 +63,7 @@ const Days: React.FC<IDays & { minDate?: Dayjs; maxDate?: Dayjs }> = React.memo(
     const currentDate = date.date(i);
     days.push(
       <Day
-        key={currentDate.format(format)}
+        key={currentDate.format(DATE_FORMAT)}
         onClick={onClick}
         currentDate={date}
         date={currentDate}
@@ -84,7 +85,7 @@ const Days: React.FC<IDays & { minDate?: Dayjs; maxDate?: Dayjs }> = React.memo(
     const nextDate = date.add(1, "month").date(i);
     days.push(
       <Day
-        key={`next-${nextDate.format(format)}`}
+        key={`next-${nextDate.format(DATE_FORMAT)}`}
         onClick={onClick}
         currentDate={date}
         date={nextDate}

@@ -14,5 +14,3 @@ export const monthNames = [
 ];
 
 export const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
-
-export const format = "DD-MM-YYYY";

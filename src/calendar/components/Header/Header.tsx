@@ -2,6 +2,7 @@ import { FC } from "react";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import "dayjs/locale/ru";
+import { DATE_FORMAT } from "@rgs-ui/date-utils";
 
 import { IHeader } from "./types";
 import {
@@ -15,7 +16,6 @@ import {
 } from "./styles";
 import DateInputs from "./components/DateInputs";
 import HeaderControls from "./components/HeaderControls";
-import { format } from "../../consts";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
@@ -27,10 +27,12 @@ const Header: FC<IHeader> = ({
   endDate,
   timeValue,
   startDate,
-  timePicker,
   showToggle,
+  timePicker,
   inputDateValue,
+  endDateInputValue,
   navigationControls,
+  startDateInputValue,
   onDateInputChange,
   onStartDateChange,
   toggleRangeMode,
@@ -72,8 +74,8 @@ const Header: FC<IHeader> = ({
         return;
     }
     if(start && end){
-      onStartDateChange(start.format(format));
-      onEndDateChange(end.format(format));
+      onStartDateChange(start.format(DATE_FORMAT));
+      onEndDateChange(end.format(DATE_FORMAT));
     }
   };
 
@@ -84,7 +86,10 @@ const Header: FC<IHeader> = ({
   };
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper
+              timePicker={timePicker}
+              range={range}
+    >
           <ToggleAndButton>
             {showToggle && (
               <ToggleContainer>
@@ -99,6 +104,8 @@ const Header: FC<IHeader> = ({
           </ToggleAndButton>
           <div className="header-top">
             <DateInputs
+              endDateInputValue={endDateInputValue}
+              startDateInputValue={startDateInputValue}
               range={range}
               startDate={startDate}
               endDate={endDate}

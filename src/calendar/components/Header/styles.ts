@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { colors } from '@rgs-ui/design-tokens';
+import { Input } from "@rgs-ui/input";
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div<{range: boolean, timePicker: boolean | undefined}>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   box-sizing: border-box;
-  padding: 12px;
   width: 100%;
   height: fit-content;
   gap: 12px;
@@ -20,9 +20,9 @@ export const HeaderWrapper = styled.div`
 
   .input-container {
     display: flex;
+    display: ${({range, timePicker}) => (range || timePicker ? "flex" : "block")};
     gap: 10px;
-    width: 100%;
-    position: relative;
+    justify-content: center;
   };
 
   .dropdown-arrow {
@@ -70,17 +70,27 @@ export const HeaderWrapper = styled.div`
   };
 `;
 
-export const InputStyled = styled.input`
+export const PeriodInputStyled = styled(Input)`
+  height: 40px;
   flex: 1;
-  min-width: 0;
-  padding: 8px;
-  border: 1px solid ${colors.gray[60]};
-  border-radius: 4px;
+  min-width: fit-content;
   font-size: 14px;
+  border-radius: 7px;
 
   & ::placeholder {
     color: ${colors.gray[80]} !important;
   };
+`;
+
+export const SingleInputStyled = styled(Input)`
+max-height: 40px;
+border-radius: 7px; 
+font-size: 14px;
+width: 100%;
+
+& ::placeholder {
+  color: ${colors.gray[80]} !important;
+};
 `;
 
 export const HeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
