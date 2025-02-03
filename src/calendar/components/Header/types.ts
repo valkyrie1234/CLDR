@@ -145,6 +145,11 @@ export interface HeaderControlsProps {
   };
 };
 
+export type DropDownProps = {
+  handleSelectionChange: (value?: string) => void;
+  isMobile?: boolean;
+};
+
 export interface ISingleInput {
   /** Флаг, указывающий, отображается ли выбор времени */
   timePicker: boolean | undefined;

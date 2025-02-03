@@ -1,9 +1,5 @@
 import { List, ListItem } from '../styles';
-
-type DropDownProps = {
-  handleSelectionChange: (value?: string) => void;
-  isMobile?: boolean;
-};
+import { DropDownProps } from '../types';
 
 const DropDown = ({ isMobile, handleSelectionChange }: DropDownProps) => {
 
