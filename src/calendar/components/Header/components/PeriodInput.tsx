@@ -7,12 +7,12 @@ import { PeriodChips, PeriodInputStyled, StyledPopover } from "../styles";
 import { IPeriodInput } from "../types";
 
 const PeriodInput: FC<IPeriodInput> = ({
-  startDateInputValue,
   endDateInputValue,
-  onDateInputChange,
-  onStartDateChange,
-  onEndDateChange,
+  startDateInputValue,
   handleSelectionChange,
+  onStartDateChange,
+  onDateInputChange,
+  onEndDateChange,
 }) => {
   const [open, setOpen] = useState(false);
 

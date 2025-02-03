@@ -3,7 +3,6 @@ import { DropDownProps } from '../types';
 
 const DropDown = ({ isMobile, handleSelectionChange }: DropDownProps) => {
 
-
   return (
     <List isMobile={isMobile}>
       <ListItem isMobile={isMobile} onClick={() => handleSelectionChange('current-week')}>

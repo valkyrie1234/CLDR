@@ -9,11 +9,11 @@ import { PeriodInputStyled, SingleInputStyled } from '../styles';
 import { ISingleInput } from '../types';
 
 const SingleInput: FC<ISingleInput> = ({
+  timeValue,
   timePicker,
   inputDateValue,
   onDateInputChange,
   onDateInputBlur,
-  timeValue,
   onTimeChange,
 }) => {
   return timePicker ? (

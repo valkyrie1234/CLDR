@@ -5,13 +5,13 @@ import { HeaderControlsProps } from "../types";
 import { ArrowExpandIcon, ArrowHideIcon, MenuClosedIcon, MenuOpenedIcon } from "@rgs-ui/icons";
 
 const HeaderControls: FC<HeaderControlsProps> = ({
-  mode,
   date,
-  changeYear,
-  changeMonth,
-  setMode,
-  handleYearScroll,
+  mode,
   navigationControls,
+  handleYearScroll,
+  changeMonth,
+  changeYear,
+  setMode,
 }) => {
   const {
     canGoToPreviousMonth,
