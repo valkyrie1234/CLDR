@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from "react";
+import { FC } from "react";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import "dayjs/locale/ru";
@@ -22,11 +22,9 @@ const Header: FC<IHeader> = ({
   mode,
   date,
   range,
-  endDate,
   timeValue,
-  startDate,
-  showToggle,
   timePicker,
+  showToggle,
   inputDateValue,
   endDateInputValue,
   navigationControls,
@@ -42,23 +40,6 @@ const Header: FC<IHeader> = ({
   resetDate,
   setMode,
 }) => {
-  const startDateInput = useRef<HTMLInputElement | null>(null);
-  const endDateInput = useRef<HTMLInputElement | null>(null);
-
-  // Синхронизация инпутов с выбранными датами
-  useEffect(() => {
-    if (startDateInput.current) {
-      startDateInput.current.value = startDate
-        ? startDate.format(DATE_FORMAT)
-        : '';
-    }
-  }, [startDate]);
-
-  useEffect(() => {
-    if (endDateInput.current) {
-      endDateInput.current.value = endDate ? endDate.format(DATE_FORMAT) : '';
-    }
-  }, [endDate]);
 
   // Обработка выбора диапазона дат
   const handleSelectionChange = (value: string) => {

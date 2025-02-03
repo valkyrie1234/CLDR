@@ -22,12 +22,6 @@ export interface IHeader {
   /** Флаг, указывающий, включен ли режим выбора диапазона дат */
   range: boolean;
 
-  /** Начальная дата диапазона (если выбран диапазон) */
-  endDate: Dayjs | null;
-
-  /** Конечная дата диапазона (если выбран диапазон) */
-  startDate: Dayjs | null;
-
   /** Колбэк, вызываемый при изменении начальной даты */
   onStartDateChange: (value: string) => void;
 
