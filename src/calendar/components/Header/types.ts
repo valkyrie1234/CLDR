@@ -1,4 +1,4 @@
-import { Dayjs } from "dayjs";
+import { Dayjs } from 'dayjs';
 
 export interface IHeader {
   /** Значение даты в первом инпуте диапазона*/
@@ -35,10 +35,10 @@ export interface IHeader {
   onEndDateChange: (value: string) => void;
 
   /** Режим отображения календаря (день, месяц, год) */
-  mode: "day" | "month" | "year";
+  mode: 'day' | 'month' | 'year';
 
   /** Функция для изменения режима отображения */
-  setMode: (mode: "day" | "month" | "year") => void;
+  setMode: (mode: 'day' | 'month' | 'year') => void;
 
   /** Флаг, указывающий, отображается ли переключатель диапазона */
   showToggle: boolean;
@@ -50,7 +50,7 @@ export interface IHeader {
   inputDateValue: string;
 
   /** Колбэк, вызываемый при изменении значения в инпуте */
-  onDateInputChange: (value: string, key: string) => void
+  onDateInputChange: (value: string, key: string) => void;
 
   /** Колбэк, вызываемый при потере фокуса инпутом */
   onDateInputBlur: () => void;
@@ -71,7 +71,7 @@ export interface IHeader {
     canGoToPreviousYear: () => boolean;
     canGoToNextYear: () => boolean;
   };
-};
+}
 
 export interface DateInputsProps {
   /** Функция обработки выбора диапазона дат*/
@@ -102,7 +102,7 @@ export interface DateInputsProps {
   inputDateValue: string;
 
   /** Колбэк, вызываемый при изменении значения в инпуте */
-  onDateInputChange: (value: string, key: string) => void
+  onDateInputChange: (value: string, key: string) => void;
 
   /** Колбэк, вызываемый при потере фокуса инпутом */
   onDateInputBlur: () => void;
@@ -115,11 +115,11 @@ export interface DateInputsProps {
 
   /** Значение времени */
   timeValue: string;
-};
+}
 
 export interface HeaderControlsProps {
   /** Режим отображения календаря (день, месяц, год) */
-  mode: "day" | "month" | "year";
+  mode: 'day' | 'month' | 'year';
 
   /** Текущая дата, отображаемая в календаре */
   date: Dayjs;
@@ -131,11 +131,11 @@ export interface HeaderControlsProps {
   changeMonth: (month: number) => void;
 
   /** Функция для изменения режима отображения */
-  setMode: (mode: "day" | "month" | "year") => void;
+  setMode: (mode: 'day' | 'month' | 'year') => void;
 
   /** Функция для прокрутки годов */
-  handleYearScroll: (direction: "prev" | "next") => void;
-  
+  handleYearScroll: (direction: 'prev' | 'next') => void;
+
   /** Функции для дизейбла стрелочек*/
   navigationControls: {
     canGoToPreviousMonth: () => boolean;
@@ -143,4 +143,47 @@ export interface HeaderControlsProps {
     canGoToPreviousYear: () => boolean;
     canGoToNextYear: () => boolean;
   };
+};
+
+export interface ISingleInput {
+  /** Флаг, указывающий, отображается ли выбор времени */
+  timePicker: boolean | undefined;
+
+  /** Значение даты в инпуте */
+  inputDateValue: string;
+
+  /** Колбэк, вызываемый при изменении значения в инпуте */
+  onDateInputChange: (value: string, key: string) => void;
+
+  /** Колбэк, вызываемый при потере фокуса инпутом */
+  onDateInputBlur: () => void;
+
+  /** Колбэк, вызываемый при изменении конечной даты */
+  onEndDateChange: (value: string) => void;
+  
+  /** Колбэк, вызываемый при изменении времени */
+  onTimeChange: (value: string) => void;
+
+  /** Значение времени */
+  timeValue: string;
+};
+
+export interface IPeriodInput {
+  /** Значение даты 1 инпуте диапазона*/
+  endDateInputValue: string;
+
+  /** Значение даты 2 инпуте диапазона*/
+  startDateInputValue: string;
+
+  /** Колбэк, вызываемый при изменении значения в инпуте */
+  onDateInputChange: (value: string, key: string) => void;
+
+  /** Колбэк, вызываемый при изменении начальной даты */
+  onStartDateChange: (value: string) => void;
+
+  /** Колбэк, вызываемый при изменении конечной даты */
+  onEndDateChange: (value: string) => void;
+
+  /** Функция обработки выбора диапазона дат*/
+  handleSelectionChange: (value: string) => void;
 };
