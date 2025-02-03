@@ -8,15 +8,12 @@ import { IHeader } from "./types";
 import {
   HeaderWrapper,
   ResetButton,
-  Slider,
-  Toggle,
-  ToggleAndButton,
-  ToggleContainer,
-  ToggleLabel,
+  ToggleAndButtonContainer,
 } from "./styles";
 import HeaderControls from "./components/controls/HeaderControls";
 import PeriodInput from "./components/inputs/PeriodInput";
 import SingleInput from "./components/inputs/SingleInput";
+import Toggle from "./components/controls/Toggle";
 
 dayjs.extend(quarterOfYear);
 dayjs.locale("ru");
@@ -102,22 +99,14 @@ const Header: FC<IHeader> = ({
 
   return (
     <HeaderWrapper $timePicker={timePicker} $range={range}>
-      <ToggleAndButton>
-        {showToggle && (
-          <ToggleContainer>
-            <Toggle>
-              <input
-                type="checkbox"
-                checked={range}
-                onChange={toggleRangeMode}
-              />
-              <Slider />
-            </Toggle>
-            <ToggleLabel>{range ? "Диапазон" : "Одна дата"}</ToggleLabel>
-          </ToggleContainer>
-        )}
+      <ToggleAndButtonContainer>
+        <Toggle
+        range={range}
+        showToggle={showToggle}
+        toggleRangeMode={toggleRangeMode}
+        />
         <ResetButton onClick={resetDate}>Сбросить</ResetButton>
-      </ToggleAndButton>
+      </ToggleAndButtonContainer>
       <div className="header-top">
         <div className="input-container">
           {range ? (

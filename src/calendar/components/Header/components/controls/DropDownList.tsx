@@ -1,7 +1,7 @@
-import { List, ListItem } from '../../styles';
-import { DropDownProps } from '../../types';
+import { List, ListItem } from './styles';
+import { DropDownProps } from './types';
 
-const DropDown = ({ isMobile, handleSelectionChange }: DropDownProps) => {
+const DropDownList = ({ isMobile, handleSelectionChange }: DropDownProps) => {
 
   return (
     <List isMobile={isMobile}>
@@ -21,4 +21,4 @@ const DropDown = ({ isMobile, handleSelectionChange }: DropDownProps) => {
   );
 };
 
-export default DropDown;
+export default DropDownList;

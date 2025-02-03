@@ -2,9 +2,9 @@ import { FC, useCallback, useState } from "react";
 import { DATE_MASK, DATE_PLACEHOLDER } from "@rgs-ui/date-utils";
 import { Tooltip } from "@rgs-ui/tooltip";
 import { Popover } from "@rgs-ui/popover";
-import DropDown from "../controls/DropDown";
-import { PeriodChips, PeriodInputStyled, StyledPopover } from "../../styles";
-import { IPeriodInput } from "../../types";
+import DropDown from "../controls/DropDownList";
+import { PeriodChips, PeriodInputStyled, StyledPopover } from "./styles";
+import { IPeriodInput } from "./types";
 
 const PeriodInput: FC<IPeriodInput> = ({
   endDateInputValue,

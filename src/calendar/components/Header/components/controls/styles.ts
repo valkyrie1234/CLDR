@@ -1,6 +1,5 @@
-import { Chips } from "@rgs-ui/chips";
 import { colors, typography } from "@rgs-ui/design-tokens";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const StyledHeaderControls = styled.div<{ mode: "day" | "month" | "year" }>`
   display: flex;
@@ -74,27 +73,63 @@ export const ListItem = styled.div<{ isMobile?: boolean }>`
   }
 `;
 
-export const PeriodChips = styled(Chips)<{ $isOpen: boolean }>`
-  z-index: 1000;
-  margin: 0;
-  padding: 0;
-  width: 20px;
-  height: 20px;
-  border: none;
-  background: transparent;
-  color: ${colors.gray[80]};
-
-  &:hover {
-    background: ${colors.gray[40]};
-  }
-
-  ${({ $isOpen }) =>
-    $isOpen &&
-    css`
-      background: ${colors.gray[60]}!important;
-    `};
+export const ToggleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 `;
 
-export const StyledPopover = styled.div`
-margin-top: 8px;
+export const ToggleLabel = styled.div`
+  margin-left: 10px;
+  font-size: 14px;
+  color: ${colors.gray[120]};
+`;
+
+export const Slider = styled.span`
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${colors.gray[60]};
+  transition: 0.4s;
+  border-radius: 34px;
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: ${colors.gray[0]};
+    transition: 0.4s;
+    border-radius: 50%;
+  };
+`;
+
+export const StyledToggle = styled.label`
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + ${Slider} {
+      background-color: ${colors.brandRed.red};
+    };
+
+    &:focus + ${Slider} {
+      box-shadow: 0 0 1px ${colors.brandRed.red};
+    };
+
+    &:checked + ${Slider}:before {
+      transform: translateX(26px);
+    };
+  };
 `;

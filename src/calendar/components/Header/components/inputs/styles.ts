@@ -1,6 +1,7 @@
+import { Chips } from "@rgs-ui/chips";
 import { colors } from "@rgs-ui/design-tokens";
 import { Input } from "@rgs-ui/input";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const PeriodInputStyled = styled(Input)`
   height: 40px;
@@ -23,4 +24,29 @@ width: 100%;
 & ::placeholder {
   color: ${colors.gray[80]} !important;
 };
+`;
+
+export const StyledPopover = styled.div`
+margin-top: 8px;
+`;
+
+export const PeriodChips = styled(Chips)<{ $isOpen: boolean }>`
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: ${colors.gray[80]};
+
+  &:hover {
+    background: ${colors.gray[40]};
+  }
+
+  ${({ $isOpen }) =>
+    $isOpen &&
+    css`
+      background: ${colors.gray[60]}!important;
+    `};
 `;
