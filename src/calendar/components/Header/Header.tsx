@@ -87,8 +87,8 @@ const Header: FC<IHeader> = ({
 
   return (
     <HeaderWrapper
-              timePicker={timePicker}
-              range={range}
+              $timePicker={timePicker}
+              $range={range}
     >
           <ToggleAndButton>
             {showToggle && (

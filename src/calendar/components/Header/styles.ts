@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from '@rgs-ui/design-tokens';
 import { Input } from "@rgs-ui/input";
 
-export const HeaderWrapper = styled.div<{range: boolean, timePicker: boolean | undefined}>`
+export const HeaderWrapper = styled.div<{$range: boolean, $timePicker: boolean | undefined}>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -20,7 +20,7 @@ export const HeaderWrapper = styled.div<{range: boolean, timePicker: boolean | u
 
   .input-container {
     display: flex;
-    display: ${({range, timePicker}) => (range || timePicker ? "flex" : "block")};
+    display: ${({$range, $timePicker}) => ($range || $timePicker ? "flex" : "block")};
     gap: 10px;
     justify-content: center;
   };

@@ -24,9 +24,7 @@ const DateInputs: FC<DateInputsProps> = ({
   // Синхронизация инпутов с выбранными датами
   useEffect(() => {
     if (startDateInput.current) {
-      startDateInput.current.value = startDate
-        ? startDate.format(DATE_FORMAT)
-        : "";
+      startDateInput.current.value = startDate ? startDate.format(DATE_FORMAT) : "";
     }
   }, [startDate]);
 
