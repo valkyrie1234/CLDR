@@ -6,11 +6,11 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { DATE_FORMAT } from "@rgs-ui/date-utils";
 
-import MonthPicker from "./components/YearAndMounthPickers/MounthPicker/MounthPicker";
-import YearPicker from "./components/YearAndMounthPickers/YearPicker/YearPicker";
-import { TodayButton, CalendarWrapper } from "./styles";
+import MonthPicker from "./components/mods/Months/MounthPicker";
+import YearPicker from "./components/mods/Years/YearPicker";
+import Days from "./components/mods/Days/Days";
 import Header from "./components/Header/Header";
-import Days from "./components/DayPicker/Days";
+import { TodayButton, CalendarWrapper } from "./styles";
 import { ICalendar } from "./types";
 
 dayjs.extend(customParseFormat);

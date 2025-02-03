@@ -3,7 +3,7 @@ import dayjs, { Dayjs } from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import { DATE_FORMAT } from "@rgs-ui/date-utils";
 import Day from "./Day";
-import { daysOfWeek } from "../../consts";
+import { daysOfWeek } from "../../../consts";
 import { IDays } from "./types";
 import { CalendarDays } from "./styles";
 
