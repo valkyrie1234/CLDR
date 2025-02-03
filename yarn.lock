@@ -504,6 +504,14 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-primitive" "1.0.0"
 
+"@radix-ui/react-arrow@1.0.1":
+  version "1.0.1"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-arrow/-/react-arrow-1.0.1.tgz#5246adf79e97f89e819af68da51ddcf349ecf1c4"
+  integrity sha1-Ukat956X+J6BmvaNpR3c80ns8cQ=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-primitive" "1.0.1"
+
 "@radix-ui/react-compose-refs@1.0.0":
   version "1.0.0"
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-compose-refs/-/react-compose-refs-1.0.0.tgz#37595b1f16ec7f228d698590e78eeed18ff218ae"
@@ -537,6 +545,35 @@
     "@radix-ui/react-use-callback-ref" "1.0.0"
     "@radix-ui/react-use-escape-keydown" "1.0.0"
 
+"@radix-ui/react-dismissable-layer@1.0.2":
+  version "1.0.2"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-dismissable-layer/-/react-dismissable-layer-1.0.2.tgz#f04d1061bddf00b1ca304148516b9ddc62e45fb2"
+  integrity sha1-8E0QYb3fALHKMEFIUWud3GLkX7I=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/primitive" "1.0.0"
+    "@radix-ui/react-compose-refs" "1.0.0"
+    "@radix-ui/react-primitive" "1.0.1"
+    "@radix-ui/react-use-callback-ref" "1.0.0"
+    "@radix-ui/react-use-escape-keydown" "1.0.2"
+
+"@radix-ui/react-focus-guards@1.0.0":
+  version "1.0.0"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-focus-guards/-/react-focus-guards-1.0.0.tgz#339c1c69c41628c1a5e655f15f7020bf11aa01fa"
+  integrity sha1-M5wcacQWKMGl5lXxX3AgvxGqAfo=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+
+"@radix-ui/react-focus-scope@1.0.1":
+  version "1.0.1"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-focus-scope/-/react-focus-scope-1.0.1.tgz#faea8c25f537c5a5c38c50914b63722db0e7f951"
+  integrity sha1-+uqMJfU3xaXDjFCRS2NyLbDn+VE=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-compose-refs" "1.0.0"
+    "@radix-ui/react-primitive" "1.0.1"
+    "@radix-ui/react-use-callback-ref" "1.0.0"
+
 "@radix-ui/react-id@1.0.0":
   version "1.0.0"
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-id/-/react-id-1.0.0.tgz#8d43224910741870a45a8c9d092f25887bb6d11e"
@@ -544,6 +581,28 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-use-layout-effect" "1.0.0"
+
+"@radix-ui/react-popover@^1.0.2":
+  version "1.0.2"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-popover/-/react-popover-1.0.2.tgz#f761c8aafb61519522b8e80501c589e619073a2c"
+  integrity sha1-92HIqvthUZUiuOgFAcWJ5hkHOiw=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/primitive" "1.0.0"
+    "@radix-ui/react-compose-refs" "1.0.0"
+    "@radix-ui/react-context" "1.0.0"
+    "@radix-ui/react-dismissable-layer" "1.0.2"
+    "@radix-ui/react-focus-guards" "1.0.0"
+    "@radix-ui/react-focus-scope" "1.0.1"
+    "@radix-ui/react-id" "1.0.0"
+    "@radix-ui/react-popper" "1.0.1"
+    "@radix-ui/react-portal" "1.0.1"
+    "@radix-ui/react-presence" "1.0.0"
+    "@radix-ui/react-primitive" "1.0.1"
+    "@radix-ui/react-slot" "1.0.1"
+    "@radix-ui/react-use-controllable-state" "1.0.0"
+    aria-hidden "^1.1.1"
+    react-remove-scroll "2.5.5"
 
 "@radix-ui/react-popper@1.0.0":
   version "1.0.0"
@@ -561,6 +620,22 @@
     "@radix-ui/react-use-size" "1.0.0"
     "@radix-ui/rect" "1.0.0"
 
+"@radix-ui/react-popper@1.0.1":
+  version "1.0.1"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-popper/-/react-popper-1.0.1.tgz#9fa8a6a493404afa225866a5cd75af23d141baa0"
+  integrity sha1-n6impJNASvoiWGalzXWvI9FBuqA=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@floating-ui/react-dom" "0.7.2"
+    "@radix-ui/react-arrow" "1.0.1"
+    "@radix-ui/react-compose-refs" "1.0.0"
+    "@radix-ui/react-context" "1.0.0"
+    "@radix-ui/react-primitive" "1.0.1"
+    "@radix-ui/react-use-layout-effect" "1.0.0"
+    "@radix-ui/react-use-rect" "1.0.0"
+    "@radix-ui/react-use-size" "1.0.0"
+    "@radix-ui/rect" "1.0.0"
+
 "@radix-ui/react-portal@1.0.0":
   version "1.0.0"
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-portal/-/react-portal-1.0.0.tgz#7220b66743394fabb50c55cb32381395cc4a276b"
@@ -568,6 +643,14 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-primitive" "1.0.0"
+
+"@radix-ui/react-portal@1.0.1":
+  version "1.0.1"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-portal/-/react-portal-1.0.1.tgz#169c5a50719c2bb0079cf4c91a27aa6d37e5dd33"
+  integrity sha1-FpxaUHGcK7AHnPTJGieqbTfl3TM=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-primitive" "1.0.1"
 
 "@radix-ui/react-presence@1.0.0":
   version "1.0.0"
@@ -585,6 +668,14 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-slot" "1.0.0"
+
+"@radix-ui/react-primitive@1.0.1":
+  version "1.0.1"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-primitive/-/react-primitive-1.0.1.tgz#c1ebcce283dd2f02e4fbefdaa49d1cb13dbc990a"
+  integrity sha1-wevM4oPdLwLk++/apJ0csT28mQo=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-slot" "1.0.1"
 
 "@radix-ui/react-scroll-area@^1.0.0":
   version "1.0.0"
@@ -606,6 +697,14 @@
   version "1.0.0"
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-slot/-/react-slot-1.0.0.tgz#7fa805b99891dea1e862d8f8fbe07f4d6d0fd698"
   integrity sha1-f6gFuZiR3qHoYtj4++B/TW0P1pg=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-compose-refs" "1.0.0"
+
+"@radix-ui/react-slot@1.0.1":
+  version "1.0.1"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-slot/-/react-slot-1.0.1.tgz#e7868c669c974d649070e9ecbec0b367ee0b4d81"
+  integrity sha1-54aMZpyXTWSQcOnsvsCzZ+4LTYE=
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-compose-refs" "1.0.0"
@@ -648,6 +747,14 @@
   version "1.0.0"
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-use-escape-keydown/-/react-use-escape-keydown-1.0.0.tgz#aef375db4736b9de38a5a679f6f49b45a060e5d1"
   integrity sha1-rvN120c2ud44paZ59vSbRaBg5dE=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-use-callback-ref" "1.0.0"
+
+"@radix-ui/react-use-escape-keydown@1.0.2":
+  version "1.0.2"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@radix-ui/react-use-escape-keydown/-/react-use-escape-keydown-1.0.2.tgz#09ab6455ab240b4f0a61faf06d4e5132c4d639f6"
+  integrity sha1-CatkVaskC08KYfrwbU5RMsTWOfY=
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-use-callback-ref" "1.0.0"
@@ -719,6 +826,14 @@
     "@radix-ui/react-tooltip" "^1.0.0"
     "@rgs-ui/design-tokens" "^0.36.0"
     "@rgs-ui/hooks" "^0.12.5"
+
+"@rgs-ui/chips@^0.1.40":
+  version "0.1.40"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@rgs-ui/chips/-/@rgs-ui/chips-0.1.40.tgz#ccc5e7c65719bbaa7dad9979c16bafd0172b0679"
+  integrity sha512-4oTjGkKoRSD00GjQpPwbK5KtcigMFE8Wu/VQaefnS49VXzBgnT1O8QBa6DCg5+ZQcqJx3hL5DB2rv3bg57EDEw==
+  dependencies:
+    "@rgs-ui/design-tokens" "^0.36.0"
+    "@rgs-ui/icons" "^0.13.5"
 
 "@rgs-ui/date-utils@^0.7.1":
   version "0.7.1"
@@ -797,6 +912,16 @@
     "@rgs-ui/utils" "^0.2.0"
     inputmask "5.0.8"
 
+"@rgs-ui/popover@^0.2.45":
+  version "0.2.45"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@rgs-ui/popover/-/@rgs-ui/popover-0.2.45.tgz#3e50e651aa8b209f2ea3b881a95ab03d1ec5ffbd"
+  integrity sha512-tpjC4l13BKRtvKMQm8QD6Jewyac//sxR44oq5bp9MaOv+xE/i7QhVll0Wpc+Pjsq38jXK7FwNYRNfZ8Bn3+7IA==
+  dependencies:
+    "@radix-ui/react-popover" "^1.0.2"
+    "@rgs-ui/design-tokens" "^0.36.0"
+    "@rgs-ui/hooks" "^0.12.5"
+    "@rgs-ui/scroll-area" "^0.10.1"
+
 "@rgs-ui/scroll-area@^0.10.1":
   version "0.10.1"
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@rgs-ui/scroll-area/-/@rgs-ui/scroll-area-0.10.1.tgz#45a378476f71b502e5f49ed075a56af3a3a04179"
@@ -806,6 +931,15 @@
     "@rgs-ui/design-tokens" "^0.36.0"
     "@rgs-ui/hooks-v3" "^3.6.1"
     "@rgs-ui/icons" "^0.13.5"
+
+"@rgs-ui/tooltip@^0.5.21":
+  version "0.5.21"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/@rgs-ui/tooltip/-/@rgs-ui/tooltip-0.5.21.tgz#4fc5d9dbb074b079dad131ef717bbef659d52858"
+  integrity sha512-wse0LOFli4TUsTImtSKdDD4CDh7S3+3Tx63WB7LNLKpsRR1un10S0pGZTdli7tBy63Dn6Flp9gfpt2P9a2gnAg==
+  dependencies:
+    "@radix-ui/react-tooltip" "^1.0.0"
+    "@rgs-ui/design-tokens" "^0.36.0"
+    "@rgs-ui/hooks" "^0.12.5"
 
 "@rgs-ui/utils@^0.2.0":
   version "0.2.0"
@@ -1097,6 +1231,13 @@ argparse@^2.0.1:
   resolved "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
   integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
+aria-hidden@^1.1.1:
+  version "1.2.3"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/aria-hidden/-/aria-hidden-1.2.3.tgz#14aeb7fb692bbb72d69bebfa47279c1fd725e954"
+  integrity sha1-FK63+2kru3LWm+v6RyecH9cl6VQ=
+  dependencies:
+    tslib "^2.0.0"
+
 balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
@@ -1233,6 +1374,11 @@ deep-is@^0.1.3:
   version "0.1.4"
   resolved "https://registry.npmjs.org/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
+
+detect-node-es@^1.1.0:
+  version "1.1.0"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/detect-node-es/-/detect-node-es-1.1.0.tgz#163acdf643330caa0b4cd7c21e7ee7755d6fa493"
+  integrity sha1-FjrN9kMzDKoLTNfCHn7ndV1vpJM=
 
 electron-to-chromium@^1.5.41:
   version "1.5.73"
@@ -1457,6 +1603,11 @@ gensync@^1.0.0-beta.2:
   resolved "https://registry.npmjs.org/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
   integrity sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
 
+get-nonce@^1.0.0:
+  version "1.0.1"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/get-nonce/-/get-nonce-1.0.1.tgz#fdf3f0278073820d2ce9426c18f07481b1e0cdf3"
+  integrity sha1-/fPwJ4Bzgg0s6UJsGPB0gbHgzfM=
+
 glob-parent@^5.1.2:
   version "5.1.2"
   resolved "https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
@@ -1523,6 +1674,13 @@ inputmask@5.0.8:
   version "5.0.8"
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/inputmask/-/inputmask-5.0.8.tgz#cd0f70b058c3291a0d4f27de25dbfc179c998bb4"
   integrity sha1-zQ9wsFjDKRoNTyfeJdv8F5yZi7Q=
+
+invariant@^2.2.4:
+  version "2.2.4"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
+  integrity sha1-YQ88ksk1nOHbYW5TgAjSP/NRWOY=
+  dependencies:
+    loose-envify "^1.0.0"
 
 is-extglob@^2.1.1:
   version "2.1.1"
@@ -1610,7 +1768,7 @@ lodash.merge@^4.6.2:
   resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
-loose-envify@^1.1.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -1789,6 +1947,34 @@ react-refresh@^0.14.2:
   version "0.14.2"
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.2.tgz#3833da01ce32da470f1f936b9d477da5c7028bf9"
   integrity sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==
+
+react-remove-scroll-bar@^2.3.3:
+  version "2.3.4"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.4.tgz#53e272d7a5cb8242990c7f144c44d8bd8ab5afd9"
+  integrity sha1-U+Jy16XLgkKZDH8UTETYvYq1r9k=
+  dependencies:
+    react-style-singleton "^2.2.1"
+    tslib "^2.0.0"
+
+react-remove-scroll@2.5.5:
+  version "2.5.5"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/react-remove-scroll/-/react-remove-scroll-2.5.5.tgz#1e31a1260df08887a8a0e46d09271b52b3a37e77"
+  integrity sha1-HjGhJg3wiIeooORtCScbUrOjfnc=
+  dependencies:
+    react-remove-scroll-bar "^2.3.3"
+    react-style-singleton "^2.2.1"
+    tslib "^2.1.0"
+    use-callback-ref "^1.3.0"
+    use-sidecar "^1.1.2"
+
+react-style-singleton@^2.2.1:
+  version "2.2.1"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/react-style-singleton/-/react-style-singleton-2.2.1.tgz#f99e420492b2d8f34d38308ff660b60d0b1205b4"
+  integrity sha1-+Z5CBJKy2PNNODCP9mC2DQsSBbQ=
+  dependencies:
+    get-nonce "^1.0.0"
+    invariant "^2.2.4"
+    tslib "^2.0.0"
 
 react@^18.3.1:
   version "18.3.1"
@@ -2101,7 +2287,7 @@ tslib@^1.11.1:
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
 
-tslib@^2.1.0:
+tslib@^2.0.0, tslib@^2.1.0:
   version "2.8.1"
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha1-YS7+TtI11Wfoq6Xypfq3AoCt6D8=
@@ -2142,10 +2328,25 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-callback-ref@^1.3.0:
+  version "1.3.2"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/use-callback-ref/-/use-callback-ref-1.3.2.tgz#6134c7f6ff76e2be0b56c809b17a650c942b1693"
+  integrity sha1-YTTH9v924r4LVsgJsXplDJQrFpM=
+  dependencies:
+    tslib "^2.0.0"
+
 use-isomorphic-layout-effect@^1.1.1:
   version "1.1.2"
   resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz#497cefb13d863d687b08477d9e5a164ad8c1a6fb"
   integrity sha1-SXzvsT2GPWh7CEd9nloWStjBpvs=
+
+use-sidecar@^1.1.2:
+  version "1.1.2"
+  resolved "https://artifactory.rgs.ru:443/artifactory/api/npm/OFR_NPM_LOCAL/use-sidecar/-/use-sidecar-1.1.2.tgz#2f43126ba2d7d7e117aa5855e5d8f0276dfe73c2"
+  integrity sha1-L0MSa6LX1+EXqlhV5djwJ23+c8I=
+  dependencies:
+    detect-node-es "^1.1.0"
+    tslib "^2.0.0"
 
 varint@^6.0.0:
   version "6.0.0"

@@ -51,9 +51,6 @@ const Header: FC<IHeader> = ({
     let start, end;
 
     switch (value) {
-      case "current-reset":
-        resetDate()
-        break;
       case "current-week":
         start = today.startOf("week");
         end = today.endOf("week");
@@ -104,6 +101,7 @@ const Header: FC<IHeader> = ({
           </ToggleAndButton>
           <div className="header-top">
             <DateInputs
+              handleSelectionChange={handleSelectionChange}
               endDateInputValue={endDateInputValue}
               startDateInputValue={startDateInputValue}
               range={range}
@@ -118,15 +116,6 @@ const Header: FC<IHeader> = ({
               onTimeChange={onTimeChange}
               timeValue={timeValue}
             />
-            {range && (
-              <select onChange={(e) => handleSelectionChange(e.target.value)}>
-                <option value="current-reset">Выберите диапазон</option>
-                <option value="current-week">Текущая неделя</option>
-                <option value="current-month">Текущий месяц</option>
-                <option value="current-quarter">Текущий квартал</option>
-                <option value="current-year">Текущий год</option>
-              </select>
-            )}
           </div>
           <HeaderControls
             mode={mode}

@@ -49,9 +49,8 @@ export const DayWrapper = styled.span<{
   ${(props) =>
     props.$isToday &&
     css`
-      border: 0.5px solid ${colors.brandRed.red};
-      border-radius: 7px; 
-      box-sizing: border-box;
+      color: ${colors.brandRed.red};
+      font-weight: bold;
     `};
 
   ${(props) =>

@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rgs-ui/chips": "^0.1.40",
     "@rgs-ui/date-utils": "^0.7.1",
     "@rgs-ui/design-tokens": "0.36.0",
     "@rgs-ui/icons": "^0.13.6",
     "@rgs-ui/input": "^0.13.16",
+    "@rgs-ui/popover": "^0.2.45",
+    "@rgs-ui/tooltip": "^0.5.21",
     "dayjs": "^1.11.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

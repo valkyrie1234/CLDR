@@ -74,6 +74,9 @@ export interface IHeader {
 };
 
 export interface DateInputsProps {
+  /** Функция обработки выбора диапазона дат*/
+  handleSelectionChange: (value: string) => void;
+
   /** Значение даты 1 инпуте диапазона*/
   endDateInputValue: string;
 

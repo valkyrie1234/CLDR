@@ -1,6 +1,9 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { DATE_FORMAT, DATE_MASK, DATE_PLACEHOLDER, TIME_MASK, TIME_PLACEHOLDER } from "@rgs-ui/date-utils";
-import { PeriodInputStyled, SingleInputStyled } from "../styles";
+import { Tooltip } from "@rgs-ui/tooltip";
+import { Popover } from "@rgs-ui/popover";
+import DropDown from "./DropDown";
+import { PeriodChips, PeriodInputStyled, SingleInputStyled, StyledPopover } from "../styles";
 import { DateInputsProps } from "../types";
 
 const DateInputs: FC<DateInputsProps> = ({
@@ -12,14 +15,33 @@ const DateInputs: FC<DateInputsProps> = ({
   inputDateValue,
   endDateInputValue,
   startDateInputValue,
+  handleSelectionChange,
   onStartDateChange,
   onDateInputChange,
   onEndDateChange,
   onDateInputBlur,
   onTimeChange,
 }) => {
-  const startDateInput = useRef<HTMLInputElement | null>(null);
-  const endDateInput = useRef<HTMLInputElement | null>(null);
+    const [open, setOpen] = useState(false);
+  
+    const startDateInput = useRef<HTMLInputElement | null>(null);
+    const endDateInput = useRef<HTMLInputElement | null>(null);
+
+  const handleSelection = (value?: string) => {
+    if(value){
+      handleSelectionChange(value);
+    }
+    setOpen(!open);
+  }
+
+
+    const toggleOpen: React.MouseEventHandler<HTMLButtonElement> = useCallback(
+      event => {
+        event.stopPropagation();
+        setOpen(!open);
+      },
+      [open]
+    );
 
   // Синхронизация инпутов с выбранными датами
   useEffect(() => {
@@ -55,6 +77,30 @@ const DateInputs: FC<DateInputsProps> = ({
             label={"Конец"}
             large={false}
           />
+          <StyledPopover>
+          <Popover
+             content={<DropDown handleSelectionChange={handleSelection} />}
+             open={open}
+             align='end'
+             position='bottom'
+             container={undefined}
+           >
+             <Tooltip
+               position="right"
+              //  data={{ text: "Выбрать диапазон дат" }}
+               delayDuration={0}
+               offset={4}
+               container={undefined}
+             >
+               <PeriodChips
+                 $isOpen={open}
+                 onClick={toggleOpen}
+                 rightIcon={open ? 'ArrowCloseIcon' : 'ArrowOpenIcon'}
+                 aria-label='Выбрать диапазон дат'
+               />
+             </Tooltip>
+           </Popover>
+          </StyledPopover>
         </>
       ) : timePicker ? (
         <>
