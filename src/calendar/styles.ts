@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from '@rgs-ui/design-tokens';
 
 export const CalendarWrapper = styled.div`
-  width: 360px;
+  width: 330px;
   padding: 15px;
   box-shadow: 1px 1px 20px 0 ${colors.gray[50]};
   overflow: hidden;

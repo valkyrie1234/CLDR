@@ -40,7 +40,7 @@ const PeriodInput: FC<IPeriodInput> = ({
     [open]
   );
 
-  const validateDate = useCallback((value: string, isStartDate: boolean) => {
+  const validateDate = useCallback((value: string) => {
     const date = dayjs(value, DATE_FORMAT, true);
     if (!date.isValid() && value !== "" && value[9] !== "Г") {
       return "Неверный формат даты";
@@ -51,17 +51,11 @@ const PeriodInput: FC<IPeriodInput> = ({
     if (maxDate && date.isAfter(maxDate, "day")) {
       return `Дата не может быть позже ${maxDate.format(DATE_FORMAT)}`;
     }
-    if (isStartDate && endDateInputValue && date.isAfter(dayjs(endDateInputValue, DATE_FORMAT), "day")) {
-      return "Начальная дата не может быть позже конечной";
-    }
-    if (!isStartDate && startDateInputValue && date.isBefore(dayjs(startDateInputValue, DATE_FORMAT), "day")) {
-      return "Конечная дата не может быть раньше начальной";
-    }
     return null;
-  }, [endDateInputValue, maxDate, minDate, startDateInputValue]);
+  }, [maxDate, minDate]);
 
   const handleStartDateBlur = (value: string) => {
-    const error = validateDate(value, true);
+    const error = validateDate(value);
     setStartDateError(error);
     if (!error) {
       onStartDateChange(value);
@@ -69,7 +63,7 @@ const PeriodInput: FC<IPeriodInput> = ({
   };
 
   const handleEndDateBlur = (value: string) => {
-    const error = validateDate(value, false);
+    const error = validateDate(value);
     setEndDateError(error);
     if (!error) {
       onEndDateChange(value);
@@ -77,12 +71,12 @@ const PeriodInput: FC<IPeriodInput> = ({
   };
 
     useEffect(() => {
-      setStartDateError(validateDate(debouncedStartValue, true))
+      setStartDateError(validateDate(debouncedStartValue))
     }, [debouncedStartValue, validateDate]);
 
 
     useEffect(() => {
-      setEndDateError(validateDate(debouncedEndValue, false))
+      setEndDateError(validateDate(debouncedEndValue))
     }, [debouncedEndValue, validateDate]);
     
   return (
