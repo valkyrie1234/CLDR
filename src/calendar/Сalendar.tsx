@@ -290,6 +290,8 @@ const Calendar: FC<ICalendar> = ({
       <Header
         date={date}
         mode={mode}
+        maxDate={maxDate}
+        minDate={minDate}
         range={isRangeMode}
         timeValue={timeValue}
         inputDateValue={inputDateValue}

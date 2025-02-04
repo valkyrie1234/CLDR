@@ -3,6 +3,12 @@ import { Dayjs } from 'dayjs';
 export interface IHeader {
   /** Значение даты в первом инпуте диапазона*/
   endDateInputValue: string;
+  
+  /** Минимальная допустимая дата (если ограничение задано) */
+  minDate?: Dayjs;
+  
+  /** Максимальная допустимая дата (если ограничение задано) */
+  maxDate?: Dayjs;
 
   /** Значение даты во втором инпуте диапазона*/
   startDateInputValue: string;

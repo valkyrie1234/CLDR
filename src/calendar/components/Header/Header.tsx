@@ -22,6 +22,8 @@ const Header: FC<IHeader> = ({
   mode,
   date,
   range,
+  maxDate,
+  minDate,
   timeValue,
   timePicker,
   showToggle,
@@ -92,22 +94,26 @@ const Header: FC<IHeader> = ({
         <div className="input-container">
           {range ? (
             <PeriodInput
+            maxDate={maxDate}
+            minDate={minDate}
+            endDateInputValue={endDateInputValue}
               startDateInputValue={startDateInputValue}
-              endDateInputValue={endDateInputValue}
+              handleSelectionChange={handleSelectionChange}
               onDateInputChange={onDateInputChange}
               onStartDateChange={onStartDateChange}
               onEndDateChange={onEndDateChange}
-              handleSelectionChange={handleSelectionChange}
             />
           ) : (
             <SingleInput
+              maxDate={maxDate}
+              minDate={minDate}
+              timeValue={timeValue}
+              timePicker={timePicker}
               inputDateValue={inputDateValue}
-              onDateInputBlur={onDateInputBlur}
               onDateInputChange={onDateInputChange}
+              onDateInputBlur={onDateInputBlur}
               onEndDateChange={onEndDateChange}
               onTimeChange={onTimeChange}
-              timePicker={timePicker}
-              timeValue={timeValue}
             />
           )}
         </div>

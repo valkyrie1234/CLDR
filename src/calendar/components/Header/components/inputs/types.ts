@@ -1,7 +1,14 @@
+import { Dayjs } from "dayjs";
 
 export interface ISingleInput {
     /** Флаг, указывающий, отображается ли выбор времени */
     timePicker: boolean | undefined;
+  
+    /** Минимальная допустимая дата (если ограничение задано) */
+    minDate?: Dayjs;
+  
+    /** Максимальная допустимая дата (если ограничение задано) */
+    maxDate?: Dayjs;
   
     /** Значение даты в инпуте */
     inputDateValue: string;
@@ -40,5 +47,11 @@ export interface ISingleInput {
   
     /** Функция обработки выбора диапазона дат*/
     handleSelectionChange: (value: string) => void;
+
+      /** Минимальная допустимая дата (если ограничение задано) */
+  minDate?: Dayjs;
+
+  /** Максимальная допустимая дата (если ограничение задано) */
+  maxDate?: Dayjs;
   };
   
