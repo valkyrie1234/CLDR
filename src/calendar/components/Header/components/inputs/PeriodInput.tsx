@@ -21,8 +21,8 @@ const PeriodInput: FC<IPeriodInput> = ({
   const [open, setOpen] = useState(false);
   const [startDateError, setStartDateError] = useState<string | null>(null);
   const [endDateError, setEndDateError] = useState<string | null>(null);
-  const debouncedStartValue = useDebounce(startDateInputValue, 300); 
-  const debouncedEndValue = useDebounce(endDateInputValue, 300); 
+  const debouncedStartValue = useDebounce(startDateInputValue); 
+  const debouncedEndValue = useDebounce(endDateInputValue); 
 
 
   const handleSelection = (value?: string) => {
