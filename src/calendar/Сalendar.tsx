@@ -196,7 +196,7 @@ const handleStartDateChange = useCallback(
       startDateInputValue: value,
       startDate: parsedDate,
     }));
-    onStartDateChange?.(parsedDate!.toDate());
+    if (parsedDate) onStartDateChange?.(parsedDate.toDate());
   },
   [parseDateFromInput, onStartDateChange]
 );
@@ -212,7 +212,7 @@ const handleEndDateChange = useCallback(
       endDateInputValue: value,
       endDate: parsedDate,
     }));
-    onEndDateChange?.(parsedDate!.toDate());
+    if (parsedDate) onEndDateChange?.(parsedDate.toDate());
   },
   [parseDateFromInput, onEndDateChange]
 );
