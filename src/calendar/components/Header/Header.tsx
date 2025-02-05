@@ -43,7 +43,7 @@ const Header: FC<IHeader> = ({
   setMode,
 }) => {
 
-  // Обработка выбора диапазона дат
+  /** Обработка выбора диапазона дат (неделя, месяц ...)*/
   const handleSelectionChange = (value: string) => {
     const today = dayjs();
     let start, end;
@@ -74,7 +74,7 @@ const Header: FC<IHeader> = ({
     }
   };
 
-  // Обработка пролистывания годов
+  /** Обработка пролистывания годов */
   const handleYearScroll = (direction: "prev" | "next") => {
     const yearOffset = direction === "prev" ? -10 : 10;
     changeYear(date.year() + yearOffset);
@@ -84,9 +84,9 @@ const Header: FC<IHeader> = ({
     <HeaderWrapper $timePicker={timePicker} $range={range}>
       <ToggleAndButtonContainer>
         <Toggle
-        range={range}
-        showToggle={showToggle}
-        toggleRangeMode={toggleRangeMode}
+          range={range}
+          showToggle={showToggle}
+          toggleRangeMode={toggleRangeMode}
         />
         <ResetButton onClick={resetDate}>Сбросить</ResetButton>
       </ToggleAndButtonContainer>
@@ -94,9 +94,9 @@ const Header: FC<IHeader> = ({
         <div className="input-container">
           {range ? (
             <PeriodInput
-            maxDate={maxDate}
-            minDate={minDate}
-            endDateInputValue={endDateInputValue}
+              maxDate={maxDate}
+              minDate={minDate}
+              endDateInputValue={endDateInputValue}
               startDateInputValue={startDateInputValue}
               handleSelectionChange={handleSelectionChange}
               onDateInputChange={onDateInputChange}

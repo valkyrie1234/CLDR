@@ -51,7 +51,7 @@ export const List = styled.div<{ isMobile?: boolean }>`
   flex-direction: column;
   align-items: flex-start;
   padding: 4px 0 12px;
-  min-height: 144px;
+  min-height: 100px;
   border-radius: 2px;
   box-shadow: ${props => (!props?.isMobile ? '0 3px 16px rgb(42 49 56 / 8%)' : 'none')};
   background: ${colors.gray[0]};
@@ -67,7 +67,8 @@ export const ListItem = styled.div<{ isMobile?: boolean }>`
   color: ${colors.gray[200]};
   border-bottom: ${props => (!props?.isMobile ? 'none' : `1px solid ${colors.gray[40]}`)};
   ${typography.TEXT_2}
-
+  font-size: 16px;
+  
   &:hover {
     background: ${colors.gray[40]};
   }

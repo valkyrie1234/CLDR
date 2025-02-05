@@ -26,6 +26,9 @@ const Calendar: FC<ICalendar> = ({
   initialDate,
   minDate,
   maxDate,
+  onChange,
+  onStartDateChange,
+  onEndDateChange,
 }) => {
   const [calendarState, setCalendarState] = useState({
     date: initialDate || dayjs(),
@@ -40,13 +43,13 @@ const Calendar: FC<ICalendar> = ({
     endDateInputValue: "",
   });
 
-  // Парсинг даты из строки
+  /** Парсинг даты из строки */
   const parseDateFromInput = useCallback((value: string): Dayjs | null => {
     const parsedDate = dayjs(value, DATE_FORMAT, true);
     return parsedDate.isValid() ? parsedDate : null;
   }, []);
 
-  // Обработка выбора года
+  /** Обработка выбора года */
   const handleYearSelect = useCallback((year: number) => {
     setCalendarState((prevState) => ({
       ...prevState,
@@ -55,7 +58,7 @@ const Calendar: FC<ICalendar> = ({
     }));
   }, []);
 
-  // Изменение месяца
+  /** Изменение месяца */
   const changeMonth = useCallback((month: number) => {
     setCalendarState((prevState) => ({
       ...prevState,
@@ -64,7 +67,7 @@ const Calendar: FC<ICalendar> = ({
     }));
   }, []);
 
-  // Изменение года
+  /** Изменение года */
   const changeYear = useCallback((year: number) => {
       setCalendarState((prevState) => ({
         ...prevState,
@@ -77,7 +80,7 @@ const Calendar: FC<ICalendar> = ({
       }
     }, [calendarState.mode]);
 
-  // Обработка выбора месяца
+  /** Обработка выбора месяца */
   const handleMonthSelect = useCallback((month: number) => {
     setCalendarState((prevState) => ({
       ...prevState,
@@ -86,7 +89,7 @@ const Calendar: FC<ICalendar> = ({
     }));
   }, []);
 
-  // Сброс даты к начальному значению или текущей дате
+  /** Сброс даты к начальному значению или текущей дате */
   const resetDate = useCallback(() => {
     setCalendarState((prevState) => ({
       ...prevState,
@@ -101,12 +104,13 @@ const Calendar: FC<ICalendar> = ({
     }));
   }, []);
 
-  // Изменение выбранной даты
+  /** Изменение выбранной даты */
   const changeDate = useCallback((selectedDate: Dayjs) => {
     setCalendarState((prevState) => {
       const { startDate, endDate, isRangeMode } = prevState;
 
       if (!isRangeMode) {
+        onChange?.(selectedDate.toDate());
         return {
           ...prevState,
           startDate: selectedDate,
@@ -114,9 +118,10 @@ const Calendar: FC<ICalendar> = ({
           startDateInputValue: selectedDate.format(DATE_FORMAT),
           endDateInputValue: selectedDate.format(DATE_FORMAT),
         };
-      }
+      };
 
       if (!startDate || (startDate && endDate)) {
+        onStartDateChange?.(selectedDate.toDate());
         return {
           ...prevState,
           startDate: selectedDate,
@@ -129,7 +134,10 @@ const Calendar: FC<ICalendar> = ({
 
       // Если выбрана дата до начальной даты, то она становится новой начальной датой,
       // а текущая начальная дата становится новой конечной датой.
+       
       if (selectedDate.isBefore(startDate, "day")) {
+        onStartDateChange?.(selectedDate.toDate());
+        onEndDateChange?.(startDate.toDate());
         return {
           ...prevState,
           startDate: selectedDate,
@@ -140,35 +148,36 @@ const Calendar: FC<ICalendar> = ({
       };
 
       // Если выбрана дата после начальной даты, то она становится новой конечной датой.
+      onEndDateChange?.(selectedDate.toDate());
       return {
         ...prevState,
         endDate: selectedDate,
         endDateInputValue: selectedDate.format(DATE_FORMAT),
       };
     });
-  }, []);
+  }, [onChange, onStartDateChange, onEndDateChange]);
 
-  // Функции дизейбла стрелочек переключения месяцев и лет
   const canGoToPreviousMonth = useCallback(() => {
     const previousMonth = calendarState.date.subtract(1, "month");
     return !minDate || previousMonth.isSameOrAfter(minDate, "month");
   }, [calendarState.date, minDate]);
-
+  
   const canGoToNextMonth = useCallback(() => {
     const nextMonth = calendarState.date.add(1, "month");
     return !maxDate || nextMonth.isSameOrBefore(maxDate, "month");
   }, [calendarState.date, maxDate]);
-
+  
   const canGoToPreviousYear = useCallback(() => {
     const previousYear = calendarState.date.subtract(1, "year");
     return !minDate || previousYear.isSameOrAfter(minDate, "year");
   }, [calendarState.date, minDate]);
-
+  
   const canGoToNextYear = useCallback(() => {
     const nextYear = calendarState.date.add(1, "year");
     return !maxDate || nextYear.isSameOrBefore(maxDate, "year");
   }, [calendarState.date, maxDate]);
-
+  
+  /** Функции дизейбла стрелочек переключения месяцев и лет */
   const navigationControls = {
     canGoToPreviousMonth,
     canGoToNextMonth,
@@ -176,36 +185,39 @@ const Calendar: FC<ICalendar> = ({
     canGoToNextYear,
   };
 
-  // Упрощаем передачу колбеков для onStartDateChange и onEndDateChange
-  const handleStartDateChange = useCallback(
-    (value: string) => {
-      const parsedDate = parseDateFromInput(value);
+/** Обработка изменения начальной даты */
+const handleStartDateChange = useCallback(
+  (value: string) => {
+    const parsedDate = parseDateFromInput(value);
 
-      setCalendarState((prevState) => ({
-        ...prevState,
-        date: parsedDate || prevState.initialDate,
-        startDateInputValue: value,
-        startDate: parsedDate,
-      }));
-    },
-    [parseDateFromInput]
-  );
+    setCalendarState((prevState) => ({
+      ...prevState,
+      date: parsedDate || prevState.initialDate,
+      startDateInputValue: value,
+      startDate: parsedDate,
+    }));
+    onStartDateChange?.(parsedDate!.toDate());
+  },
+  [parseDateFromInput, onStartDateChange]
+);
 
-  const handleEndDateChange = useCallback(
-    (value: string) => {
-      const parsedDate = parseDateFromInput(value);
+/** Обработка изменения конечной даты */
+const handleEndDateChange = useCallback(
+  (value: string) => {
+    const parsedDate = parseDateFromInput(value);
 
-      setCalendarState((prevState) => ({
-        ...prevState,
-        date: parsedDate || prevState.initialDate,
-        endDateInputValue: value,
-        endDate: parsedDate,
-      }));
-    },
-    [parseDateFromInput]
-  );
+    setCalendarState((prevState) => ({
+      ...prevState,
+      date: parsedDate || prevState.initialDate,
+      endDateInputValue: value,
+      endDate: parsedDate,
+    }));
+    onEndDateChange?.(parsedDate!.toDate());
+  },
+  [parseDateFromInput, onEndDateChange]
+);
 
-  // Обработка изменения значения инпута
+  /** Обработка изменения значения инпута */
   const handleDateInputChange = useCallback((value: string, key: string) => {
     setCalendarState((prevState) => ({
       ...prevState,
@@ -213,18 +225,19 @@ const Calendar: FC<ICalendar> = ({
     }));
   }, []);
 
-  // Выбор текущей даты
+  /** Выбор текущей даты */
   const selectToday = useCallback(() => {
+    const today = dayjs();
     setCalendarState((prevState) => ({
       ...prevState,
-      date: dayjs(),
+      date: today,
       startDate: null,
       endDate: null,
     }));
-    changeDate(dayjs());
+    changeDate(today);
   }, [changeDate]);
 
-  // Обработка потери фокуса инпутом
+  /** Обработка потери фокуса инпутом */
   const handleDateInputBlur = useCallback(() => {
     const parsedDate = parseDateFromInput(calendarState.inputDateValue);
 
@@ -236,15 +249,16 @@ const Calendar: FC<ICalendar> = ({
         endDate: prevState.isRangeMode ? parsedDate : null,
         inputDateValue: parsedDate.format(DATE_FORMAT),
       }));
+      onChange?.(parsedDate.toDate());
     } else {
       setCalendarState((prevState) => ({
         ...prevState,
         inputDateValue: "",
       }));
     }
-  }, [calendarState.inputDateValue, parseDateFromInput]);
+  }, [calendarState.inputDateValue, parseDateFromInput, onChange]);
 
-  // Обработка изменения времени
+  /** Обработка изменения времени */
   const handleTimeChange = useCallback((value: string) => {
     setCalendarState((prevState) => ({
       ...prevState,
@@ -252,7 +266,7 @@ const Calendar: FC<ICalendar> = ({
     }));
   }, []);
 
-  // Логика переключения режима диапазона
+  /** Логика переключения режима диапазона */
   const toggleRangeMode = useCallback(() => {
     resetDate();
     setCalendarState((prevState) => ({
@@ -277,7 +291,7 @@ const Calendar: FC<ICalendar> = ({
     startDateInputValue,
   } = calendarState;
 
-  // Синхронизация инпута с календарем
+  // Синхронизация инпута с календарем 
   useEffect(() => {
     setCalendarState((prevState) => ({
       ...prevState,

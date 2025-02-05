@@ -3,10 +3,10 @@ import { DATE_FORMAT, DATE_MASK, DATE_PLACEHOLDER } from "@rgs-ui/date-utils";
 import { Tooltip } from "@rgs-ui/tooltip";
 import { Popover } from "@rgs-ui/popover";
 import dayjs from "dayjs";
+import useDebounce from "./useDebounce";
 import DropDown from "../controls/DropDownList";
 import { PeriodChips, PeriodInputStyled, StyledPopover } from "./styles";
 import { IPeriodInput } from "./types";
-import useDebounce from "./useDebounce";
 
 const PeriodInput: FC<IPeriodInput> = ({
   minDate,
@@ -24,7 +24,7 @@ const PeriodInput: FC<IPeriodInput> = ({
   const debouncedStartValue = useDebounce(startDateInputValue); 
   const debouncedEndValue = useDebounce(endDateInputValue); 
 
-
+  /** Обработка выбора диапазона дат */
   const handleSelection = (value?: string) => {
     if (value) {
       handleSelectionChange(value);
@@ -32,6 +32,7 @@ const PeriodInput: FC<IPeriodInput> = ({
     setOpen(!open);
   };
 
+  /** Переключение состояния открытия поповера */
   const toggleOpen: React.MouseEventHandler<HTMLButtonElement> = useCallback(
     (event) => {
       event.stopPropagation();
@@ -40,6 +41,7 @@ const PeriodInput: FC<IPeriodInput> = ({
     [open]
   );
 
+  /** Валидация даты */
   const validateDate = useCallback((value: string) => {
     const date = dayjs(value, DATE_FORMAT, true);
     if (!date.isValid() && value !== "" && value[9] !== "Г") {
@@ -54,6 +56,7 @@ const PeriodInput: FC<IPeriodInput> = ({
     return null;
   }, [maxDate, minDate]);
 
+  /** Обработка потери фокуса инпута начальной даты*/
   const handleStartDateBlur = (value: string) => {
     const error = validateDate(value);
     setStartDateError(error);
@@ -62,6 +65,7 @@ const PeriodInput: FC<IPeriodInput> = ({
     }
   };
 
+  /** Обработка потери фокуса инпута конечной даты */
   const handleEndDateBlur = (value: string) => {
     const error = validateDate(value);
     setEndDateError(error);
@@ -70,15 +74,14 @@ const PeriodInput: FC<IPeriodInput> = ({
     }
   };
 
-    useEffect(() => {
-      setStartDateError(validateDate(debouncedStartValue))
-    }, [debouncedStartValue, validateDate]);
+  useEffect(() => {
+    setStartDateError(validateDate(debouncedStartValue));
+  }, [debouncedStartValue, validateDate]);
 
+  useEffect(() => {
+    setEndDateError(validateDate(debouncedEndValue));
+  }, [debouncedEndValue, validateDate]);
 
-    useEffect(() => {
-      setEndDateError(validateDate(debouncedEndValue))
-    }, [debouncedEndValue, validateDate]);
-    
   return (
     <>
       <PeriodInputStyled

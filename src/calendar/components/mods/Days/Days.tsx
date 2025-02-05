@@ -80,8 +80,7 @@ const Days: React.FC<IDays & { minDate?: Dayjs; maxDate?: Dayjs }> = React.memo(
   }
 
   // Добавление дней следующего месяца, чтобы заполнить календарь
-  const totalDaysDisplayed = days.length;
-  for (let i = 1; i <= 42 - totalDaysDisplayed; i++) {
+  for (let i = 1; i <= 42 - days.length; i++) {
     const nextDate = date.add(1, "month").date(i);
     days.push(
       <Day

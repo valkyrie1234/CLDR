@@ -21,4 +21,13 @@ export interface ICalendar {
 
   /** Флаг, указывающий, отображается ли выбор времени */
   timePicker?: boolean;
+
+  /** Обработчик изменения даты */
+  onChange?: (date: Date) => void;
+
+  /** Обработчик изменения начальной даты диапазона */
+  onStartDateChange?: (date: Date | null) => void;
+
+  /** Обработчик изменения конечной даты диапазона */
+  onEndDateChange?: (date: Date | null) => void;
 };

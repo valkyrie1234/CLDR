@@ -11,7 +11,6 @@ import { PeriodInputStyled, SingleInputStyled } from './styles';
 import { ISingleInput } from './types';
 import useDebounce from "./useDebounce";
 
-
 const SingleInput: FC<ISingleInput> = ({
   minDate,
   maxDate,
@@ -23,8 +22,11 @@ const SingleInput: FC<ISingleInput> = ({
   onTimeChange,
 }) => {
   const [dateError, setDateError] = useState<string | null>(null);
+  const [timeError, setTimeError] = useState<string | null>(null);
   const debouncedInputValue = useDebounce(inputDateValue, 300); 
+  const debouncedTimeValue = useDebounce(timeValue, 300); 
 
+  /** Валидация даты */
   const validateDate = useCallback((value: string) => {
     const date = dayjs(value, DATE_FORMAT, true);
     if (!date.isValid() && value !== "" && value[9] !== "Г") {
@@ -39,6 +41,16 @@ const SingleInput: FC<ISingleInput> = ({
     return null;
   }, [maxDate, minDate]);
 
+  /** Функция для валидации времени */
+  const validateTime = useCallback((value: string) => {
+    const timePattern = /^(2[0-3]|[01][0-9]):[0-5][0-9]$/;
+    if (!timePattern.test(value) && value !== "" && value[4] !== 'М') {
+      return "Введите корректное значение времени";
+    }
+    return null;
+  }, []);
+
+  /** Обработка потери фокуса на поле даты */
   const handleDateBlur = (value: string) => {
     const error = validateDate(value);
     setDateError(error);
@@ -47,9 +59,22 @@ const SingleInput: FC<ISingleInput> = ({
     }
   };
 
+  /** Обработка потери фокуса на поле времени */
+  const handleTimeBlur = (value: string) => {
+    const error = validateTime(value);
+    setTimeError(error);
+    if (!error) {
+      onTimeChange(value);
+    }
+  };
+
   useEffect(() => {
-    setDateError(validateDate(debouncedInputValue))
+    setDateError(validateDate(debouncedInputValue));
   }, [debouncedInputValue, validateDate]);
+
+  useEffect(() => {
+    setTimeError(validateTime(debouncedTimeValue));
+  }, [debouncedTimeValue, validateTime]);
 
   return timePicker ? (
     <>
@@ -71,6 +96,7 @@ const SingleInput: FC<ISingleInput> = ({
       <PeriodInputStyled
         value={timeValue === '00:00' ? undefined : timeValue}
         onChange={(e) => onTimeChange(e.target.value)}
+        onBlur={(e) => handleTimeBlur(e.target.value)}
         mask={{
           alias: TIME_MASK,
           showMaskOnHover: false,
@@ -78,6 +104,8 @@ const SingleInput: FC<ISingleInput> = ({
         }}
         label={'Время'}
         large={false}
+        invalid={!!timeError}
+        errorMessage={timeError || ""}
       />
     </>
   ) : (
