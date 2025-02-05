@@ -61,10 +61,14 @@ const SingleInput: FC<ISingleInput> = ({
 
   /** Обработка потери фокуса на поле времени */
   const handleTimeBlur = (value: string) => {
+    const testLength = value.split('').filter(el => el !== ":" && el !== "Г" && el !== "М").length
     const error = validateTime(value);
     setTimeError(error);
     if (!error) {
       onTimeChange(value);
+    }
+    if(value[4] === 'М' && testLength === 3){
+      setTimeError("Введите время до конца");
     }
   };
 
